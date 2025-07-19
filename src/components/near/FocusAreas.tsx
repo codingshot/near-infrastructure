@@ -21,7 +21,7 @@ interface FocusArea {
 
 const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
-  const [showExamples, setShowExamples] = useState(false);
+  const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
@@ -30,25 +30,26 @@ const FocusAreas = () => {
       .catch(error => console.error('Error loading focus areas:', error));
   }, []);
 
+  const toggleCard = (cardId: string) => {
+    setExpandedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <section id="focus-areas" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground">
-              Our Focus Areas
-            </h2>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowExamples(!showExamples)}
-              className="flex items-center gap-2 border-border text-foreground hover:bg-muted"
-            >
-              {showExamples ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-              {showExamples ? 'Hide Examples' : 'Show Examples'}
-            </Button>
-          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
+            Our Focus Areas
+          </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
             The Infrastructure Committee will consider any proposal that helps make the network 
             a more compelling place for web3 builders and users. That includes, but is not limited to, these key areas:
@@ -57,8 +58,10 @@ const FocusAreas = () => {
 
         {/* Focus Areas Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {focusAreas.map((area) => (
-            <Card key={area.id} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+          {focusAreas.map((area) => {
+            const isExpanded = expandedCards.has(area.id);
+            return (
+            <Card key={area.id} className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer" onClick={() => toggleCard(area.id)}>
               <CardHeader>
                 <CardTitle className="text-xl font-grotesk font-semibold text-foreground mb-3 flex items-center justify-between">
                   {area.title}
@@ -68,6 +71,7 @@ const FocusAreas = () => {
                       variant="ghost"
                       size="sm"
                       className="text-primary hover:text-primary/80"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <a
                         href={area.categoryUrl}
@@ -84,7 +88,7 @@ const FocusAreas = () => {
                 </CardDescription>
               </CardHeader>
               
-              {area.examples.length > 0 && showExamples && (
+              {area.examples.length > 0 && isExpanded && (
                 <CardContent className="pt-0">
                   <div className="space-y-3">
                     <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
@@ -120,6 +124,7 @@ const FocusAreas = () => {
                               variant="ghost"
                               size="sm"
                               className="p-1 h-auto text-muted-foreground hover:text-primary"
+                              onClick={(e) => e.stopPropagation()}
                             >
                               <a
                                 href={example.twitter}
@@ -158,6 +163,7 @@ const FocusAreas = () => {
                         variant="outline" 
                         size="sm" 
                         className="w-full border-border text-foreground hover:bg-muted"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <a 
                           href={area.categoryUrl} 
@@ -174,7 +180,8 @@ const FocusAreas = () => {
                 </CardContent>
               )}
             </Card>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
