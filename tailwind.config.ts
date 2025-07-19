@@ -65,31 +65,37 @@ export default {
 				},
 				// NEAR Brand Colors
 				near: {
-					"50": "#f0fdfd",
-					"100": "#ccfbf9", 
-					"200": "#99f6f0",
-					"300": "#5eede3",
-					"400": "#2dd8cc", // Close to NEAR cyan #17d9d4
-					"500": "#17d9d4", // Official NEAR cyan
-					"600": "#0fb0aa",
-					"700": "#118c87",
-					"800": "#146f6b",
-					"900": "#165b58",
-					"950": "#073633",
+					"50": "#e6ffe6",
+					"100": "#b3ffb3", 
+					"200": "#80ff80",
+					"300": "#4dff4d",
+					"400": "#1aff1a",
+					"500": "#00ec97", // Primary NEAR Green
+					"600": "#00d085",
+					"700": "#00b374",
+					"800": "#009662",
+					"900": "#007a51",
+					"950": "#005d3d",
 				},
-				// Neutral grays for NEAR brand
+				// Accent Colors
+				accent: {
+					red: "#ff7966",    // Red accent
+					purple: "#9797ff", // Purple accent  
+					blue: "#17d9d4",   // Blue accent
+				},
+				// Dark mode grays
 				gray: {
-					"50": "#f9fafb",
-					"100": "#f3f4f6",
-					"200": "#e5e7eb",
-					"300": "#d1d5db",
-					"400": "#9ca3af",
-					"500": "#6b7280",
-					"600": "#4b5563",
-					"700": "#374151",
-					"800": "#1f2937",
-					"900": "#111827",
-					"950": "#030712",
+					"50": "#f2f1e9",   // Off-white for text
+					"100": "#e5e4dc",
+					"200": "#d1d0c8",
+					"300": "#bdbcb4",
+					"400": "#a9a8a0",
+					"500": "#95948c",
+					"600": "#808078",
+					"700": "#6c6b64",
+					"800": "#575650",
+					"900": "#43423c",
+					"950": "#2e2d28",
 				},
 			},
 			borderRadius: {
@@ -150,9 +156,9 @@ export default {
 				'pulse-gradient': 'linear-gradient(180deg, rgba(249,115,22,0.8) 0%, rgba(249,115,22,0) 100%)',
 			},
 			fontFamily: {
-				'sans': ['Inter', 'sans-serif'],
-				'grotesk': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-				'display': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+				'sans': ['FK Grotesk', 'Inter', 'sans-serif'],
+				'grotesk': ['FK Grotesk', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+				'display': ['FK Grotesk', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
 			},
 			boxShadow: {
 				'elegant': '0 4px 20px rgba(0, 0, 0, 0.08)',
