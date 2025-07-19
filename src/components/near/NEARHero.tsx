@@ -91,12 +91,12 @@ const NEARHero = () => {
               className="relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto
                         before:absolute before:inset-0 before:metallic-border before:opacity-20 before:z-0"
             >
-              <a href="https://nearn.io/infra-committee/7" className="flex items-center gap-2 justify-center relative z-10">
+              <a href="https://nearn.io/infra-committee/7" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 justify-center relative z-10">
                 Submit A Proposal
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-border text-foreground hover:bg-muted px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto">
-              <a href="https://nearn.io/infra-committee/" className="flex items-center gap-2 justify-center">
+              <a href="https://nearn.io/infra-committee/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 justify-center">
                 See our RFPs
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </a>
