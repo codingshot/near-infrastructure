@@ -155,13 +155,35 @@
   }
 
   .near-infra-highlight {
-    background: linear-gradient(135deg, #c0c0c0, #e8e8e8, #a8a8a8, #d0d0d0);
+    background: linear-gradient(135deg, 
+      #c0c0c0, 
+      #14B8A6, 
+      #e8e8e8, 
+      #14B8A6, 
+      #a8a8a8, 
+      #d0d0d0
+    );
     background-size: 300% 300%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shimmer 2s ease-in-out infinite;
     font-weight: 600;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.3));
+  }
+
+  /* Enhanced metallic border effect */
+  .metallic-border {
+    background: linear-gradient(
+      45deg,
+      #c0c0c0 0%,
+      #14B8A6 25%,
+      #ffffff 50%,
+      #14B8A6 75%,
+      #c0c0c0 100%
+    );
+    background-size: 200% 200%;
+    animation: metallicShine 2s ease-in-out infinite;
   }
 }
 

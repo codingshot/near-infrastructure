@@ -5,6 +5,7 @@ import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookO
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import CountUp from 'react-countup';
+import HeroBackground3D from '../HeroBackground3D';
 
 const NEARHero = () => {
   const [showStats, setShowStats] = useState(false);
@@ -67,8 +68,9 @@ const NEARHero = () => {
   ];
 
   return (
-    <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section className="relative pt-20 md:pt-24 pb-12 md:pb-16 bg-background overflow-hidden">
+      <HeroBackground3D />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="hero-text max-w-4xl mx-auto text-center">
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight text-center">
