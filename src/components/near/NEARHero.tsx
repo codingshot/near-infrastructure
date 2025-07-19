@@ -42,10 +42,7 @@ const NEARHero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           {/* Badge */}
-          <div className="inline-flex items-center px-3 md:px-4 py-2 rounded-full bg-near-50 text-near-700 text-xs md:text-sm font-medium mb-6 md:mb-8">
-            <span className="w-2 h-2 bg-near-500 rounded-full mr-2"></span>
-            nearinfra.com
-          </div>
+          
 
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-4 md:mb-6 leading-tight px-4 sm:px-0">
