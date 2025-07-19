@@ -32,17 +32,17 @@ const CaseStudies = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Completed':
-        return 'bg-green-100 text-green-800';
+        return 'bg-primary/10 text-primary border-primary/20';
       case 'In Development':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-accent-blue/10 text-accent-blue border-accent-blue/20';
       case 'Maintenance':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-accent-purple/10 text-accent-purple border-accent-purple/20';
       case 'In KYC':
-        return 'bg-orange-100 text-orange-800';
+        return 'bg-accent-red/10 text-accent-red border-accent-red/20';
       case 'Approved':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-primary/10 text-primary border-primary/20';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-muted text-muted-foreground border-border';
     }
   };
 
@@ -58,59 +58,60 @@ const CaseStudies = () => {
   const uniqueStatuses = Array.from(new Set(caseStudies.map(study => study.status)));
 
   return (
-    <section className="py-16 bg-white">
+    <section id="case-studies" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
             Funded Projects
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
-            Explore the projects and infrastructure improvements we've funded to strengthen the network.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed mb-8">
+            Discover the innovative projects that have been funded through our Infrastructure Committee. 
+            Each project represents a step forward in building better infrastructure for the network.
           </p>
           
           {/* Search and Filters */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="flex flex-col sm:flex-row gap-4">
-              {/* Search */}
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <Input
-                  type="text"
-                  placeholder="Search case studies..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 border-gray-200 focus:border-near-300"
-                />
-              </div>
-              
-              {/* Status Filter */}
-              <div className="sm:w-48">
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="border-gray-200 focus:border-near-300">
-                    <Filter className="w-4 h-4 mr-2" />
-                    <SelectValue placeholder="Filter by status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Statuses</SelectItem>
-                    {uniqueStatuses.map(status => (
-                      <SelectItem key={status} value={status}>{status}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            {/* Search */}
+            <div className="w-full sm:max-w-md relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                type="text"
+                placeholder="Search projects..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 bg-background border-border focus:border-primary"
+              />
+            </div>
+
+            {/* Filter */}
+            <div className="w-full sm:w-auto flex items-center gap-2">
+              <Filter className="w-4 h-4 text-muted-foreground" />
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-full sm:w-[180px] bg-background border-border">
+                  <SelectValue placeholder="All statuses" />
+                </SelectTrigger>
+                <SelectContent className="bg-background border-border">
+                  <SelectItem value="all" className="text-foreground">All Statuses</SelectItem>
+                  <SelectItem value="Completed" className="text-foreground">Completed</SelectItem>
+                  <SelectItem value="In Development" className="text-foreground">In Development</SelectItem>
+                  <SelectItem value="Maintenance" className="text-foreground">Maintenance</SelectItem>
+                  <SelectItem value="In KYC" className="text-foreground">In KYC</SelectItem>
+                  <SelectItem value="Approved" className="text-foreground">Approved</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
 
         {/* Case Studies Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filterCaseStudies().map((study, index) => (
-            <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300">
+            <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-lg font-semibold text-gray-900 mb-2">
+                    <CardTitle className="text-lg font-grotesk font-semibold text-foreground mb-2">
                       {study.name}
                     </CardTitle>
                     
@@ -119,7 +120,7 @@ const CaseStudies = () => {
                       {study.tags?.map((tag, tagIndex) => (
                         <span 
                           key={tagIndex}
-                          className="px-2 py-1 text-xs bg-near-100 text-near-700 rounded-full font-medium"
+                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20"
                         >
                           {tag}
                         </span>
@@ -127,14 +128,14 @@ const CaseStudies = () => {
                     </div>
                     
                     <div className="flex items-center gap-2 mb-3">
-                      <Badge className={getStatusColor(study.status)}>
+                      <Badge className={`${getStatusColor(study.status)} border`}>
                         {study.status}
                       </Badge>
                     </div>
                   </div>
                   {/* Logo placeholder */}
-                  <div className="w-12 h-12 bg-gradient-to-br from-near-100 to-near-200 rounded-lg flex items-center justify-center ml-3">
-                    <span className="text-near-600 font-semibold text-xs">
+                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center ml-3">
+                    <span className="text-primary font-semibold text-xs">
                       {study.name.substring(0, 2).toUpperCase()}
                     </span>
                   </div>
@@ -142,7 +143,7 @@ const CaseStudies = () => {
               </CardHeader>
               
               <CardContent className="pt-0">
-                <CardDescription className="text-gray-600 mb-4 leading-relaxed">
+                <CardDescription className="text-muted-foreground mb-4 leading-relaxed">
                   {study.description}
                 </CardDescription>
                 
@@ -152,7 +153,7 @@ const CaseStudies = () => {
                       asChild
                       variant="outline"
                       size="sm"
-                      className="flex-1 border-near-200 text-near-700 hover:bg-near-50"
+                      className="flex-1 border-border text-foreground hover:bg-muted"
                     >
                       <a
                         href={study.productUrl}
@@ -171,7 +172,7 @@ const CaseStudies = () => {
                       asChild
                       variant="ghost"
                       size="sm"
-                      className="flex-1 text-near-600 hover:text-near-700 hover:bg-near-50"
+                      className="flex-1 text-primary hover:text-primary/80 hover:bg-muted"
                     >
                       <a
                         href={study.proposalUrl}
@@ -192,19 +193,19 @@ const CaseStudies = () => {
         
         {/* No results message */}
         {filterCaseStudies().length === 0 && (searchTerm || statusFilter !== 'all') && (
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-8 text-muted-foreground">
             No case studies found matching your criteria. Try adjusting your search or filters.
           </div>
         )}
 
         {/* Additional Resources */}
-        <div className="mt-12 text-center">
-          <div className="bg-gray-50 rounded-lg p-6 max-w-md mx-auto">
-            <h3 className="font-semibold text-gray-900 mb-2">Other Internal Resources</h3>
+        <div className="mt-12">
+          <div className="bg-muted rounded-lg p-6 max-w-md">
+            <h3 className="font-grotesk font-semibold text-foreground mb-2">Other Internal Resources</h3>
             <Button
               asChild
               variant="outline"
-              className="w-full"
+              className="w-full border-border text-foreground hover:bg-background"
             >
               <a
                 href="https://status.near.org"

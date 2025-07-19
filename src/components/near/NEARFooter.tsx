@@ -21,25 +21,25 @@ const NEARFooter = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-background border-t border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-near-400 to-near-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NIC</span>
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm">NIC</span>
               </div>
-              <span className="font-display font-semibold text-lg">
+              <span className="font-grotesk font-semibold text-lg text-foreground">
                 NEAR Infrastructure Committee
               </span>
             </div>
-            <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-              NEAR is the user owned AI stack, blockchain, chain abstraction, ai.
+            <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+              NEAR is the user-owned AI stack, blockchain, chain abstraction, AI.
             </p>
             <Button
               asChild
-              className="bg-near-500 hover:bg-near-600 text-white"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <a
                 href="https://nearn.io/infra-committee/7"
@@ -53,7 +53,7 @@ const NEARFooter = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Resources</h3>
+            <h3 className="font-grotesk font-semibold text-foreground mb-4">Resources</h3>
             <ul className="space-y-2">
               {resourceLinks.map((link) => (
                 <li key={link.title}>
@@ -61,7 +61,7 @@ const NEARFooter = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-near-400 transition-colors text-sm flex items-center gap-1"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1"
                   >
                     {link.title}
                     <ExternalLink className="w-3 h-3" />
@@ -73,7 +73,7 @@ const NEARFooter = () => {
 
           {/* Support Networks */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Support Networks</h3>
+            <h3 className="font-grotesk font-semibold text-foreground mb-4">Support Networks</h3>
             <ul className="space-y-2">
               {supportLinks.map((link) => (
                 <li key={link.title}>
@@ -81,7 +81,7 @@ const NEARFooter = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-near-400 transition-colors text-sm flex items-center gap-1"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1"
                   >
                     {link.title}
                     <ExternalLink className="w-3 h-3" />
@@ -93,7 +93,7 @@ const NEARFooter = () => {
 
           {/* Community */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Support Channels</h3>
+            <h3 className="font-grotesk font-semibold text-foreground mb-4">Support Channels</h3>
             <ul className="space-y-2">
               {communityLinks.map((link) => (
                 <li key={link.title}>
@@ -101,7 +101,7 @@ const NEARFooter = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-near-400 transition-colors text-sm flex items-center gap-1"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1"
                   >
                     {link.title}
                     <ExternalLink className="w-3 h-3" />
@@ -113,8 +113,8 @@ const NEARFooter = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-muted-foreground text-sm">
             © 2025 NEAR Infrastructure Committee.
           </p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
@@ -122,7 +122,7 @@ const NEARFooter = () => {
               href="https://near.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-near-400 transition-colors text-sm"
+              className="text-muted-foreground hover:text-primary transition-colors text-sm"
             >
               NEAR.org
             </a>
@@ -130,7 +130,7 @@ const NEARFooter = () => {
               href="https://near.foundation"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-near-400 transition-colors text-sm"
+              className="text-muted-foreground hover:text-primary transition-colors text-sm"
             >
               NEAR Foundation
             </a>

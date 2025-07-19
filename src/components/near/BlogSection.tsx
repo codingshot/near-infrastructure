@@ -41,20 +41,24 @@ const BlogSection = () => {
   };
 
   return (
-    <section id="blog" className="py-16 bg-gray-50">
+    <section id="blog" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
             Latest Updates
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
-            Stay informed about NEAR Infrastructure Committee developments, RFPs, and ecosystem updates.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
+            Stay updated with the latest developments, announcements, and insights from the NEAR Infrastructure Committee.
           </p>
+        </div>
+
+        {/* View All Articles Button */}
+        <div className="mb-8">
           <Button
             asChild
             variant="outline"
-            className="border-near-200 text-near-700 hover:bg-near-50"
+            className="border-border text-foreground hover:bg-muted"
           >
             <a
               href="https://www.near.org/blog/category/Infrastructure%20Committee"
@@ -74,7 +78,7 @@ const BlogSection = () => {
             {blogPosts.map((post, index) => (
               <div key={index} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 pl-4">
                 <Card 
-                  className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
+                  className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer group"
                   onClick={() => window.open(post.url, '_blank')}
                 >
                   {/* Blog Image */}
@@ -83,21 +87,24 @@ const BlogSection = () => {
                       src={post.image} 
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src = '/blog/blogdefault.webp';
+                      }}
                     />
                   </div>
                   
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg font-semibold text-gray-900 leading-tight group-hover:text-near-600 transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                  <CardHeader>
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm mb-2">
                       <Calendar className="w-4 h-4" />
                       <span>{formatDate(post.date)}</span>
                     </div>
+                    <CardTitle className="text-lg font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {post.title}
+                    </CardTitle>
                   </CardHeader>
                   
                   <CardContent className="pt-0">
-                    <CardDescription className="text-gray-600 leading-relaxed">
+                    <CardDescription className="text-muted-foreground leading-relaxed">
                       {post.excerpt}
                     </CardDescription>
                   </CardContent>

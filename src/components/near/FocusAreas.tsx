@@ -30,32 +30,32 @@ const FocusAreas = () => {
   }, []);
 
   return (
-    <section id="focus-areas" className="py-16 bg-white">
+    <section id="focus-areas" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
             Our Focus Areas
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
             The Infrastructure Committee will consider any proposal that helps make the network 
             a more compelling place for web3 builders and users. That includes, but is not limited to, these key areas:
           </p>
         </div>
 
         {/* Focus Areas Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {focusAreas.map((area) => (
-            <Card key={area.id} className="h-full hover:shadow-lg transition-shadow duration-300">
+            <Card key={area.id} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl font-semibold text-gray-900 flex items-center justify-between">
+                <CardTitle className="text-xl font-grotesk font-semibold text-foreground mb-3 flex items-center justify-between">
                   {area.title}
                   {area.categoryUrl && (
                     <Button
                       asChild
                       variant="ghost"
                       size="sm"
-                      className="text-near-500 hover:text-near-600"
+                      className="text-primary hover:text-primary/80"
                     >
                       <a
                         href={area.categoryUrl}
@@ -67,76 +67,98 @@ const FocusAreas = () => {
                     </Button>
                   )}
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-muted-foreground leading-relaxed">
                   {area.description}
                 </CardDescription>
               </CardHeader>
               
               {area.examples.length > 0 && (
-                <CardContent>
+                <CardContent className="pt-0">
                   <div className="space-y-3">
-                    <h4 className="font-medium text-gray-700 text-sm uppercase tracking-wide">
+                    <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
                       Examples on NEAR
                     </h4>
                     {area.examples.map((example, index) => (
-                      <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2">
-                              <a
-                                href={example.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-medium text-near-600 hover:text-near-700 transition-colors"
-                              >
-                                {example.name}
-                              </a>
-                              {example.recommended && (
-                                <span className="inline-flex px-2 py-1 text-xs font-medium bg-near-100 text-near-700 rounded-full">
-                                  Recommended
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-600 mt-1">
-                              {example.description}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-1 ml-2">
-                            {example.twitter && (
-                              <Button
-                                asChild
-                                variant="ghost"
-                                size="sm"
-                                className="p-1 h-auto"
-                              >
-                                <a
-                                  href={example.twitter}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  <Twitter className="w-3 h-3 text-blue-500" />
-                                </a>
-                              </Button>
+                      <div key={index} 
+                           className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
+                        <div className="flex-grow">
+                          <div className="flex items-center gap-2 mb-1">
+                            <a
+                              href={example.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
+                            >
+                              {example.name}
+                            </a>
+                            {example.recommended && (
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                Recommended
+                              </span>
                             )}
+                          </div>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {example.description}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 ml-3">
+                          {example.twitter && (
                             <Button
                               asChild
                               variant="ghost"
                               size="sm"
-                              className="p-1 h-auto"
+                              className="p-1 h-auto text-muted-foreground hover:text-primary"
                             >
                               <a
-                                href={example.url}
+                                href={example.twitter}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label={`${example.name} Twitter`}
                               >
-                                <ExternalLink className="w-3 h-3 text-gray-400" />
+                                <Twitter className="w-3 h-3" />
                               </a>
                             </Button>
-                          </div>
+                          )}
+                          <Button
+                            asChild
+                            variant="ghost"
+                            size="sm"
+                            className="p-1 h-auto text-muted-foreground hover:text-primary"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <a
+                              href={example.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Visit ${example.name}`}
+                            >
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          </Button>
                         </div>
                       </div>
                     ))}
                   </div>
+                  {area.categoryUrl && (
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <Button 
+                        asChild 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full border-border text-foreground hover:bg-muted"
+                      >
+                        <a 
+                          href={area.categoryUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2"
+                        >
+                          View All {area.title} Projects
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    </div>
+                  )}
                 </CardContent>
               )}
             </Card>

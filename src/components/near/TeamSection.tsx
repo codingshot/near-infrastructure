@@ -25,6 +25,7 @@ const TeamSection = () => {
   const [teamData, setTeamData] = useState<TeamData>({ workingGroup: [], infrastructureCommittee: [] });
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+  const [activeTab, setActiveTab] = useState('infrastructure');
 
   useEffect(() => {
     fetch('/data/team.json')
@@ -242,7 +243,7 @@ const TeamSection = () => {
             </div>
 
             {/* Team Toggle */}
-            <Tabs defaultValue="infrastructure" className="w-full sm:w-auto">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full sm:w-auto">
               <TabsList className="grid grid-cols-2 w-full sm:w-auto bg-muted">
                 <TabsTrigger 
                   value="infrastructure" 
@@ -262,29 +263,33 @@ const TeamSection = () => {
         </div>
 
         {/* Team Content */}
-        <Tabs defaultValue="infrastructure" className="w-full">
-          <TabsContent value="infrastructure" className="mt-0">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {filterMembers(teamData.infrastructureCommittee).map((member, index) => renderMember(member, index))}
-            </div>
-            {filterMembers(teamData.infrastructureCommittee).length === 0 && searchTerm && (
-              <div className="text-center py-8 text-muted-foreground">
-                No team members found matching "{searchTerm}"
+        <div className="mt-0">
+          {activeTab === 'infrastructure' && (
+            <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                {filterMembers(teamData.infrastructureCommittee).map((member, index) => renderMember(member, index))}
               </div>
-            )}
-          </TabsContent>
+              {filterMembers(teamData.infrastructureCommittee).length === 0 && searchTerm && (
+                <div className="text-center py-8 text-muted-foreground">
+                  No team members found matching "{searchTerm}"
+                </div>
+              )}
+            </div>
+          )}
           
-          <TabsContent value="working" className="mt-0">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {filterMembers(teamData.workingGroup).map((member, index) => renderMember(member, index))}
-            </div>
-            {filterMembers(teamData.workingGroup).length === 0 && searchTerm && (
-              <div className="text-center py-8 text-muted-foreground">
-                No team members found matching "{searchTerm}"
+          {activeTab === 'working' && (
+            <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                {filterMembers(teamData.workingGroup).map((member, index) => renderMember(member, index))}
               </div>
-            )}
-          </TabsContent>
-        </Tabs>
+              {filterMembers(teamData.workingGroup).length === 0 && searchTerm && (
+                <div className="text-center py-8 text-muted-foreground">
+                  No team members found matching "{searchTerm}"
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
