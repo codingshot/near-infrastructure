@@ -11,12 +11,15 @@ const NEARHero = () => {
       loop: true,
       align: 'start',
       slidesToScroll: 1,
+      skipSnaps: false,
+      dragFree: false,
+      containScroll: 'trimSnaps',
       breakpoints: {
         '(min-width: 768px)': { slidesToScroll: 2 },
         '(min-width: 1024px)': { slidesToScroll: 3 }
       }
     },
-    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+    [Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })]
   );
 
   // All action cards including Apply Credits
