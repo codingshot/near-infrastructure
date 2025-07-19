@@ -4,7 +4,7 @@
     "description": "Decentralized RPC infrastructure for enhanced network reliability",
     "status": "Maintenance",
     "fundingDate": "2024-Q2",
-    "logo": "/placeholder-logos/lava.png",
+    "logo": "/companies/lavanetwork.jpg",
     "productUrl": "https://lavanet.xyz",
     "proposalUrl": "#",
     "tags": ["Protocol Development", "Infrastructure"]
@@ -14,7 +14,7 @@
     "description": "Modern NEAR wallet with enhanced user experience",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/meteor.png",
+    "logo": "/companies/meteorwallet.jpg",
     "productUrl": "https://meteorwallet.app",
     "proposalUrl": "#",
     "tags": ["Wallets", "User Experience"]
@@ -44,7 +44,7 @@
     "description": "Multi-chain wallet with NEAR integration",
     "status": "Maintenance",
     "fundingDate": "2024-Q3",
-    "logo": "/placeholder-logos/nightly.png",
+    "logo": "/companies/nightlywallet.jpg",
     "productUrl": "https://nightly.app",
     "proposalUrl": "#",
     "tags": ["Wallets", "Multi-chain"]
@@ -54,7 +54,7 @@
     "description": "Chain abstracted onramp using NEAR Intents",
     "status": "In Development",
     "fundingDate": "2024-Q3",
-    "logo": "/placeholder-logos/pingpay.png",
+    "logo": "/companies/pingpay.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Chain Abstraction", "Payments"]
@@ -74,7 +74,7 @@
     "description": "Blockchain monitoring and analytics tools",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/chainspect.png",
+    "logo": "/companies/chainspect.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Analytics", "Monitoring"]
@@ -124,7 +124,7 @@
     "description": "Blockchain analytics and token metrics platform",
     "status": "Maintenance",
     "fundingDate": "2024-Q2",
-    "logo": "/placeholder-logos/tokenterminal.png",
+    "logo": "/companies/tokenterminal.jpg",
     "productUrl": "https://tokenterminal.com",
     "proposalUrl": "#",
     "tags": ["Analytics", "Metrics"]
@@ -144,7 +144,7 @@
     "description": "High-performance RPC infrastructure services",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/blockpi.png",
+    "logo": "/companies/blockpi.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Infrastructure", "RPC"]
@@ -154,7 +154,7 @@
     "description": "Optimized RPC services for NEAR blockchain",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/fastnear.png",
+    "logo": "/companies/fastnear.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Infrastructure", "RPC"]
@@ -164,7 +164,7 @@
     "description": "NEAR's main block explorer and network monitoring",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/nearblocks.png",
+    "logo": "/companies/nearblocks.jpg",
     "productUrl": "https://nearblocks.io",
     "proposalUrl": "#",
     "tags": ["Explorers", "Analytics"]
@@ -174,7 +174,7 @@
     "description": "Chain Abstracted relayer infrastructure",
     "status": "In Development",
     "fundingDate": "2024-Q3",
-    "logo": "/placeholder-logos/rathfi.png",
+    "logo": "/companies/rathfi.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Chain Abstraction", "Relayer"]
