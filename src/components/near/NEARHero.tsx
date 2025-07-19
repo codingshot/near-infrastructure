@@ -1,8 +1,52 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen } from 'lucide-react';
 
 const NEARHero = () => {
+  // Navigation items that were in the navbar
+  const navItems = [
+    { 
+      title: 'Get Funding', 
+      href: 'https://nearn.io/infra-committee/7', 
+      external: true,
+      icon: FileText,
+      description: 'Submit your proposal to get funding for infrastructure projects'
+    },
+    { 
+      title: 'RFP', 
+      href: 'https://nearn.io/infra-committee/', 
+      external: true,
+      icon: Target,
+      description: 'Browse open requests for proposals and funding opportunities'
+    },
+    { 
+      title: 'Feedback', 
+      href: 'https://nearn.io//listing/near-infrastructure-ecosystem-feedback-page-no-payment/', 
+      external: true,
+      icon: MessageSquare,
+      description: 'Share your thoughts on NEAR infrastructure ecosystem needs'
+    },
+    { 
+      title: 'Focus', 
+      href: '#focus-areas',
+      icon: Target,
+      description: 'Explore our key focus areas and supported infrastructure types'
+    },
+    { 
+      title: 'Team', 
+      href: '#team',
+      icon: Users,
+      description: 'Meet the committee members and working group'
+    },
+    { 
+      title: 'Blog', 
+      href: '#blog',
+      icon: BookOpen,
+      description: 'Read the latest updates and announcements'
+    },
+  ];
+
   return (
     <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-gradient-to-br from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,6 +125,45 @@ const NEARHero = () => {
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold text-near-500 mb-2">8</div>
               <div className="text-sm md:text-base text-gray-600">Focus Areas</div>
+            </div>
+          </div>
+
+          {/* Navigation Cards */}
+          <div className="mt-16 px-4 sm:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {navItems.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <Card 
+                    key={item.title} 
+                    className="hover:shadow-lg transition-shadow duration-300 cursor-pointer group border-gray-200 hover:border-near-300"
+                    onClick={() => {
+                      if (item.external) {
+                        window.open(item.href, '_blank', 'noopener,noreferrer');
+                      } else {
+                        document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                  >
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-near-100 rounded-lg flex items-center justify-center group-hover:bg-near-500 transition-colors">
+                          <IconComponent className="w-5 h-5 text-near-600 group-hover:text-white transition-colors" />
+                        </div>
+                        <CardTitle className="text-lg font-semibold text-gray-900 group-hover:text-near-600 transition-colors">
+                          {item.title}
+                          {item.external && <ExternalLink className="w-4 h-4 inline ml-1" />}
+                        </CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <CardDescription className="text-gray-600 text-sm leading-relaxed">
+                        {item.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>

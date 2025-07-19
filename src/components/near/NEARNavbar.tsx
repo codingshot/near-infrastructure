@@ -5,13 +5,10 @@ import { Button } from '@/components/ui/button';
 const NEARNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
+  // Simplified navbar - main navigation moved to hero cards
+  const quickLinks = [
     { title: 'Get Funding', href: 'https://nearn.io/infra-committee/7', external: true },
     { title: 'RFP', href: 'https://nearn.io/infra-committee/', external: true },
-    { title: 'Feedback', href: 'https://nearn.io//listing/near-infrastructure-ecosystem-feedback-page-no-payment/', external: true },
-    { title: 'Focus', href: '#focus-areas' },
-    { title: 'Team', href: '#team' },
-    { title: 'Blog', href: '#blog' },
   ];
 
   return (
@@ -31,10 +28,10 @@ const NEARNavbar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Quick Links */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-4 xl:space-x-6">
-              {navItems.map((item) => (
+              {quickLinks.map((item) => (
                 <a
                   key={item.title}
                   href={item.href}
@@ -84,7 +81,7 @@ const NEARNavbar = () => {
         {isOpen && (
           <div className="lg:hidden border-t border-gray-200">
             <div className="px-4 pt-2 pb-3 space-y-1 bg-white">
-              {navItems.map((item) => (
+              {quickLinks.map((item) => (
                 <a
                   key={item.title}
                   href={item.href}
