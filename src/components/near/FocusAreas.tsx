@@ -114,7 +114,7 @@ const FocusAreas = () => {
                 </CardDescription>
               </CardHeader>
               
-              {area.examples.length > 0 && showExamples && (
+              {area.examples.length > 0 && showExamples && isExpanded && (
                 <CardContent className="pt-0">
                   <div className="space-y-3">
                     <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
