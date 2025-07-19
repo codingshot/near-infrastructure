@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen, CreditCard } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import CountUp from 'react-countup';
 
 const NEARHero = () => {
+  const [showStats, setShowStats] = useState(false);
+  
   const [emblaRef] = useEmblaCarousel(
     { 
       loop: true,
@@ -21,6 +24,11 @@ const NEARHero = () => {
     },
     [Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })]
   );
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowStats(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // All action cards including Apply Credits
   const actionCards = [
@@ -60,32 +68,35 @@ const NEARHero = () => {
 
   return (
     <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-left max-w-4xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="hero-text max-w-4xl mx-auto">
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight">
-            NEAR Infrastructure
+            NEAR <span className="metallic-gradient">Infrastructure</span>
             <br />
-            <span className="text-primary">Committee</span>
+            <span className="metallic-gradient">Committee</span> (IC)
           </h1>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto">
             The NEAR Infrastructure Committee (IC) is{' '}
             <strong className="text-foreground">a group focused on strengthening the network's foundational infrastructure</strong>.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-start gap-3 md:gap-4 mb-12 md:mb-16">
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto">
-              <a href="https://nearn.io/infra-committee/7" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 mb-12 md:mb-16">
+            <Button 
+              asChild 
+              size="lg" 
+              className="relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto
+                        before:absolute before:inset-0 before:metallic-border before:opacity-20 before:z-0"
+            >
+              <a href="https://nearn.io/infra-committee/7" className="flex items-center gap-2 justify-center relative z-10">
                 Submit A Proposal
-                <ExternalLink className="w-4 h-4 md:w-5 md:h-5" />
               </a>
             </Button>
-            
             <Button asChild variant="outline" size="lg" className="border-border text-foreground hover:bg-muted px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto">
-              <a href="https://nearn.io/infra-committee/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 justify-center">
+              <a href="https://nearn.io/infra-committee/" className="flex items-center gap-2 justify-center">
                 See our RFPs
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </a>
@@ -95,15 +106,50 @@ const NEARHero = () => {
           {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
             <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold text-primary mb-2">$4M+</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold mb-2">
+                {showStats ? (
+                  <CountUp 
+                    end={4} 
+                    duration={2.5} 
+                    suffix="M+" 
+                    preserveValue
+                    className="metallic-gradient"
+                  />
+                ) : (
+                  <span className="metallic-gradient">$0M+</span>
+                )}
+              </div>
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Funding Committed</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold text-primary mb-2">20+</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold mb-2">
+                {showStats ? (
+                  <CountUp 
+                    end={20} 
+                    duration={2.5} 
+                    suffix="+" 
+                    preserveValue
+                    className="metallic-gradient"
+                  />
+                ) : (
+                  <span className="metallic-gradient">0+</span>
+                )}
+              </div>
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Projects Funded</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold text-primary mb-2">3</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold mb-2">
+                {showStats ? (
+                  <CountUp 
+                    end={3} 
+                    duration={2.5} 
+                    preserveValue
+                    className="metallic-gradient"
+                  />
+                ) : (
+                  <span className="metallic-gradient">0</span>
+                )}
+              </div>
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Support Programs</div>
             </div>
           </div>
@@ -112,7 +158,7 @@ const NEARHero = () => {
 
       {/* Action Cards Carousel - Full Width */}
       <div className="mb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
           <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground">Quick Actions</h2>
         </div>
         <div className="overflow-hidden" ref={emblaRef}>
@@ -130,7 +176,6 @@ const NEARHero = () => {
                         </div>
                         <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
                           {card.title}
-                          <ExternalLink className="w-4 h-4 inline ml-1 opacity-60" />
                         </CardTitle>
                       </div>
                     </CardHeader>

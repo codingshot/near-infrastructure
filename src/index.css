@@ -80,10 +80,44 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  /* Blink animation */
+  /* Metallic gradient animations */
+  @keyframes metallicShine {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
   @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+  }
+
+  .metallic-gradient {
+    background: linear-gradient(
+      90deg,
+      #c0c0c0 0%,
+      #e8e8e8 25%,
+      #ffffff 50%,
+      #e8e8e8 75%,
+      #c0c0c0 100%
+    );
+    background-size: 200% 100%;
+    animation: metallicShine 3s ease-in-out infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .metallic-border {
+    background: linear-gradient(
+      90deg,
+      #c0c0c0 0%,
+      #e8e8e8 25%,
+      #ffffff 50%,
+      #e8e8e8 75%,
+      #c0c0c0 100%
+    );
+    background-size: 200% 100%;
+    animation: metallicShine 3s ease-in-out infinite;
   }
 }
 
