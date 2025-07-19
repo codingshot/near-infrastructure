@@ -17,8 +17,16 @@ const NEARNavbar = () => {
         <div className="flex justify-between items-center h-14 md:h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="flex items-center space-x-2 md:space-x-3">
-              <img src="/favicon.ico" alt="NEAR" className="w-7 h-7 md:w-8 md:h-8 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)] transition-all duration-300" />
+            <a 
+              href="/" 
+              className="flex items-center space-x-2 md:space-x-3"
+              aria-label="NEAR Infrastructure Committee - Home"
+            >
+              <img 
+                src="/favicon.ico" 
+                alt="NEAR Infrastructure Committee Logo" 
+                className="w-7 h-7 md:w-8 md:h-8 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)] transition-all duration-300" 
+              />
               <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300">
                 <span className="hidden sm:inline">NEAR INFRA</span>
                 <span className="sm:hidden">NEAR IC</span>
@@ -37,6 +45,7 @@ const NEARNavbar = () => {
                       href={item.href}
                       target={item.external ? '_blank' : undefined}
                       rel={item.external ? 'noopener noreferrer' : undefined}
+                      aria-label={`${item.title} - Opens in new tab`}
                       className="bg-primary text-primary-foreground hover:bg-primary/90 px-3 xl:px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.title}
@@ -49,6 +58,7 @@ const NEARNavbar = () => {
                     href={item.href}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
+                    aria-label={`${item.title} - Opens in new tab`}
                     className="text-muted-foreground hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap"
                   >
                     {item.title}
@@ -78,12 +88,13 @@ const NEARNavbar = () => {
               {quickLinks.map((item) => {
                 if (item.title === 'Get Funding') {
                   return (
-                    <a
-                      key={item.title}
-                      href={item.href}
-                      target={item.external ? '_blank' : undefined}
-                      rel={item.external ? 'noopener noreferrer' : undefined}
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 block px-3 py-2 text-base font-medium rounded-md transition-colors"
+                     <a
+                       key={item.title}
+                       href={item.href}
+                       target={item.external ? '_blank' : undefined}
+                       rel={item.external ? 'noopener noreferrer' : undefined}
+                       aria-label={`${item.title} - Opens in new tab`}
+                       className="bg-primary text-primary-foreground hover:bg-primary/90 block px-3 py-2 text-base font-medium rounded-md transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.title}
@@ -96,6 +107,7 @@ const NEARNavbar = () => {
                     href={item.href}
                     target={item.external ? '_blank' : undefined}
                     rel={item.external ? 'noopener noreferrer' : undefined}
+                    aria-label={`${item.title} - Opens in new tab`}
                     className="text-muted-foreground hover:text-primary hover:bg-muted block px-3 py-2 text-base font-medium rounded-md transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
