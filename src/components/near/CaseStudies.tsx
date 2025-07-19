@@ -178,7 +178,10 @@ const CaseStudies = () => {
                     
                     {/* Status and Tags in same row */}
                     <div className="flex flex-wrap items-center gap-2 mb-3">
-                      <Badge className={`${getStatusColor(study.status)} border flex-shrink-0`}>
+                      <Badge 
+                        className={`${getStatusColor(study.status)} border flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity`}
+                        onClick={() => setStatusFilter(study.status)}
+                      >
                         {study.status}
                       </Badge>
                       {study.tags?.map((tag, tagIndex) => 
