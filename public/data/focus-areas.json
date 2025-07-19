@@ -46,27 +46,32 @@
       {
         "name": "Meteor Wallet",
         "url": "https://meteorwallet.app",
-        "description": "Modern NEAR wallet with advanced features"
+        "description": "Modern NEAR wallet with advanced features",
+        "logo": "/companies/meteorwallet.jpg"
       },
       {
         "name": "NEAR Mobile Wallet",
         "url": "https://nearmobile.app",
-        "description": "Official NEAR mobile wallet application"
+        "description": "Official NEAR mobile wallet application",
+        "logo": "/companies/nearmobile.jpg"
       },
       {
         "name": "Bitget Wallet",
         "url": "https://web3.bitget.com/en",
-        "description": "Multi-chain wallet with NEAR support"
+        "description": "Multi-chain wallet with NEAR support",
+        "logo": "/companies/bitget.png"
       },
       {
         "name": "Nightly",
         "url": "https://nightly.app/",
-        "description": "Secure multi-chain wallet"
+        "description": "Secure multi-chain wallet",
+        "logo": "/companies/nightlywallet.jpg"
       },
       {
         "name": "OKX Wallet",
         "url": "https://web3.okx.com/",
-        "description": "Comprehensive Web3 wallet solution"
+        "description": "Comprehensive Web3 wallet solution",
+        "logo": "/companies/okx.png"
       },
       {
         "name": "Fast Auth 2.0",
@@ -86,7 +91,8 @@
       {
         "name": "Hot Wallet",
         "url": "https://hot-labs.org/",
-        "description": "Chain abstraction wallet"
+        "description": "Chain abstraction wallet",
+        "logo": "/companies/hot.jpg"
       },
       {
         "name": "Ledger",
@@ -96,7 +102,8 @@
       {
         "name": "Coin98 Wallet",
         "url": "https://coin98.com/wallet",
-        "description": "Multi-chain DeFi wallet"
+        "description": "Multi-chain DeFi wallet",
+        "logo": "/companies/coin98.jpg"
       },
       {
         "name": "MetaMask Snap",
@@ -160,7 +167,9 @@
       {
         "name": "Shitzu Bridge",
         "url": "https://omni-bridge.shitzu-app.pages.dev/bridge",
-        "description": "Community-built bridging solution"
+        "description": "Community-built bridging solution",
+        "logo": "/companies/shitzu.jpg"
+
       },
       {
         "name": "NEAR Intents",
@@ -170,12 +179,15 @@
       {
         "name": "Rubic",
         "url": "https://rubic.exchange",
-        "description": "Cross-chain exchange platform"
+        "description": "Cross-chain exchange platform",
+        "logo": "/companies/rubic.jpg"
+
       },
       {
         "name": "Infinex Swidge",
         "url": "https://support.infinex.xyz/en/articles/10336734-how-to-swidge",
-        "description": "Multi-chain bridge aggregator"
+        "description": "Multi-chain bridge aggregator",
+        "logo": "/companies/infinex.jpg"
       },
       {
         "name": "Rainbow Bridge",
@@ -192,17 +204,20 @@
       {
         "name": "Lava Network",
         "url": "https://lavanet.xyz",
-        "description": "Decentralized RPC network providing reliable blockchain data"
+        "description": "Decentralized RPC network providing reliable blockchain data",
+        "logo": "/companies/lavanetwork.jpg"
       },
       {
         "name": "FastNEAR",
         "url": "https://fastnear.com",
-        "description": "High-performance RPC service for NEAR Protocol"
+        "description": "High-performance RPC service for NEAR Protocol",
+        "logo": "/companies/fastnear.jpg"
       },
       {
         "name": "BlockPI",
         "url": "https://blockpi.io",
-        "description": "Multi-chain RPC service with NEAR support"
+        "description": "Multi-chain RPC service with NEAR support",
+        "logo": "/companies/blockpi.jpg"
       }
     ]
   },
@@ -215,17 +230,20 @@
       {
         "name": "Onramper",
         "url": "https://www.onramper.com/",
-        "description": "Global fiat onramp aggregator"
+        "description": "Global fiat onramp aggregator",
+        "logo": "/companies/onramper.jpg"
       },
       {
         "name": "Ramper",
         "url": "https://www.ramper.xyz/",
-        "description": "Web3 onboarding infrastructure"
+        "description": "Web3 onboarding infrastructure",
+        "logo": "/companies/ramper.jpg"
       },
       {
         "name": "Transak",
         "url": "https://transak.com/",
-        "description": "Global payment gateway for Web3"
+        "description": "Global payment gateway for Web3",
+        "logo": "/companies/transak.jpg"
       }
     ]
   },
@@ -237,12 +255,14 @@
       {
         "name": "Hot Relayer",
         "url": "#",
-        "description": "Chain abstraction relayer"
+        "description": "Chain abstraction relayer",
+        "logo": "/companies/hot.jpg"
       },
       {
         "name": "Bitte Relayer",
         "url": "https://wallet.bitte.ai/paymaster",
-        "description": "AI-powered relayer with paymaster"
+        "description": "AI-powered relayer with paymaster",
+        "logo": "/companies/bitte.jpg"
       },
       {
         "name": "NEP366",
@@ -252,7 +272,8 @@
       {
         "name": "Rath.fi Tachyon",
         "url": "https://certain-occupation-46b.notion.site/Tachyon-The-High-Speed-Relayer-1838187f313080499de4dd7eab597c54/",
-        "description": "High-speed relayer infrastructure"
+        "description": "High-speed relayer infrastructure",
+        "logo": "/companies/rath.jpg"
       }
     ]
   },
@@ -265,12 +286,14 @@
         "name": "NEAR Blocks",
         "url": "https://nearblocks.io",
         "description": "Primary NEAR Protocol block explorer (Recommended)",
-        "recommended": true
+        "recommended": true,
+        "logo": "/companies/nearblocks.jpg"
       },
       {
         "name": "Pikespeak.ai",
         "url": "https://pikespeak.ai",
-        "description": "Advanced analytics and insights platform"
+        "description": "Advanced analytics and insights platform",
+        "logo": "/companies/pikespeak.jpg"
       },
       {
         "name": "Explorer Selector",
@@ -292,12 +315,14 @@
       {
         "name": "The Graph",
         "url": "https://thegraph.com/docs/en/subgraphs/guides/near/",
-        "description": "Decentralized indexing protocol"
+        "description": "Decentralized indexing protocol",
+        "logo": "/companies/thegraph.jpg"
       },
       {
         "name": "Subquery",
         "url": "https://subquery.network/doc/indexer/quickstart/quickstart_chains/near.html",
-        "description": "Fast, flexible, and universal data indexer"
+        "description": "Fast, flexible, and universal data indexer",
+        "logo": "/companies/subquery.jpg"
       },
       {
         "name": "Intear API",
@@ -339,7 +364,8 @@
       {
         "name": "NEAR AI",
         "url": "https://near.ai",
-        "description": "Official NEAR AI infrastructure"
+        "description": "Official NEAR AI infrastructure",
+        "logo": "/companies/nearaiwhite.png"
       },
       {
         "name": "Bitte AI",
@@ -349,7 +375,8 @@
       {
         "name": "Shade Agents",
         "url": "https://docs.near.org/ai/shade-agents/introduction",
-        "description": "Privacy-focused AI agents"
+        "description": "Privacy-focused AI agents",
+        "logo": "/companies/proximity.jpg"
       }
     ]
   },
@@ -378,6 +405,7 @@
         "name": "Hot Wallet Selector",
         "url": "https://github.com/hot-dao/near-selector",
         "description": "Enhanced wallet selection interface"
+        "logo": "/companies/hot.jpg"
       }
     ]
   },
@@ -389,7 +417,8 @@
       {
         "name": "Aurora Virtual Chains",
         "url": "https://aurora.dev",
-        "description": "EVM-compatible virtual chains on NEAR"
+        "description": "EVM-compatible virtual chains on NEAR",
+        "logo": "/companies/aurora.jpg"
       },
       {
         "name": "Chain Signatures",
