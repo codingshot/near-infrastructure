@@ -11,6 +11,23 @@ interface Example {
   recommended?: boolean;
 }
 
+// Mapping of company/project names to their images
+const companyImages: Record<string, string> = {
+  'Aurora': '/companies/aurora.jpg',
+  'Aurora Virtual Chains': '/companies/aurora.jpg',
+  'BlockPI': '/companies/blockpi.jpg',
+  'Chainspect': '/companies/chainspect.jpg',
+  'FastNEAR': '/companies/fastnear.jpg',
+  'Lava Network': '/companies/lavanetwork.jpg',
+  'Meteor Wallet': '/companies/meteorwallet.jpg',
+  'NEAR Blocks': '/companies/nearblocks.jpg',
+  'NEAR Mobile Wallet': '/companies/nearmobile.jpg',
+  'Nightly': '/companies/nightlywallet.jpg',
+  'Ping Pay': '/companies/pingpay.jpg',
+  'Rath.fi Tachyon': '/companies/rathfi.jpg',
+  'Token Terminal': '/companies/tokenterminal.jpg'
+};
+
 interface FocusArea {
   id: string;
   title: string;
@@ -94,10 +111,22 @@ const FocusAreas = () => {
                     <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
                       Examples on NEAR
                     </h4>
-                    {area.examples.map((example, index) => (
-                      <div key={index} 
-                           className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
-                        <div className="flex-grow">
+                     {area.examples.map((example, index) => {
+                       const hasImage = companyImages[example.name];
+                       return (
+                       <div key={index} 
+                            className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
+                         <div className="flex items-start gap-3 flex-grow">
+                           {hasImage && (
+                             <div className="flex-shrink-0">
+                               <img 
+                                 src={hasImage} 
+                                 alt={`${example.name} logo`}
+                                 className="w-8 h-8 rounded object-cover"
+                               />
+                             </div>
+                           )}
+                           <div className="flex-grow min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <a
                               href={example.url}
@@ -113,10 +142,11 @@ const FocusAreas = () => {
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {example.description}
-                          </p>
-                        </div>
+                             <p className="text-sm text-muted-foreground leading-relaxed">
+                               {example.description}
+                             </p>
+                           </div>
+                         </div>
                         <div className="flex items-center gap-2 ml-3">
                           {example.twitter && (
                             <Button
@@ -153,8 +183,9 @@ const FocusAreas = () => {
                             </a>
                           </Button>
                         </div>
-                      </div>
-                    ))}
+                         </div>
+                       );
+                     })}
                   </div>
                   {area.categoryUrl && (
                     <div className="mt-4 pt-4 border-t border-border">
