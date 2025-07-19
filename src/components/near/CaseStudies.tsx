@@ -176,23 +176,20 @@ const CaseStudies = () => {
                       {study.name}
                     </CardTitle>
                     
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1 mb-3">
+                    {/* Status and Tags in same row */}
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <Badge className={`${getStatusColor(study.status)} border flex-shrink-0`}>
+                        {study.status}
+                      </Badge>
                       {study.tags?.map((tag, tagIndex) => 
                         <span 
                           key={tagIndex} 
-                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20 hover:bg-primary/20 cursor-pointer transition-colors"
+                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20 hover:bg-primary/20 cursor-pointer transition-colors flex-shrink-0"
                           onClick={() => handleTagClick(tag)}
                         >
                           {tag}
                         </span>
                       )}
-                    </div>
-                    
-                    <div className="flex items-center gap-2 mb-3">
-                      <Badge className={`${getStatusColor(study.status)} border`}>
-                        {study.status}
-                      </Badge>
                     </div>
                   </div>
                   {/* Company Logo */}
