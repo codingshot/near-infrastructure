@@ -159,7 +159,7 @@ const TeamSection = () => {
 
               {/* Member Image - Right Side */}
               <div className="flex-shrink-0 self-start">
-                <div className="w-16 h-16 rounded-full overflow-hidden bg-muted ring-2 ring-background shadow-md group-hover:scale-105 transition-transform duration-300">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-muted ring-2 ring-background shadow-md group-hover:scale-105 transition-transform duration-300">
                   <img 
                     src={member.image} 
                     alt={member.name}
