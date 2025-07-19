@@ -26,11 +26,12 @@ const NEARFooter = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
-              <img src="/favicon.ico" alt="NEAR" className="w-8 h-8" />
-              <span className="font-grotesk font-semibold text-lg text-foreground">
-                NEAR Infrastructure Committee
-              </span>
+            <div className="mb-4">
+              <img 
+                src="/nearinfrastrcuturelogoblack.svg" 
+                alt="NEAR Infrastructure Committee" 
+                className="h-12 w-auto brightness-0 invert"
+              />
             </div>
             <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
               NEAR is the user-owned AI stack, blockchain, chain abstraction, AI.
