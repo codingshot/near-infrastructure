@@ -24,7 +24,7 @@ interface FocusArea {
 const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
-  const [showExamples, setShowExamples] = useState(true);
+  const [showExamples, setShowExamples] = useState(false);
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
@@ -108,87 +108,85 @@ const FocusAreas = () => {
                       Examples on NEAR
                     </h4>
                      {area.examples.map((example, index) => {
-                       return (
-                       <div key={index} 
-                            className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
-                         <div className="flex items-start gap-3 flex-grow">
-                            {example.logo && (
-                              <div className="flex-shrink-0">
-                                <img 
-                                  src={example.logo} 
-                                  alt={`${example.name} logo`}
-                                  className="w-8 h-8 rounded-full object-cover"
-                                />
-                              </div>
+                        return (
+                        <div key={index} 
+                             className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group"
+                             onClick={(e) => e.stopPropagation()}>
+                          <div className="flex items-start gap-3 flex-grow">
+                             {example.logo && (
+                               <div className="flex-shrink-0">
+                                 <img 
+                                   src={example.logo} 
+                                   alt={`${example.name} logo`}
+                                   className="w-8 h-8 rounded-full object-cover"
+                                 />
+                               </div>
+                             )}
+                            <div className="flex-grow min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                               {example.url && example.url !== '#' ? (
+                                  <a
+                                    href={example.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
+                                  >
+                                   {example.name}
+                                 </a>
+                              ) : (
+                                <span className="font-grotesk font-medium text-foreground">
+                                  {example.name}
+                                </span>
+                              )}
+                             {example.recommended && (
+                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                 Recommended
+                               </span>
+                             )}
+                           </div>
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {example.description}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 ml-3">
+                            {example.twitter && (
+                              <Button
+                                asChild
+                                variant="ghost"
+                                size="sm"
+                                className="p-1 h-auto text-muted-foreground hover:text-primary"
+                              >
+                                 <a
+                                   href={example.twitter}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label={`${example.name} Twitter`}
+                                 >
+                                  <Twitter className="w-3 h-3" />
+                                </a>
+                              </Button>
                             )}
-                           <div className="flex-grow min-w-0">
-                           <div className="flex items-center gap-2 mb-1">
-                              {example.url && example.url !== '#' ? (
+                            {example.url && example.url !== '#' && (
+                              <Button
+                                asChild
+                                variant="ghost"
+                                size="sm"
+                                className="p-1 h-auto text-muted-foreground hover:text-primary"
+                              >
                                  <a
                                    href={example.url}
                                    target="_blank"
                                    rel="noopener noreferrer"
-                                   className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
-                                   onClick={(e) => e.stopPropagation()}
+                                   aria-label={`Visit ${example.name}`}
                                  >
-                                  {example.name}
+                                  <ExternalLink className="w-3 h-3" />
                                 </a>
-                             ) : (
-                               <span className="font-grotesk font-medium text-foreground">
-                                 {example.name}
-                               </span>
-                             )}
-                            {example.recommended && (
-                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                Recommended
-                              </span>
+                              </Button>
                             )}
+                         </div>
                           </div>
-                             <p className="text-sm text-muted-foreground leading-relaxed">
-                               {example.description}
-                             </p>
-                           </div>
-                         </div>
-                         <div className="flex items-center gap-2 ml-3">
-                           {example.twitter && (
-                             <Button
-                               asChild
-                               variant="ghost"
-                               size="sm"
-                               className="p-1 h-auto text-muted-foreground hover:text-primary"
-                               onClick={(e) => e.stopPropagation()}
-                             >
-                                <a
-                                  href={example.twitter}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  aria-label={`${example.name} Twitter`}
-                                >
-                                 <Twitter className="w-3 h-3" />
-                               </a>
-                             </Button>
-                           )}
-                           {example.url && example.url !== '#' && (
-                             <Button
-                               asChild
-                               variant="ghost"
-                               size="sm"
-                               className="p-1 h-auto text-muted-foreground hover:text-primary"
-                               onClick={(e) => e.stopPropagation()}
-                             >
-                                <a
-                                  href={example.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  aria-label={`Visit ${example.name}`}
-                                >
-                                 <ExternalLink className="w-3 h-3" />
-                               </a>
-                             </Button>
-                           )}
-                        </div>
-                         </div>
-                       );
+                        );
                      })}
                   </div>
                   {area.categoryUrl && (
