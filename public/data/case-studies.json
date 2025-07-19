@@ -105,7 +105,7 @@
     "description": "NEAR blockchain data integration with Google BigQuery",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/bigquery.png",
+    "logo": "/companies/bigquery.webp",
     "productUrl": "https://docs.near.org/data-infrastructure/big-query",
     "proposalUrl": "#",
     "tags": ["Data Lake"]
