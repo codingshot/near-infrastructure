@@ -18,7 +18,7 @@ const NEARNavbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/" className="flex items-center space-x-2 md:space-x-3">
-              <img src="/favicon.ico" alt="NEAR" className="w-7 h-7 md:w-8 md:h-8" />
+              <img src="/favicon.ico" alt="NEAR" className="w-7 h-7 md:w-8 md:h-8 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)] transition-all duration-300" />
               <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl">
                 <span className="hidden sm:inline">NEAR INFRA</span>
                 <span className="sm:hidden">NEAR IC</span>
@@ -29,17 +29,32 @@ const NEARNavbar = () => {
           {/* Desktop Quick Links */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-4 xl:space-x-6">
-              {quickLinks.map((item) => (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noopener noreferrer' : undefined}
-                  className="text-muted-foreground hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap"
-                >
-                  {item.title}
-                </a>
-              ))}
+              {quickLinks.map((item, index) => {
+                if (item.title === 'Get Funding') {
+                  return (
+                    <a
+                      key={item.title}
+                      href={item.href}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
+                      className="metallic-gradient px-3 xl:px-4 py-2 text-sm font-bold transition-colors duration-200 whitespace-nowrap order-first"
+                    >
+                      {item.title}
+                    </a>
+                  );
+                }
+                return (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    className="text-muted-foreground hover:text-primary px-2 xl:px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap"
+                  >
+                    {item.title}
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -60,18 +75,34 @@ const NEARNavbar = () => {
         {isOpen && (
           <div className="lg:hidden border-t border-border">
             <div className="px-4 pt-2 pb-3 space-y-1 bg-background">
-              {quickLinks.map((item) => (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noopener noreferrer' : undefined}
-                  className="text-muted-foreground hover:text-primary hover:bg-muted block px-3 py-2 text-base font-medium rounded-md transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.title}
-                </a>
-              ))}
+              {quickLinks.map((item) => {
+                if (item.title === 'Get Funding') {
+                  return (
+                    <a
+                      key={item.title}
+                      href={item.href}
+                      target={item.external ? '_blank' : undefined}
+                      rel={item.external ? 'noopener noreferrer' : undefined}
+                      className="metallic-gradient block px-3 py-2 text-base font-bold rounded-md transition-colors order-first"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.title}
+                    </a>
+                  );
+                }
+                return (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    className="text-muted-foreground hover:text-primary hover:bg-muted block px-3 py-2 text-base font-medium rounded-md transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.title}
+                  </a>
+                );
+              })}
             </div>
           </div>
         )}

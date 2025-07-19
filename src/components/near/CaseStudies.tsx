@@ -3,8 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Search, Filter } from 'lucide-react';
+import { ExternalLink, Search, Filter, X } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
 interface CaseStudy {
   name: string;
   description: string;
@@ -15,13 +16,60 @@ interface CaseStudy {
   proposalUrl: string;
   tags: string[];
 }
+
 const CaseStudies = () => {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  // URL parameter management
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    const statusParam = urlParams.get('status');
+    const tagsParam = urlParams.get('tags');
+    
+    if (searchParam) setSearchTerm(searchParam);
+    if (statusParam) setStatusFilter(statusParam);
+    if (tagsParam) setSelectedTags(tagsParam.split(',').filter(Boolean));
+  }, []);
+
+  const updateUrlParams = (search: string, status: string, tags: string[]) => {
+    const urlParams = new URLSearchParams();
+    if (search) urlParams.set('search', search);
+    if (status !== 'all') urlParams.set('status', status);
+    if (tags.length > 0) urlParams.set('tags', tags.join(','));
+    
+    const newUrl = `${window.location.pathname}${urlParams.toString() ? '?' + urlParams.toString() : ''}`;
+    window.history.replaceState(null, '', newUrl);
+  };
+
   useEffect(() => {
     fetch('/data/case-studies.json').then(response => response.json()).then(data => setCaseStudies(data)).catch(error => console.error('Error loading case studies:', error));
   }, []);
+
+  // Update URL params when filters change
+  useEffect(() => {
+    updateUrlParams(searchTerm, statusFilter, selectedTags);
+  }, [searchTerm, statusFilter, selectedTags]);
+
+  const handleTagClick = (tag: string) => {
+    if (!selectedTags.includes(tag)) {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
+
+  const removeTag = (tag: string) => {
+    setSelectedTags(selectedTags.filter(t => t !== tag));
+  };
+
+  const clearAllFilters = () => {
+    setSearchTerm('');
+    setStatusFilter('all');
+    setSelectedTags([]);
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Completed':
@@ -38,14 +86,20 @@ const CaseStudies = () => {
         return 'bg-muted text-muted-foreground border-border';
     }
   };
+
   const filterCaseStudies = () => {
     return caseStudies.filter(study => {
-      const matchesSearch = study.name.toLowerCase().includes(searchTerm.toLowerCase()) || study.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = study.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                           study.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           study.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
       const matchesStatus = statusFilter === 'all' || study.status === statusFilter;
-      return matchesSearch && matchesStatus;
+      const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => study.tags.includes(tag));
+      return matchesSearch && matchesStatus && matchesTags;
     });
   };
+
   const uniqueStatuses = Array.from(new Set(caseStudies.map(study => study.status)));
+  const hasActiveFilters = searchTerm || statusFilter !== 'all' || selectedTags.length > 0;
   return <section id="case-studies" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -84,6 +138,32 @@ const CaseStudies = () => {
               </Select>
             </div>
           </div>
+
+          {/* Active Tags Display */}
+          {selectedTags.length > 0 && (
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="text-sm text-muted-foreground">Active filters:</span>
+              {selectedTags.map((tag) => (
+                <Badge 
+                  key={tag} 
+                  variant="secondary" 
+                  className="flex items-center gap-1 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 cursor-pointer"
+                  onClick={() => removeTag(tag)}
+                >
+                  {tag}
+                  <X className="w-3 h-3" />
+                </Badge>
+              ))}
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                onClick={clearAllFilters}
+                className="text-muted-foreground hover:text-foreground text-xs"
+              >
+                Clear all
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Case Studies Grid */}
@@ -98,9 +178,15 @@ const CaseStudies = () => {
                     
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1 mb-3">
-                      {study.tags?.map((tag, tagIndex) => <span key={tagIndex} className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20">
+                      {study.tags?.map((tag, tagIndex) => 
+                        <span 
+                          key={tagIndex} 
+                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20 hover:bg-primary/20 cursor-pointer transition-colors"
+                          onClick={() => handleTagClick(tag)}
+                        >
                           {tag}
-                        </span>)}
+                        </span>
+                      )}
                     </div>
                     
                     <div className="flex items-center gap-2 mb-3">
@@ -158,9 +244,20 @@ const CaseStudies = () => {
         </div>
         
         {/* No results message */}
-        {filterCaseStudies().length === 0 && (searchTerm || statusFilter !== 'all') && <div className="text-center py-8 text-muted-foreground">
-            No case studies found matching your criteria. Try adjusting your search or filters.
-          </div>}
+        {filterCaseStudies().length === 0 && hasActiveFilters && (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground mb-4">
+              No projects found matching your criteria.
+            </p>
+            <Button 
+              variant="outline" 
+              onClick={clearAllFilters}
+              className="border-border text-foreground hover:bg-muted"
+            >
+              Clear all filters
+            </Button>
+          </div>
+        )}
 
         {/* Additional Resources */}
         <div className="mt-12">
