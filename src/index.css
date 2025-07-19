@@ -186,19 +186,23 @@
     animation: metallicShine 2s ease-in-out infinite;
   }
 
-  /* Metallic green border animation */
-  .metallic-green-border {
+  /* Silver-green metallic glowing border animation */
+  .silver-green-glow-border {
     background: linear-gradient(
       45deg,
-      #14B8A6 0%,
-      #20DDCC 25%,
-      #ffffff 50%,
-      #20DDCC 75%,
-      #14B8A6 100%
+      #c0c0c0 0%,
+      #14B8A6 20%,
+      #e8e8e8 40%,
+      #14B8A6 60%,
+      #ffffff 80%,
+      #c0c0c0 100%
     );
     background-size: 400% 400%;
     animation: metallicShine 2s ease-in-out infinite;
     border-radius: inherit;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6))
+            drop-shadow(0 0 16px rgba(20, 184, 166, 0.4))
+            drop-shadow(0 0 24px rgba(192, 192, 192, 0.3));
   }
 }
 
