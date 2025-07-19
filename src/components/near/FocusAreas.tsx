@@ -101,11 +101,9 @@ const FocusAreas = () => {
                       className="text-primary hover:text-primary/80"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <a
-                        href={area.categoryUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
+                       <a
+                         href={area.categoryUrl}
+                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     </Button>
@@ -138,15 +136,19 @@ const FocusAreas = () => {
                               </div>
                             )}
                            <div className="flex-grow min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <a
-                              href={example.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
-                            >
-                              {example.name}
-                            </a>
+                           <div className="flex items-center gap-2 mb-1">
+                             {example.url && example.url !== '#' ? (
+                               <a
+                                 href={example.url}
+                                 className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
+                               >
+                                 {example.name}
+                               </a>
+                             ) : (
+                               <span className="font-grotesk font-medium text-foreground">
+                                 {example.name}
+                               </span>
+                             )}
                             {example.recommended && (
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
                                 Recommended
@@ -158,41 +160,39 @@ const FocusAreas = () => {
                              </p>
                            </div>
                          </div>
-                        <div className="flex items-center gap-2 ml-3">
-                          {example.twitter && (
-                            <Button
-                              asChild
-                              variant="ghost"
-                              size="sm"
-                              className="p-1 h-auto text-muted-foreground hover:text-primary"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              <a
-                                href={example.twitter}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={`${example.name} Twitter`}
-                              >
-                                <Twitter className="w-3 h-3" />
-                              </a>
-                            </Button>
-                          )}
-                          <Button
-                            asChild
-                            variant="ghost"
-                            size="sm"
-                            className="p-1 h-auto text-muted-foreground hover:text-primary"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <a
-                              href={example.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`Visit ${example.name}`}
-                            >
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          </Button>
+                         <div className="flex items-center gap-2 ml-3">
+                           {example.twitter && (
+                             <Button
+                               asChild
+                               variant="ghost"
+                               size="sm"
+                               className="p-1 h-auto text-muted-foreground hover:text-primary"
+                               onClick={(e) => e.stopPropagation()}
+                             >
+                               <a
+                                 href={example.twitter}
+                                 aria-label={`${example.name} Twitter`}
+                               >
+                                 <Twitter className="w-3 h-3" />
+                               </a>
+                             </Button>
+                           )}
+                           {example.url && example.url !== '#' && (
+                             <Button
+                               asChild
+                               variant="ghost"
+                               size="sm"
+                               className="p-1 h-auto text-muted-foreground hover:text-primary"
+                               onClick={(e) => e.stopPropagation()}
+                             >
+                               <a
+                                 href={example.url}
+                                 aria-label={`Visit ${example.name}`}
+                               >
+                                 <ExternalLink className="w-3 h-3" />
+                               </a>
+                             </Button>
+                           )}
                         </div>
                          </div>
                        );
@@ -207,12 +207,10 @@ const FocusAreas = () => {
                         className="w-full border-border text-foreground hover:bg-muted"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <a 
-                          href={area.categoryUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
+                         <a 
+                           href={area.categoryUrl} 
+                           className="flex items-center gap-2"
+                         >
                           View All {area.title} Projects
                           <ExternalLink className="w-4 h-4" />
                         </a>
