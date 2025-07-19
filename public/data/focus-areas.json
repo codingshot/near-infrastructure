@@ -404,7 +404,7 @@
       {
         "name": "Hot Wallet Selector",
         "url": "https://github.com/hot-dao/near-selector",
-        "description": "Enhanced wallet selection interface"
+        "description": "Enhanced wallet selection interface",
         "logo": "/companies/hot.jpg"
       }
     ]
