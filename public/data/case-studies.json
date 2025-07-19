@@ -208,5 +208,15 @@
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Wallets", "User Experience"]
+  },
+  {
+    "name": "Valhalla Security",
+    "description": "Maintaining NEAR's bug bounty program and security program",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/valhalla.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Security", "Bug Bounty"]
   }
 ]

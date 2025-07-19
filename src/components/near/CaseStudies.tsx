@@ -200,23 +200,74 @@ const CaseStudies = () => {
 
         {/* Additional Resources */}
         <div className="mt-12">
-          <div className="bg-muted rounded-lg p-6 max-w-md">
-            <h3 className="font-grotesk font-semibold text-foreground mb-2">Other Internal Resources</h3>
-            <Button
-              asChild
-              variant="outline"
-              className="w-full border-border text-foreground hover:bg-background"
-            >
-              <a
-                href="https://status.near.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2"
+          <div className="bg-muted rounded-lg p-6">
+            <h3 className="font-grotesk font-semibold text-foreground mb-4">Internal Resources</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="border-border text-foreground hover:bg-background"
               >
-                NEAR Status Page
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </Button>
+                <a
+                  href="https://status.near.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  NEAR Status Page
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="border-border text-foreground hover:bg-background"
+              >
+                <a
+                  href="https://nearn.io/infra-committee/5/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  Infrastructure Credits Program
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="border-border text-foreground hover:bg-background"
+              >
+                <a
+                  href="https://near.org/security"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  NEAR Security Program
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="border-border text-foreground hover:bg-background"
+              >
+                <a
+                  href="https://nearn.io/beta-testing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  NEAR Beta Testing Program
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
