@@ -9,24 +9,9 @@ interface Example {
   description: string;
   twitter?: string;
   recommended?: boolean;
+  logo?: string;
 }
 
-// Mapping of company/project names to their images
-const companyImages: Record<string, string> = {
-  'Aurora': '/companies/aurora.jpg',
-  'Aurora Virtual Chains': '/companies/aurora.jpg',
-  'BlockPI': '/companies/blockpi.jpg',
-  'Chainspect': '/companies/chainspect.jpg',
-  'FastNEAR': '/companies/fastnear.jpg',
-  'Lava Network': '/companies/lavanetwork.jpg',
-  'Meteor Wallet': '/companies/meteorwallet.jpg',
-  'NEAR Blocks': '/companies/nearblocks.jpg',
-  'NEAR Mobile Wallet': '/companies/nearmobile.jpg',
-  'Nightly': '/companies/nightlywallet.jpg',
-  'Ping Pay': '/companies/pingpay.jpg',
-  'Rath.fi Tachyon': '/companies/rathfi.jpg',
-  'Token Terminal': '/companies/tokenterminal.jpg'
-};
 
 interface FocusArea {
   id: string;
@@ -123,15 +108,14 @@ const FocusAreas = () => {
                       Examples on NEAR
                     </h4>
                      {area.examples.map((example, index) => {
-                       const hasImage = companyImages[example.name];
                        return (
                        <div key={index} 
                             className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
                          <div className="flex items-start gap-3 flex-grow">
-                            {hasImage && (
+                            {example.logo && (
                               <div className="flex-shrink-0">
                                 <img 
-                                  src={hasImage} 
+                                  src={example.logo} 
                                   alt={`${example.name} logo`}
                                   className="w-8 h-8 rounded-full object-cover"
                                 />
