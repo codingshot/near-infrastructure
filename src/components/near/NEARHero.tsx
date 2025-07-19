@@ -57,8 +57,7 @@ const NEARHero = () => {
           {/* Description */}
           <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
             The NEAR Infrastructure Committee (IC) is{' '}
-            <strong>a group within the NEAR ecosystem focused on strengthening the network's foundational infrastructure</strong>. 
-            It was established to improve the underlying technology that developers rely on to build applications on NEAR.
+            <strong>a group within the NEAR ecosystem focused on strengthening the network's foundational infrastructure</strong>.
           </p>
 
           
