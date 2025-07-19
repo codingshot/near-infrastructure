@@ -30,18 +30,68 @@
       },
       {
         "name": "NEAR Mobile Wallet",
-        "url": "#",
+        "url": "https://nearmobile.app",
         "description": "Official NEAR mobile wallet application"
       },
       {
         "name": "Bitget Wallet",
-        "url": "#",
+        "url": "https://web3.bitget.com/en",
         "description": "Multi-chain wallet with NEAR support"
+      },
+      {
+        "name": "Nightly",
+        "url": "https://nightly.app/",
+        "description": "Secure multi-chain wallet"
+      },
+      {
+        "name": "OKX Wallet",
+        "url": "https://web3.okx.com/",
+        "description": "Comprehensive Web3 wallet solution"
       },
       {
         "name": "Fast Auth 2.0",
         "url": "#",
         "description": "Streamlined authentication for NEAR applications"
+      },
+      {
+        "name": "Wallet Selector",
+        "url": "https://github.com/near/wallet-selector",
+        "description": "Universal wallet connection library"
+      },
+      {
+        "name": "Sender Wallet",
+        "url": "https://senderwallet.io/",
+        "description": "Cross-chain wallet solution"
+      },
+      {
+        "name": "Hot Wallet",
+        "url": "https://hot-labs.org/",
+        "description": "Chain abstraction wallet"
+      },
+      {
+        "name": "Ledger",
+        "url": "https://www.ledger.com/coin/wallet/near",
+        "description": "Hardware wallet support for NEAR"
+      },
+      {
+        "name": "Coin98 Wallet",
+        "url": "https://coin98.com/wallet",
+        "description": "Multi-chain DeFi wallet"
+      },
+      {
+        "name": "MetaMask Snap",
+        "url": "https://snaps.metamask.io/snap/npm/near-snap/plugin/",
+        "description": "NEAR integration for MetaMask"
+      },
+      {
+        "name": "Trust Wallet",
+        "url": "https://trustwallet.com/near-wallet",
+        "description": "Mobile-first crypto wallet"
+      },
+      {
+        "name": "Intear Wallet",
+        "url": "https://wallet.intear.tech",
+        "description": "Advanced NEAR wallet features"
       }
     ]
   },
@@ -50,6 +100,7 @@
     "title": "Oracles",
     "description": "Providing reliable external data feeds to NEAR applications",
     "categoryUrl": "https://nearcatalog.xyz/category/oracles",
+    "docsUrl": "https://docs.near.org/primitives/oracles",
     "examples": [
       {
         "name": "Pyth Network",
@@ -58,8 +109,13 @@
         "description": "High-frequency financial market data oracle"
       },
       {
+        "name": "Intear Oracle",
+        "url": "https://docs.intear.tech/docs/oracle/",
+        "description": "Comprehensive oracle solution for NEAR"
+      },
+      {
         "name": "NEAR Oracle",
-        "url": "#",
+        "url": "https://github.com/NearDeFi",
         "description": "Native oracle solution for NEAR Protocol"
       }
     ]
@@ -70,19 +126,89 @@
     "description": "Enabling seamless cross-chain interoperability",
     "examples": [
       {
-        "name": "NEAR Intents",
-        "url": "https://near-intents.org",
-        "description": "Intent-based cross-chain infrastructure"
-      },
-      {
         "name": "Omnibridge",
-        "url": "#",
-        "description": "Multi-chain bridge solution"
+        "url": "https://docs.near.org/chain-abstraction/omnibridge/overview",
+        "description": "Official NEAR bridge solution"
       },
       {
         "name": "Shitzu Bridge",
         "url": "https://omni-bridge.shitzu-app.pages.dev/bridge",
         "description": "Community-built bridging solution"
+      },
+      {
+        "name": "NEAR Intents",
+        "url": "https://near-intents.org",
+        "description": "Intent-based cross-chain infrastructure"
+      },
+      {
+        "name": "Rubic",
+        "url": "https://rubic.exchange",
+        "description": "Cross-chain exchange platform"
+      },
+      {
+        "name": "Infinex Swidge",
+        "url": "https://support.infinex.xyz/en/articles/10336734-how-to-swidge",
+        "description": "Multi-chain bridge aggregator"
+      },
+      {
+        "name": "Rainbow Bridge",
+        "url": "https://rainbowbridge.app/",
+        "description": "Ethereum-NEAR bridge"
+      }
+    ]
+  },
+  {
+    "id": "onramps-offramps",
+    "title": "Onramps / Offramps",
+    "description": "Fiat-to-crypto and crypto-to-fiat conversion services",
+    "categoryUrl": "https://nearcatalog.xyz/category/on-off-ramp",
+    "examples": [
+      {
+        "name": "Onramper",
+        "url": "https://www.onramper.com/",
+        "description": "Global fiat onramp aggregator"
+      },
+      {
+        "name": "Ramper",
+        "url": "https://www.ramper.xyz/",
+        "description": "Web3 onboarding infrastructure"
+      },
+      {
+        "name": "Ping Pay",
+        "url": "https://pingpay.io",
+        "description": "Chain abstracted onramp using NEAR Intents"
+      },
+      {
+        "name": "Transak",
+        "url": "https://transak.com/",
+        "description": "Global payment gateway for Web3"
+      }
+    ]
+  },
+  {
+    "id": "relayers",
+    "title": "Relayers",
+    "description": "Meta-transaction and gasless transaction infrastructure",
+    "examples": [
+      {
+        "name": "Hot Relayer",
+        "url": "#",
+        "description": "Chain abstraction relayer"
+      },
+      {
+        "name": "Bitte Relayer",
+        "url": "https://wallet.bitte.ai/paymaster",
+        "description": "AI-powered relayer with paymaster"
+      },
+      {
+        "name": "NEP366",
+        "url": "https://docs.near.org/chain-abstraction/meta-transactions",
+        "description": "Meta-transaction standard"
+      },
+      {
+        "name": "Rath.fi Tachyon",
+        "url": "https://certain-occupation-46b.notion.site/Tachyon-The-High-Speed-Relayer-1838187f313080499de4dd7eab597c54/",
+        "description": "High-speed relayer infrastructure"
       }
     ]
   },
@@ -101,6 +227,67 @@
         "name": "Pikespeak.ai",
         "url": "https://pikespeak.ai",
         "description": "Advanced analytics and insights platform"
+      },
+      {
+        "name": "Explorer Selector",
+        "url": "#",
+        "description": "Multi-explorer interface"
+      },
+      {
+        "name": "NEAR Scan",
+        "url": "#",
+        "description": "Alternative block explorer"
+      }
+    ]
+  },
+  {
+    "id": "indexers",
+    "title": "Indexers",
+    "description": "Data indexing and querying infrastructure",
+    "examples": [
+      {
+        "name": "The Graph",
+        "url": "https://thegraph.com/docs/en/subgraphs/guides/near/",
+        "description": "Decentralized indexing protocol"
+      },
+      {
+        "name": "Subquery",
+        "url": "https://subquery.network/doc/indexer/quickstart/quickstart_chains/near.html",
+        "description": "Fast, flexible, and universal data indexer"
+      },
+      {
+        "name": "Intear API",
+        "url": "https://docs.intear.tech/",
+        "description": "Comprehensive NEAR data API"
+      }
+    ]
+  },
+  {
+    "id": "data-lakes",
+    "title": "Data Lakes",
+    "description": "Large-scale data storage and processing solutions",
+    "examples": [
+      {
+        "name": "NEAR Lake Framework",
+        "url": "https://docs.near.org/data-infrastructure/lake-framework/near-lake-framework",
+        "description": "Official NEAR data lake framework"
+      }
+    ]
+  },
+  {
+    "id": "payments",
+    "title": "Payments",
+    "description": "Payment processing and transaction solutions",
+    "examples": [
+      {
+        "name": "NEAR Intents",
+        "url": "https://near-intents.org",
+        "description": "Intent-based payment infrastructure"
+      },
+      {
+        "name": "Ping Pay",
+        "url": "https://pingpay.io",
+        "description": "Chain abstracted payment solution"
       }
     ]
   },
@@ -111,13 +298,68 @@
     "examples": [
       {
         "name": "NEAR AI",
-        "url": "#",
+        "url": "https://near.ai",
         "description": "Official NEAR AI infrastructure"
       },
       {
         "name": "Bitte AI",
-        "url": "#",
+        "url": "https://bitte.ai",
         "description": "AI agent platform on NEAR"
+      },
+      {
+        "name": "Shade Agents",
+        "url": "https://docs.near.org/ai/shade-agents/introduction",
+        "description": "Privacy-focused AI agents"
+      }
+    ]
+  },
+  {
+    "id": "chain-abstraction-tooling",
+    "title": "Chain Abstraction Tooling",
+    "description": "Tools and infrastructure for chain abstraction",
+    "examples": []
+  },
+  {
+    "id": "tooling",
+    "title": "Tooling",
+    "description": "Development tools and utilities for NEAR ecosystem",
+    "examples": [
+      {
+        "name": "Wallet Selector",
+        "url": "https://github.com/near/wallet-selector",
+        "description": "Universal wallet connection library"
+      },
+      {
+        "name": "Fast Auth 2.0",
+        "url": "#",
+        "description": "Streamlined authentication solution"
+      },
+      {
+        "name": "Hot Wallet Selector",
+        "url": "https://github.com/hot-dao/near-selector",
+        "description": "Enhanced wallet selection interface"
+      }
+    ]
+  },
+  {
+    "id": "interop",
+    "title": "Interop",
+    "description": "Interoperability solutions and cross-chain functionality",
+    "examples": [
+      {
+        "name": "Aurora Virtual Chains",
+        "url": "https://aurora.dev",
+        "description": "EVM-compatible virtual chains on NEAR"
+      },
+      {
+        "name": "Chain Signatures",
+        "url": "https://docs.near.org/chain-abstraction/chain-signatures",
+        "description": "Cross-chain signature verification"
+      },
+      {
+        "name": "Data Availability",
+        "url": "https://docs.near.org/chain-abstraction/data-availability",
+        "description": "Cross-chain data availability solutions"
       }
     ]
   }
