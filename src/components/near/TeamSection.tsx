@@ -268,7 +268,7 @@ const TeamSection = () => {
                     <img 
                       src={getCompanyLogo(member.name)} 
                       alt={`${member.name} company`}
-                      className="w-8 h-8 object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                      className="h-full w-auto max-w-none object-contain opacity-60 group-hover:opacity-100 transition-opacity"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                       }}
