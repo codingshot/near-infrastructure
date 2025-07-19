@@ -90,8 +90,8 @@ const NEARHero = () => {
             <Button 
               asChild 
               size="lg" 
-              className="relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto
-                        before:absolute before:inset-0 before:metallic-border before:opacity-20 before:z-0"
+              className="relative overflow-hidden bg-transparent hover:bg-transparent text-white hover:text-white border-2 border-transparent px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto
+                        before:absolute before:inset-0 before:metallic-green-border before:opacity-100 before:z-0"
             >
               <a href="https://nearn.io/infra-committee/7" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 justify-center relative z-10">
                 Submit A Proposal

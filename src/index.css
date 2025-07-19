@@ -185,6 +185,21 @@
     background-size: 200% 200%;
     animation: metallicShine 2s ease-in-out infinite;
   }
+
+  /* Metallic green border animation */
+  .metallic-green-border {
+    background: linear-gradient(
+      45deg,
+      #14B8A6 0%,
+      #20DDCC 25%,
+      #ffffff 50%,
+      #20DDCC 75%,
+      #14B8A6 100%
+    );
+    background-size: 400% 400%;
+    animation: metallicShine 2s ease-in-out infinite;
+    border-radius: inherit;
+  }
 }
 
 @layer base {
