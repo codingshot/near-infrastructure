@@ -243,7 +243,8 @@
       {
         "name": "Rainbow Bridge",
         "url": "https://rainbowbridge.app/",
-        "description": "Ethereum-NEAR bridge"
+        "description": "Ethereum-NEAR bridge",
+        "logo": "/companies/rainbowbridge.webp"
       }
     ]
   },
@@ -416,12 +417,13 @@
         "name": "NEAR AI",
         "url": "https://near.ai",
         "description": "Official NEAR AI infrastructure",
-        "logo": "/companies/nearaiwhite.png"
+        "logo": "/companies/nearaisquare.jpg"
       },
       {
         "name": "Bitte AI",
         "url": "https://bitte.ai",
-        "description": "AI agent platform on NEAR"
+        "description": "AI agent platform on NEAR",
+        "logo": "/companies/bitte.jpg"
       },
       {
         "name": "Shade Agents",
