@@ -27,9 +27,7 @@ const NEARFooter = () => {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">NIC</span>
-              </div>
+              <img src="/favicon.ico" alt="NEAR" className="w-8 h-8" />
               <span className="font-grotesk font-semibold text-lg text-foreground">
                 NEAR Infrastructure Committee
               </span>

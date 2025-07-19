@@ -109,9 +109,24 @@ const CaseStudies = () => {
                       </Badge>
                     </div>
                   </div>
-                  {/* Logo placeholder */}
-                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center ml-3">
-                    <span className="text-primary font-semibold text-xs">
+                  {/* Company Logo */}
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex items-center justify-center ml-3 flex-shrink-0">
+                    {study.logo ? (
+                      <img 
+                        src={study.logo} 
+                        alt={`${study.name} logo`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+                          if (nextElement) nextElement.style.display = 'flex';
+                        }}
+                      />
+                    ) : null}
+                    <span 
+                      className="text-primary font-semibold text-xs flex items-center justify-center w-full h-full"
+                      style={{ display: study.logo ? 'none' : 'flex' }}
+                    >
                       {study.name.substring(0, 2).toUpperCase()}
                     </span>
                   </div>

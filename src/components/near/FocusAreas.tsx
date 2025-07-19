@@ -116,7 +116,7 @@ const FocusAreas = () => {
                 </CardDescription>
               </CardHeader>
               
-              {area.examples.length > 0 && showExamples && isExpanded && (
+              {area.examples.length > 0 && showExamples && (
                 <CardContent className="pt-0">
                   <div className="space-y-3">
                     <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
@@ -128,15 +128,15 @@ const FocusAreas = () => {
                        <div key={index} 
                             className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
                          <div className="flex items-start gap-3 flex-grow">
-                           {hasImage && (
-                             <div className="flex-shrink-0">
-                               <img 
-                                 src={hasImage} 
-                                 alt={`${example.name} logo`}
-                                 className="w-8 h-8 rounded object-cover"
-                               />
-                             </div>
-                           )}
+                            {hasImage && (
+                              <div className="flex-shrink-0">
+                                <img 
+                                  src={hasImage} 
+                                  alt={`${example.name} logo`}
+                                  className="w-8 h-8 rounded-full object-cover"
+                                />
+                              </div>
+                            )}
                            <div className="flex-grow min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <a
