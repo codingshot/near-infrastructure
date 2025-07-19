@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen, CreditCard } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+
 const NEARHero = () => {
   const [emblaRef] = useEmblaCarousel(
     { 
@@ -53,7 +54,9 @@ const NEARHero = () => {
       buttonText: 'Give Feedback'
     }
   ];
-  return <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background">
+
+  return (
+    <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-left max-w-4xl">
           {/* Main Heading */}
@@ -101,46 +104,50 @@ const NEARHero = () => {
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Focus Areas</div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Action Cards Carousel */}
-          <div className="mb-12">
-            <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground mb-6">Quick Actions</h2>
-            <div className="overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8" ref={emblaRef}>
-              <div className="flex gap-4 md:gap-6 px-4 sm:px-6 lg:px-8">
-                {actionCards.map((card, index) => {
-                  const IconComponent = card.icon;
-                  return (
-                    <div key={index} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
-                      <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:translate-y-[-2px] h-full" 
-                            onClick={() => window.open(card.href, '_blank', 'noopener,noreferrer')}>
-                        <CardHeader className="pb-3">
-                          <div className="flex items-center gap-3 mb-2">
-                            <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
-                              <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                            </div>
-                            <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
-                              {card.title}
-                              <ExternalLink className="w-4 h-4 inline ml-1 opacity-60" />
-                            </CardTitle>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
-                            {card.description}
-                          </CardDescription>
-                          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                            {card.buttonText}
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+      {/* Action Cards Carousel - Full Width */}
+      <div className="mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+          <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground">Quick Actions</h2>
+        </div>
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-4 md:gap-6 px-4 sm:px-6 lg:px-8">
+            {actionCards.map((card, index) => {
+              const IconComponent = card.icon;
+              return (
+                <div key={index} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
+                  <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:translate-y-[-2px] h-full" 
+                        onClick={() => window.open(card.href, '_blank', 'noopener,noreferrer')}>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
+                          <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                        </div>
+                        <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {card.title}
+                          <ExternalLink className="w-4 h-4 inline ml-1 opacity-60" />
+                        </CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+                        {card.description}
+                      </CardDescription>
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                        {card.buttonText}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default NEARHero;
