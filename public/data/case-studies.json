@@ -6,7 +6,8 @@
     "fundingDate": "2024-Q2",
     "logo": "/placeholder-logos/lava.png",
     "productUrl": "https://lavanet.xyz",
-    "proposalUrl": "#"
+    "proposalUrl": "#",
+    "tags": ["Protocol Development", "Infrastructure"]
   },
   {
     "name": "Meteor Wallet",
@@ -15,7 +16,8 @@
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/meteor.png",
     "productUrl": "https://meteorwallet.app",
-    "proposalUrl": "#"
+    "proposalUrl": "#",
+    "tags": ["Wallets", "User Experience"]
   },
   {
     "name": "MyNEAR Wallet Transition",
@@ -24,7 +26,8 @@
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/mynear.png",
     "productUrl": "#",
-    "proposalUrl": "#"
+    "proposalUrl": "#",
+    "tags": ["Wallets", "Infrastructure"]
   },
   {
     "name": "HERE and Hot Wallet",
@@ -33,7 +36,8 @@
     "fundingDate": "2024-Q2",
     "logo": "/placeholder-logos/hot.png",
     "productUrl": "#",
-    "proposalUrl": "#"
+    "proposalUrl": "#",
+    "tags": ["Wallets", "Protocol Development"]
   },
   {
     "name": "NEARBlocks",
@@ -42,7 +46,8 @@
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/nearblocks.png",
     "productUrl": "https://nearblocks.io",
-    "proposalUrl": "#"
+    "proposalUrl": "#",
+    "tags": ["Explorers", "Analytics"]
   },
   {
     "name": "FastAuth 2.0",
@@ -51,6 +56,7 @@
     "fundingDate": "2024-Q3",
     "logo": "/placeholder-logos/fastauth.png",
     "productUrl": "#",
-    "proposalUrl": "#"
+    "proposalUrl": "#",
+    "tags": ["Wallets", "Authentication"]
   }
 ]

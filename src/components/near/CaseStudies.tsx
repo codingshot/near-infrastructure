@@ -14,6 +14,7 @@ interface CaseStudy {
   logo: string;
   productUrl: string;
   proposalUrl: string;
+  tags: string[];
 }
 
 const CaseStudies = () => {
@@ -62,7 +63,7 @@ const CaseStudies = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
-            Past Funded Case Studies
+            Funded Projects
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
             Explore the projects and infrastructure improvements we've funded to strengthen the NEAR ecosystem.
@@ -112,6 +113,19 @@ const CaseStudies = () => {
                     <CardTitle className="text-lg font-semibold text-gray-900 mb-2">
                       {study.name}
                     </CardTitle>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {study.tags?.map((tag, tagIndex) => (
+                        <span 
+                          key={tagIndex}
+                          className="px-2 py-1 text-xs bg-near-100 text-near-700 rounded-full font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    
                     <div className="flex items-center gap-2 mb-3">
                       <Badge className={getStatusColor(study.status)}>
                         {study.status}
@@ -138,7 +152,7 @@ const CaseStudies = () => {
                       asChild
                       variant="outline"
                       size="sm"
-                      className="flex-1"
+                      className="flex-1 border-near-200 text-near-700 hover:bg-near-50"
                     >
                       <a
                         href={study.productUrl}
@@ -157,15 +171,15 @@ const CaseStudies = () => {
                       asChild
                       variant="ghost"
                       size="sm"
-                      className="text-near-600 hover:text-near-700"
+                      className="flex-1 text-near-600 hover:text-near-700 hover:bg-near-50"
                     >
                       <a
                         href={study.proposalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1"
+                        className="flex items-center justify-center gap-2"
                       >
-                        <span>Proposal</span>
+                        <span>See Proposal</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </Button>
