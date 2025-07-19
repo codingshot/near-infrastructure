@@ -190,7 +190,8 @@
         "name": "Pyth Network",
         "url": "https://pyth.network/",
         "twitter": "https://twitter.com/PythNetwork",
-        "description": "High-frequency financial market data oracle"
+        "description": "High-frequency financial market data oracle",
+        "logo": "/companies/pyth.jpg"
       },
       {
         "name": "Intear Oracle",
@@ -374,7 +375,7 @@
         "name": "Subquery",
         "url": "https://subquery.network/doc/indexer/quickstart/quickstart_chains/near.html",
         "description": "Fast, flexible, and universal data indexer",
-        "logo": "/companies/subquery.jpg"
+        "logo": "/companies/subquery.png"
       },
       {
         "name": "Intear API",
