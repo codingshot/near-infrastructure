@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Linkedin, Twitter, Github, ExternalLink, Search, X } from 'lucide-react';
+import ProposalProcessTooltip from './ProposalProcessTooltip';
 
 interface TeamMember {
   name: string;
@@ -235,7 +236,7 @@ const TeamSection = () => {
             Meet Our Team
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8 leading-relaxed">
-            Dedicated professionals driving NEAR infrastructure forward with expertise in blockchain technology, 
+            Dedicated professionals driving <span className="near-infra-highlight">near infrastructure</span> forward with expertise in blockchain technology, 
             decentralized systems, and ecosystem development.
           </p>
           
@@ -332,6 +333,9 @@ const TeamSection = () => {
             </div>
           )}
         </div>
+        
+        {/* Proposal Process Tooltip */}
+        <ProposalProcessTooltip />
       </div>
     </section>
   );

@@ -49,7 +49,7 @@ const BlogSection = () => {
             Latest Updates
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
-            Stay updated with the latest developments, announcements, and insights from the NEAR Infrastructure Committee.
+            Stay updated with the latest developments, announcements, and insights from the <span className="near-infra-highlight">near infrastructure</span> Committee.
           </p>
         </div>
 

@@ -19,8 +19,8 @@ const NEARNavbar = () => {
         <div className="flex justify-between items-center h-14 md:h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="flex items-center space-x-2 md:space-x-3" aria-label="NEAR Infrastructure Committee - Home">
-              <img src="/nearinfrastrcuturelogowhite.svg" alt="NEAR Infrastructure Committee" className="h-7 md:h-8 w-auto logo-glow" />
+            <a href="/" className="flex items-center space-x-2 md:space-x-3" aria-label="near infrastructure Committee - Home">
+              <img src="/nearinfrastrcuturelogowhite.svg" alt="near infrastructure Committee" className="h-7 md:h-8 w-auto logo-glow" />
               <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300">
                 
                 <span className="sm:hidden">NEAR IC</span>
