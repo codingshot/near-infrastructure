@@ -24,7 +24,7 @@
     "description": "Supporting community wallet infrastructure transition",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
-    "logo": "/placeholder-logos/mynear.png",
+    "logo": "/companies/mynearwallet.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Wallets", "Infrastructure"]
@@ -34,7 +34,7 @@
     "description": "Hot wallet infrastructure for improved accessibility",
     "status": "Maintenance",
     "fundingDate": "2024-Q2",
-    "logo": "/placeholder-logos/hot.png",
+    "logo": "/companies/hot.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Wallets", "Protocol Development"]
