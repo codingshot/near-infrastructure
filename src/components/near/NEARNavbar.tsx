@@ -18,9 +18,7 @@ const NEARNavbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/" className="flex items-center space-x-2 md:space-x-3">
-              <div className="w-7 h-7 md:w-8 md:h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xs md:text-sm">NIC</span>
-              </div>
+              <img src="/favicon.ico" alt="NEAR" className="w-7 h-7 md:w-8 md:h-8" />
               <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl">
                 <span className="hidden sm:inline">NEAR INFRA</span>
                 <span className="sm:hidden">NEAR IC</span>

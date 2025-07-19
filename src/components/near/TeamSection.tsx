@@ -202,10 +202,10 @@ const TeamSection = () => {
                   href={`https://${member.near}.social`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${member.name} NEAR Social`}
-                  className="flex items-center gap-1"
-                >
-                  <span className="text-base">⬢</span>
+                   aria-label={`${member.name} NEAR Social`}
+                   className="flex items-center gap-1"
+                 >
+                   <img src="/favicon.ico" alt="NEAR" className="w-4 h-4" />
                 </a>
               </Button>
             )}
