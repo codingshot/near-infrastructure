@@ -58,7 +58,7 @@ const TeamSection = () => {
       'Iker Alustiza': '/team/iker.jpg',
       'Konrad Merino': '/team/konrad.jpg',
       'Vlad Frolov': '/team/vlad.jpeg',
-      'Dillon Freeman': '/team/dillon.jpg',
+      'Dillon Freeman': '/team/dillon.jpeg',
       'Plug': '/team/plug.jpg'
     };
     return imageMap[name] || '/placeholder.svg?height=200&width=200&text=Team+Member';
