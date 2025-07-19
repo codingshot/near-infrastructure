@@ -7,7 +7,7 @@
     "logo": "/companies/lavanetwork.jpg",
     "productUrl": "https://lavanet.xyz",
     "proposalUrl": "#",
-    "tags": ["Protocol Development", "Infrastructure"]
+    "tags": ["RPC"]
   },
   {
     "name": "Meteor Wallet",
@@ -17,7 +17,7 @@
     "logo": "/companies/meteorwallet.jpg",
     "productUrl": "https://meteorwallet.app",
     "proposalUrl": "#",
-    "tags": ["Wallets", "User Experience"]
+    "tags": ["Wallet"]
   },
   {
     "name": "My NEAR Wallet",
@@ -27,7 +27,7 @@
     "logo": "/companies/mynearwallet.jpg",
     "productUrl": "https://mynearwallet.com",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Infrastructure"]
+    "tags": ["Wallet"]
   },
   {
     "name": "HERE and Hot Wallet",
@@ -48,7 +48,7 @@
     "logo": "/companies/nightlywallet.jpg",
     "productUrl": "https://nightly.app",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Payments"]
+    "tags": ["Wallet"]
   },
   {
     "name": "PingPay",
@@ -58,7 +58,7 @@
     "logo": "/companies/pingpay.jpg",
     "productUrl": "https://pingpay.io",
     "proposalUrl": "#",
-    "tags": ["Chain Abstraction Tooling", "Payments"]
+    "tags": ["Onramp", "Payments", "Chain Abstraction"]
   },
   {
     "name": "Intear Indexer",
@@ -88,7 +88,7 @@
     "logo": "/companies/hot.jpg",
     "productUrl": "https://github.com/hot-dao/near-selector",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Developer Tools"]
+    "tags": ["Wallet", "Developer Tools"]
   },
   {
     "name": "Lucid Wallet Selector",
@@ -98,7 +98,7 @@
     "logo": "/placeholder-logos/lucid.png",
     "productUrl": "#",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Developer Tools"]
+    "tags": ["Wallet", "Developer Tools"]
   },
   {
     "name": "BigQuery",
@@ -138,7 +138,7 @@
     "logo": "/companies/neartreasury.png",
     "productUrl": "https://neartreasury.com",
     "proposalUrl": "#",
-    "tags": ["DAO"]
+    "tags": ["DAO", "Payments"]
   },
   {
     "name": "BlockPI RPC Services",
@@ -148,7 +148,7 @@
     "logo": "/companies/blockpi.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
-    "tags": ["Infrastructure", "RPC"]
+    "tags": ["RPC"]
   },
   {
     "name": "FastNEAR RPC",
@@ -158,7 +158,7 @@
     "logo": "/companies/fastnear.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
-    "tags": ["Infrastructure", "RPC"]
+    "tags": ["RPC"]
   },
   {
     "name": "NEARBlocks",
@@ -198,7 +198,7 @@
     "logo": "/placeholder-logos/fastauth.png",
     "productUrl": "#",
     "proposalUrl": "#",
-    "tags": ["Authentication", "Wallets"]
+    "tags": ["Chain Abstraction", "Wallet"]
   },
   {
     "name": "1 Click Connect",
@@ -208,7 +208,7 @@
     "logo": "/placeholder-logos/oneclick.png",
     "productUrl": "#",
     "proposalUrl": "#",
-    "tags": ["Wallets", "User Experience"]
+    "tags": ["Wallets", "Chain Abstraction"]
   },
   {
     "name": "Valhalla Security",
