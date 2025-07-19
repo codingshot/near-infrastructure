@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Lava Network",
+    "description": "Decentralized RPC infrastructure for enhanced network reliability",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q2",
+    "logo": "/placeholder-logos/lava.png",
+    "productUrl": "https://lavanet.xyz",
+    "proposalUrl": "#"
+  },
+  {
+    "name": "Meteor Wallet",
+    "description": "Modern NEAR wallet with enhanced user experience",
+    "status": "In Development",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/meteor.png",
+    "productUrl": "https://meteorwallet.app",
+    "proposalUrl": "#"
+  },
+  {
+    "name": "MyNEAR Wallet Transition",
+    "description": "Supporting community wallet infrastructure transition",
+    "status": "Completed",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/mynear.png",
+    "productUrl": "#",
+    "proposalUrl": "#"
+  },
+  {
+    "name": "HERE and Hot Wallet",
+    "description": "Hot wallet infrastructure for improved accessibility",
+    "status": "In Development",
+    "fundingDate": "2024-Q2",
+    "logo": "/placeholder-logos/hot.png",
+    "productUrl": "#",
+    "proposalUrl": "#"
+  },
+  {
+    "name": "NEARBlocks",
+    "description": "NEAR's primary block explorer and network monitoring",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/nearblocks.png",
+    "productUrl": "https://nearblocks.io",
+    "proposalUrl": "#"
+  },
+  {
+    "name": "FastAuth 2.0",
+    "description": "Next-generation authentication system by Peersyst",
+    "status": "In Development",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/fastauth.png",
+    "productUrl": "#",
+    "proposalUrl": "#"
+  }
+]

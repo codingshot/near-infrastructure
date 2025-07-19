@@ -1,16 +1,12 @@
 
 import React, { useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import HumanoidSection from "@/components/HumanoidSection";
-import SpecsSection from "@/components/SpecsSection";
-import DetailsSection from "@/components/DetailsSection";
-import ImageShowcaseSection from "@/components/ImageShowcaseSection";
-import Features from "@/components/Features";
-import Testimonials from "@/components/Testimonials";
-import Newsletter from "@/components/Newsletter";
-import MadeByHumans from "@/components/MadeByHumans";
-import Footer from "@/components/Footer";
+import NEARNavbar from "@/components/near/NEARNavbar";
+import NEARHero from "@/components/near/NEARHero";
+import FocusAreas from "@/components/near/FocusAreas";
+import TeamSection from "@/components/near/TeamSection";
+import CaseStudies from "@/components/near/CaseStudies";
+import BlogSection from "@/components/near/BlogSection";
+import NEARFooter from "@/components/near/NEARFooter";
 
 const Index = () => {
   // Initialize intersection observer to detect when elements enter viewport
@@ -60,19 +56,15 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
-      <main className="space-y-4 sm:space-y-8"> {/* Reduced space on mobile */}
-        <Hero />
-        <HumanoidSection />
-        <SpecsSection />
-        <DetailsSection />
-        <ImageShowcaseSection />
-        <Features />
-        <Testimonials />
-        <Newsletter />
-        <MadeByHumans />
+      <NEARNavbar />
+      <main>
+        <NEARHero />
+        <FocusAreas />
+        <CaseStudies />
+        <TeamSection />
+        <BlogSection />
       </main>
-      <Footer />
+      <NEARFooter />
     </div>
   );
 };

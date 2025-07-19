@@ -1,0 +1,124 @@
+[
+  {
+    "id": "protocol-development",
+    "title": "Protocol Development",
+    "description": "Enhancing NEAR Protocol's core infrastructure and capabilities",
+    "examples": [
+      {
+        "name": "NEAR Enhancement Proposals",
+        "url": "https://neps.near.org/",
+        "description": "Formal process for proposing protocol improvements"
+      }
+    ]
+  },
+  {
+    "id": "contract-standards",
+    "title": "Contract and Token Standards",
+    "description": "Developing standardized interfaces and best practices for smart contracts",
+    "examples": []
+  },
+  {
+    "id": "wallets",
+    "title": "Wallets",
+    "description": "Supporting wallet infrastructure and user experience improvements",
+    "categoryUrl": "https://nearcatalog.xyz/category/wallet",
+    "examples": [
+      {
+        "name": "Meteor Wallet",
+        "url": "https://meteorwallet.app",
+        "description": "Modern NEAR wallet with advanced features"
+      },
+      {
+        "name": "NEAR Mobile Wallet",
+        "url": "#",
+        "description": "Official NEAR mobile wallet application"
+      },
+      {
+        "name": "Bitget Wallet",
+        "url": "#",
+        "description": "Multi-chain wallet with NEAR support"
+      },
+      {
+        "name": "Fast Auth 2.0",
+        "url": "#",
+        "description": "Streamlined authentication for NEAR applications"
+      }
+    ]
+  },
+  {
+    "id": "oracles",
+    "title": "Oracles",
+    "description": "Providing reliable external data feeds to NEAR applications",
+    "categoryUrl": "https://nearcatalog.xyz/category/oracles",
+    "examples": [
+      {
+        "name": "Pyth Network",
+        "url": "https://pyth.network/",
+        "twitter": "https://twitter.com/PythNetwork",
+        "description": "High-frequency financial market data oracle"
+      },
+      {
+        "name": "NEAR Oracle",
+        "url": "#",
+        "description": "Native oracle solution for NEAR Protocol"
+      }
+    ]
+  },
+  {
+    "id": "bridges",
+    "title": "Bridges",
+    "description": "Enabling seamless cross-chain interoperability",
+    "examples": [
+      {
+        "name": "NEAR Intents",
+        "url": "https://near-intents.org",
+        "description": "Intent-based cross-chain infrastructure"
+      },
+      {
+        "name": "Omnibridge",
+        "url": "#",
+        "description": "Multi-chain bridge solution"
+      },
+      {
+        "name": "Shitzu Bridge",
+        "url": "https://omni-bridge.shitzu-app.pages.dev/bridge",
+        "description": "Community-built bridging solution"
+      }
+    ]
+  },
+  {
+    "id": "explorers",
+    "title": "Explorers",
+    "description": "Block explorers and network monitoring tools",
+    "examples": [
+      {
+        "name": "NEAR Blocks",
+        "url": "https://nearblocks.io",
+        "description": "Primary NEAR Protocol block explorer (Recommended)",
+        "recommended": true
+      },
+      {
+        "name": "Pikespeak.ai",
+        "url": "https://pikespeak.ai",
+        "description": "Advanced analytics and insights platform"
+      }
+    ]
+  },
+  {
+    "id": "ai",
+    "title": "AI",
+    "description": "AI infrastructure and tooling for the NEAR ecosystem",
+    "examples": [
+      {
+        "name": "NEAR AI",
+        "url": "#",
+        "description": "Official NEAR AI infrastructure"
+      },
+      {
+        "name": "Bitte AI",
+        "url": "#",
+        "description": "AI agent platform on NEAR"
+      }
+    ]
+  }
+]

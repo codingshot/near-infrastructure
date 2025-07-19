@@ -1,0 +1,73 @@
+{
+  "workingGroup": [
+    {
+      "name": "Konrad Merino",
+      "title": "Head of Partner Success, NEAR Foundation",
+      "bio": "Ex Kraken executive focused on partner success and ecosystem growth",
+      "twitter": "https://x.com/swisshustler",
+      "linkedin": "https://www.linkedin.com/in/konradmerino",
+      "image": "/lovable-uploads/22d31f51-c174-40a7-bd95-00e4ad00eaf3.png"
+    },
+    {
+      "name": "Iker Alustiza",
+      "title": "Partner Engineer at NEAR One",
+      "bio": "Ex Tech Integrations Lead at Parity Technologies, specializing in blockchain infrastructure",
+      "linkedin": "https://www.linkedin.com/in/iker-alustiza-beitia-68803a2b",
+      "image": "/lovable-uploads/5663820f-6c97-4492-9210-9eaa1a8dc415.png"
+    },
+    {
+      "name": "Dillon Freeman",
+      "title": "Partnerships at NEAR Foundation",
+      "bio": "Leading strategic partnerships and ecosystem development initiatives",
+      "linkedin": "https://www.linkedin.com/in/dillonjfreeman",
+      "image": "/lovable-uploads/af412c03-21e4-4856-82ff-d1a975dc84a9.png"
+    },
+    {
+      "name": "Plug",
+      "title": "Public Goods at NEAR Foundation",
+      "bio": "Core contributor at POTLOCK, focused on public goods funding and ecosystem development",
+      "twitter": "https://x.com/plugrel",
+      "near": "plugrel.near"
+    }
+  ],
+  "infrastructureCommittee": [
+    {
+      "name": "Bowen Wang",
+      "title": "Head of Protocol, NEAR One",
+      "bio": "Leading protocol development and core infrastructure improvements",
+      "twitter": "https://x.com/BowenWang18",
+      "linkedin": "https://www.linkedin.com/in/bowen-wang-84b978a3",
+      "near": "bowen.near"
+    },
+    {
+      "name": "Alex Shevchenko",
+      "title": "Co-Founder & CEO of Aurora Labs and Defuse Labs",
+      "bio": "Building NEAR Intents and Aurora ecosystem infrastructure",
+      "twitter": "https://x.com/AlexAuroraDev",
+      "linkedin": "https://www.linkedin.com/in/alexauroradev"
+    },
+    {
+      "name": "Eric Winer",
+      "title": "CTO at NEAR.ai",
+      "bio": "Ex CTO at Pagoda (NEAR Inc), Ex Nifty Gateway, Ex Gemini",
+      "twitter": "https://x.com/eric_winer",
+      "near": "eric3.near"
+    },
+    {
+      "name": "Evgeny Kuzyakov",
+      "title": "Co-Founder of Fast EAR",
+      "bio": "Ex ProximityFi, NEAR, Google, Facebook. Core protocol contributor",
+      "twitter": "https://x.com/ekuzyakov",
+      "github": "https://github.com/evgenykuzyakov",
+      "near": "mob.near"
+    },
+    {
+      "name": "Vlad Frolov",
+      "title": "Co-Founder Devhub, NEAR Protocol Core Contributor",
+      "bio": "Leading developer tooling and infrastructure initiatives",
+      "twitter": "https://x.com/Freol",
+      "linkedin": "https://www.linkedin.com/in/frolvlad",
+      "near": "frol.near"
+    }
+  ]
+}

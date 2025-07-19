@@ -63,25 +63,33 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Custom colors for Pulse Robot
-				pulse: {
-					"50": "#fff7ed",
-					"100": "#ffedd5",
-					"200": "#fed7aa",
-					"300": "#fdba74",
-					"400": "#fb923c",
-					"500": "#f97316", // Primary orange
-					"600": "#ea580c",
-					"700": "#c2410c",
-					"800": "#9a3412",
-					"900": "#7c2d12",
-					"950": "#431407",
+				// NEAR Brand Colors
+				near: {
+					"50": "#f0fdfd",
+					"100": "#ccfbf9", 
+					"200": "#99f6f0",
+					"300": "#5eede3",
+					"400": "#2dd8cc", // Close to NEAR cyan #17d9d4
+					"500": "#17d9d4", // Official NEAR cyan
+					"600": "#0fb0aa",
+					"700": "#118c87",
+					"800": "#146f6b",
+					"900": "#165b58",
+					"950": "#073633",
 				},
-				dark: {
-					"900": "#121212", // Almost black
-					"800": "#1e1e1e",
-					"700": "#2d2d2d",
-					"600": "#3d3d3d",
+				// Neutral grays for NEAR brand
+				gray: {
+					"50": "#f9fafb",
+					"100": "#f3f4f6",
+					"200": "#e5e7eb",
+					"300": "#d1d5db",
+					"400": "#9ca3af",
+					"500": "#6b7280",
+					"600": "#4b5563",
+					"700": "#374151",
+					"800": "#1f2937",
+					"900": "#111827",
+					"950": "#030712",
 				},
 			},
 			borderRadius: {
@@ -143,9 +151,8 @@ export default {
 			},
 			fontFamily: {
 				'sans': ['Inter', 'sans-serif'],
-				'display': ['Brockmann', 'SF Pro Display', 'Inter', 'sans-serif'],
-				'brockmann': ['Brockmann', 'serif'],
-				'playfair': ['"Playfair Display"', 'serif'],
+				'grotesk': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+				'display': ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
 			},
 			boxShadow: {
 				'elegant': '0 4px 20px rgba(0, 0, 0, 0.08)',
