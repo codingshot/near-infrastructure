@@ -20,12 +20,12 @@
     "tags": ["Wallets", "User Experience"]
   },
   {
-    "name": "MyNEAR Wallet",
+    "name": "My NEAR Wallet",
     "description": "Supporting community wallet infrastructure transition",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
     "logo": "/companies/mynearwallet.jpg",
-    "productUrl": "#",
+    "productUrl": "https://mynearwallet.com",
     "proposalUrl": "#",
     "tags": ["Wallets", "Infrastructure"]
   },
@@ -35,9 +35,10 @@
     "status": "Maintenance",
     "fundingDate": "2024-Q2",
     "logo": "/companies/hot.jpg",
-    "productUrl": "#",
+
+    "productUrl": "https://hot-labs.org/",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Protocol Development"]
+    "tags": ["Wallet"]
   },
   {
     "name": "Nightly Wallet",
@@ -47,7 +48,7 @@
     "logo": "/companies/nightlywallet.jpg",
     "productUrl": "https://nightly.app",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Multi-chain"]
+    "tags": ["Wallets", "Payments"]
   },
   {
     "name": "PingPay",
@@ -55,9 +56,9 @@
     "status": "In Development",
     "fundingDate": "2024-Q3",
     "logo": "/companies/pingpay.jpg",
-    "productUrl": "#",
+    "productUrl": "https://pingpay.io",
     "proposalUrl": "#",
-    "tags": ["Chain Abstraction", "Payments"]
+    "tags": ["Chain Abstraction Tooling", "Payments"]
   },
   {
     "name": "Intear Indexer",
@@ -65,9 +66,9 @@
     "status": "Maintenance",
     "fundingDate": "2024-Q2",
     "logo": "/placeholder-logos/intear.png",
-    "productUrl": "#",
+    "productUrl": "https://intear.tech",
     "proposalUrl": "#",
-    "tags": ["Indexing", "Analytics"]
+    "tags": ["Indexer"]
   },
   {
     "name": "Chainspect Services",
@@ -75,17 +76,17 @@
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
     "logo": "/companies/chainspect.jpg",
-    "productUrl": "#",
+    "productUrl": "https://chainspect.app/",
     "proposalUrl": "#",
-    "tags": ["Analytics", "Monitoring"]
+    "tags": ["Analytics"]
   },
   {
     "name": "Hot Wallet Selector",
     "description": "Wallet selection interface for Hot ecosystem",
     "status": "In Development",
     "fundingDate": "2024-Q2",
-    "logo": "/placeholder-logos/hotwalletsel.png",
-    "productUrl": "#",
+    "logo": "/companies/hot.jpg",
+    "productUrl": "https://github.com/hot-dao/near-selector",
     "proposalUrl": "#",
     "tags": ["Wallets", "Developer Tools"]
   },
@@ -100,14 +101,14 @@
     "tags": ["Wallets", "Developer Tools"]
   },
   {
-    "name": "BigQuery Integration",
+    "name": "BigQuery",
     "description": "NEAR blockchain data integration with Google BigQuery",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/bigquery.png",
-    "productUrl": "#",
+    "productUrl": "https://docs.near.org/data-infrastructure/big-query",
     "proposalUrl": "#",
-    "tags": ["Analytics", "Data Integration"]
+    "tags": ["Data Lake"]
   },
   {
     "name": "HotCraft",
@@ -127,17 +128,17 @@
     "logo": "/companies/tokenterminal.jpg",
     "productUrl": "https://tokenterminal.com",
     "proposalUrl": "#",
-    "tags": ["Analytics", "Metrics"]
+    "tags": ["Analytics"]
   },
   {
-    "name": "NEAR Treasury by DevHub",
-    "description": "Treasury management and transparency platform",
+    "name": "NEAR Treasury",
+    "description": "Treasury/multisig management built on Sputnik v2 with cross chain payments by NEAR DevHub",
     "status": "Maintenance",
     "fundingDate": "2024-Q2",
-    "logo": "/placeholder-logos/treasury.png",
+    "logo": "/companies/neartreasury.png",
     "productUrl": "https://neartreasury.com",
     "proposalUrl": "#",
-    "tags": ["Governance", "Treasury"]
+    "tags": ["DAO"]
   },
   {
     "name": "BlockPI RPC Services",
@@ -184,7 +185,7 @@
     "description": "Cross-chain relayer for seamless transactions",
     "status": "In Development",
     "fundingDate": "2024-Q3",
-    "logo": "/placeholder-logos/hotrelayer.png",
+    "logo": "/companies/hot.jpg",
     "productUrl": "#",
     "proposalUrl": "#",
     "tags": ["Chain Abstraction", "Relayer"]
