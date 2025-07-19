@@ -12,22 +12,22 @@
       {
         "name": "NEP-591: Global Contracts",
         "url": "https://github.com/near/NEPs/pull/591",
-        "description": "A-NEP, S-approved - Global contract functionality"
+        "description": "Global contract functionality"
       },
       {
         "name": "NEP-568: Resharding V3",
         "url": "https://github.com/near/NEPs/pull/568",
-        "description": "A-NEP, S-approved, WG-protocol - Protocol resharding improvements"
+        "description": "Protocol resharding improvements"
       },
       {
         "name": "NEP-509: Stateless validation stage 0",
         "url": "https://github.com/near/NEPs/pull/509",
-        "description": "A-NEP, S-approved, WG-protocol - Stateless validation implementation"
+        "description": "Stateless validation implementation"
       },
       {
         "name": "NEP-508: Resharding v2",
         "url": "https://github.com/near/NEPs/pull/508",
-        "description": "A-NEP, S-approved, WG-protocol - Resharding protocol improvements"
+        "description": "Resharding protocol improvements"
       }
     ]
   },
