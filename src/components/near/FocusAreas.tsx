@@ -103,6 +103,8 @@ const FocusAreas = () => {
                     >
                        <a
                          href={area.categoryUrl}
+                         target="_blank"
+                         rel="noopener noreferrer"
                        >
                         <ExternalLink className="w-4 h-4" />
                       </a>
@@ -138,10 +140,12 @@ const FocusAreas = () => {
                            <div className="flex-grow min-w-0">
                            <div className="flex items-center gap-2 mb-1">
                              {example.url && example.url !== '#' ? (
-                               <a
-                                 href={example.url}
-                                 className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
-                               >
+                                <a
+                                  href={example.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
+                                >
                                  {example.name}
                                </a>
                              ) : (
@@ -169,10 +173,12 @@ const FocusAreas = () => {
                                className="p-1 h-auto text-muted-foreground hover:text-primary"
                                onClick={(e) => e.stopPropagation()}
                              >
-                               <a
-                                 href={example.twitter}
-                                 aria-label={`${example.name} Twitter`}
-                               >
+                                <a
+                                  href={example.twitter}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  aria-label={`${example.name} Twitter`}
+                                >
                                  <Twitter className="w-3 h-3" />
                                </a>
                              </Button>
@@ -185,10 +191,12 @@ const FocusAreas = () => {
                                className="p-1 h-auto text-muted-foreground hover:text-primary"
                                onClick={(e) => e.stopPropagation()}
                              >
-                               <a
-                                 href={example.url}
-                                 aria-label={`Visit ${example.name}`}
-                               >
+                                <a
+                                  href={example.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  aria-label={`Visit ${example.name}`}
+                                >
                                  <ExternalLink className="w-3 h-3" />
                                </a>
                              </Button>
@@ -209,6 +217,8 @@ const FocusAreas = () => {
                       >
                          <a 
                            href={area.categoryUrl} 
+                           target="_blank"
+                           rel="noopener noreferrer"
                            className="flex items-center gap-2"
                          >
                           View All {area.title} Projects
