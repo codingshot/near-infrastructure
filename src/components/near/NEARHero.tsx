@@ -69,16 +69,16 @@ const NEARHero = () => {
   return (
     <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="hero-text max-w-4xl mx-auto">
+        <div className="hero-text max-w-4xl mx-auto text-center">
           {/* Main Heading */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight text-center">
             NEAR <span className="metallic-gradient">Infrastructure</span>
             <br />
             <span className="metallic-gradient">Committee</span> (IC)
           </h1>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto text-center">
             The NEAR Infrastructure Committee (IC) is{' '}
             <strong className="text-foreground">a group focused on strengthening the network's foundational infrastructure</strong>.
           </p>
