@@ -83,13 +83,13 @@ const TeamSection = () => {
     return (
       <Card 
         key={index} 
-        className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer group border border-gray-200 hover:border-near-300 bg-white overflow-hidden"
+        className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group bg-card border-border hover:border-primary/50 overflow-hidden"
         onClick={() => toggleExpanded(member.name)}
       >
-        <CardContent className="p-6">
+        <CardContent className="p-4">
           {/* Member Image */}
-          <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-near-100 to-near-200 ring-4 ring-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-full overflow-hidden bg-muted ring-2 ring-background shadow-md group-hover:scale-105 transition-transform duration-300">
               <img 
                 src={member.image} 
                 alt={member.name}
@@ -102,42 +102,42 @@ const TeamSection = () => {
           </div>
           
           {/* Member Info */}
-          <div className="text-center mb-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-near-600 transition-colors">
+          <div className="text-center mb-4">
+            <h3 className="text-lg font-grotesk font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
               {member.name}
             </h3>
-            <p className="text-near-600 font-semibold text-sm mb-4 uppercase tracking-wide">
+            <p className="text-primary font-medium text-xs mb-3 uppercase tracking-wide">
               {member.title}
             </p>
             
             {/* Bio - Expandable */}
             <div className="relative">
-              <p className={`text-gray-600 leading-relaxed transition-all duration-300 ${
-                isExpanded ? 'text-sm' : 'text-sm line-clamp-2'
+              <p className={`text-muted-foreground leading-relaxed transition-all duration-300 ${
+                isExpanded ? 'text-xs' : 'text-xs line-clamp-2'
               }`}>
                 {member.bio}
               </p>
               {!isExpanded && member.bio && member.bio.length > 100 && (
-                <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-card to-transparent"></div>
               )}
             </div>
             
             {/* Click to expand hint */}
             {member.bio && member.bio.length > 100 && (
-              <div className="mt-3 text-xs text-near-500 opacity-70 group-hover:opacity-100 transition-opacity">
+              <div className="mt-2 text-xs text-primary opacity-70 group-hover:opacity-100 transition-opacity">
                 Click to {isExpanded ? 'collapse' : 'read more'}
               </div>
             )}
           </div>
           
           {/* Social Links */}
-          <div className="flex justify-center gap-3 pt-4 border-t border-gray-100">
+          <div className="flex justify-center gap-2 pt-3 border-t border-border">
             {member.twitter && (
               <Button
                 asChild
                 variant="ghost"
                 size="sm"
-                className="p-3 h-auto text-gray-500 hover:text-blue-500 hover:bg-blue-50 rounded-full transition-all"
+                className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
                 onClick={(e) => e.stopPropagation()}
               >
                 <a
@@ -146,7 +146,7 @@ const TeamSection = () => {
                   rel="noopener noreferrer"
                   aria-label={`${member.name} Twitter`}
                 >
-                  <Twitter className="w-5 h-5" />
+                  <Twitter className="w-4 h-4" />
                 </a>
               </Button>
             )}
@@ -156,7 +156,7 @@ const TeamSection = () => {
                 asChild
                 variant="ghost"
                 size="sm"
-                className="p-3 h-auto text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-all"
+                className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
                 onClick={(e) => e.stopPropagation()}
               >
                 <a
@@ -165,7 +165,7 @@ const TeamSection = () => {
                   rel="noopener noreferrer"
                   aria-label={`${member.name} LinkedIn`}
                 >
-                  <Linkedin className="w-5 h-5" />
+                  <Linkedin className="w-4 h-4" />
                 </a>
               </Button>
             )}
@@ -175,7 +175,7 @@ const TeamSection = () => {
                 asChild
                 variant="ghost"
                 size="sm"
-                className="p-3 h-auto text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-full transition-all"
+                className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
                 onClick={(e) => e.stopPropagation()}
               >
                 <a
@@ -184,7 +184,7 @@ const TeamSection = () => {
                   rel="noopener noreferrer"
                   aria-label={`${member.name} GitHub`}
                 >
-                  <Github className="w-5 h-5" />
+                  <Github className="w-4 h-4" />
                 </a>
               </Button>
             )}
@@ -194,7 +194,7 @@ const TeamSection = () => {
                 asChild
                 variant="ghost"
                 size="sm"
-                className="p-3 h-auto text-gray-500 hover:text-near-600 hover:bg-near-50 rounded-full transition-all"
+                className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
                 onClick={(e) => e.stopPropagation()}
               >
                 <a
@@ -204,7 +204,7 @@ const TeamSection = () => {
                   aria-label={`${member.name} NEAR Social`}
                   className="flex items-center gap-1"
                 >
-                  <span className="text-lg">⬢</span>
+                  <span className="text-base">⬢</span>
                 </a>
               </Button>
             )}
@@ -215,59 +215,71 @@ const TeamSection = () => {
   };
 
   return (
-    <section id="team" className="py-16 bg-gray-50">
+    <section id="team" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
             Meet Our Team
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mb-8 leading-relaxed">
             Dedicated professionals driving NEAR infrastructure forward with expertise in blockchain technology, 
             decentralized systems, and ecosystem development.
           </p>
           
-          {/* Search */}
-          <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              type="text"
-              placeholder="Search team members..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 border-gray-200 focus:border-near-300"
-            />
+          {/* Search and Toggle Row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+            {/* Search */}
+            <div className="w-full sm:max-w-md relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                type="text"
+                placeholder="Search team members..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 bg-background border-border focus:border-primary"
+              />
+            </div>
+
+            {/* Team Toggle */}
+            <Tabs defaultValue="infrastructure" className="w-full sm:w-auto">
+              <TabsList className="grid grid-cols-2 w-full sm:w-auto bg-muted">
+                <TabsTrigger 
+                  value="infrastructure" 
+                  className="text-sm whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground"
+                >
+                  Infrastructure Committee
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="working" 
+                  className="text-sm whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground"
+                >
+                  Working Group
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
         </div>
 
-        {/* Team Tabs */}
+        {/* Team Content */}
         <Tabs defaultValue="infrastructure" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto mb-12">
-            <TabsTrigger value="infrastructure" className="text-sm">
-              Infrastructure Committee
-            </TabsTrigger>
-            <TabsTrigger value="working" className="text-sm">
-              Working Group
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="infrastructure" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <TabsContent value="infrastructure" className="mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
               {filterMembers(teamData.infrastructureCommittee).map((member, index) => renderMember(member, index))}
             </div>
             {filterMembers(teamData.infrastructureCommittee).length === 0 && searchTerm && (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-muted-foreground">
                 No team members found matching "{searchTerm}"
               </div>
             )}
           </TabsContent>
           
-          <TabsContent value="working" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <TabsContent value="working" className="mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
               {filterMembers(teamData.workingGroup).map((member, index) => renderMember(member, index))}
             </div>
             {filterMembers(teamData.workingGroup).length === 0 && searchTerm && (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-muted-foreground">
                 No team members found matching "{searchTerm}"
               </div>
             )}
