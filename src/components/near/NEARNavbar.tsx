@@ -19,7 +19,7 @@ const NEARNavbar = () => {
           <div className="flex-shrink-0">
             <a href="/" className="flex items-center space-x-2 md:space-x-3">
               <img src="/favicon.ico" alt="NEAR" className="w-7 h-7 md:w-8 md:h-8 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)] transition-all duration-300" />
-              <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl">
+              <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300">
                 <span className="hidden sm:inline">NEAR INFRA</span>
                 <span className="sm:hidden">NEAR IC</span>
               </span>
