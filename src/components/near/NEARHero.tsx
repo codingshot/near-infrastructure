@@ -67,9 +67,9 @@ const NEARHero = () => {
   ];
 
   return (
-    <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="hero-text max-w-4xl mx-auto">
+    <section className="pt-20 md:pt-24 pb-12 md:pb-16 bg-background min-h-screen flex items-center">
+      <div className="w-full">
+        <div className="hero-text text-center mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight">
             NEAR <span className="metallic-gradient">Infrastructure</span>
@@ -89,7 +89,9 @@ const NEARHero = () => {
               asChild 
               size="lg" 
               className="relative overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground px-6 md:px-8 py-3 md:py-4 text-base md:text-lg w-full sm:w-auto
-                        before:absolute before:inset-0 before:metallic-border before:opacity-20 before:z-0"
+                        before:absolute before:inset-0 before:metallic-border before:z-0 
+                        shadow-[0_0_20px_hsl(var(--primary)/0.3)] hover:shadow-[0_0_30px_hsl(var(--primary)/0.5)]
+                        border border-white/20"
             >
               <a href="https://nearn.io/infra-committee/7" className="flex items-center gap-2 justify-center relative z-10">
                 Submit A Proposal
