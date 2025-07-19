@@ -98,8 +98,8 @@ const NEARHero = () => {
 
           {/* Navigation Cards */}
           <div className="mt-16 px-4 sm:px-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {navItems.map(item => {
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+              {navItems.filter(item => !['Focus', 'Team', 'Blog'].includes(item.title)).map(item => {
               const IconComponent = item.icon;
               return <Card key={item.title} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer group border-gray-200 hover:border-near-300" onClick={() => {
                 if (item.external) {
