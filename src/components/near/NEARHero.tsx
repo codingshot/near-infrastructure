@@ -93,7 +93,7 @@ const NEARHero = () => {
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Funding Committed</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold text-primary mb-2">20</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold text-primary mb-2">20+</div>
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Projects Funded</div>
             </div>
             <div>
