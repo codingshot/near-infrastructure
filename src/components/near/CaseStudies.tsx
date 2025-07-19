@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Search, Filter } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-
 interface CaseStudy {
   name: string;
   description: string;
@@ -16,19 +15,13 @@ interface CaseStudy {
   proposalUrl: string;
   tags: string[];
 }
-
 const CaseStudies = () => {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-
   useEffect(() => {
-    fetch('/data/case-studies.json')
-      .then(response => response.json())
-      .then(data => setCaseStudies(data))
-      .catch(error => console.error('Error loading case studies:', error));
+    fetch('/data/case-studies.json').then(response => response.json()).then(data => setCaseStudies(data)).catch(error => console.error('Error loading case studies:', error));
   }, []);
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Completed':
@@ -45,20 +38,15 @@ const CaseStudies = () => {
         return 'bg-muted text-muted-foreground border-border';
     }
   };
-
   const filterCaseStudies = () => {
     return caseStudies.filter(study => {
-      const matchesSearch = study.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           study.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = study.name.toLowerCase().includes(searchTerm.toLowerCase()) || study.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || study.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
   };
-
   const uniqueStatuses = Array.from(new Set(caseStudies.map(study => study.status)));
-
-  return (
-    <section id="case-studies" className="py-12 md:py-16 bg-background">
+  return <section id="case-studies" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
@@ -75,13 +63,7 @@ const CaseStudies = () => {
             {/* Search */}
             <div className="w-full sm:max-w-md relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search projects..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-background border-border focus:border-primary"
-              />
+              <Input type="text" placeholder="Search projects..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-background border-border focus:border-primary" />
             </div>
 
             {/* Filter */}
@@ -106,8 +88,7 @@ const CaseStudies = () => {
 
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filterCaseStudies().map((study, index) => (
-            <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -117,14 +98,9 @@ const CaseStudies = () => {
                     
                     {/* Tags */}
                     <div className="flex flex-wrap gap-1 mb-3">
-                      {study.tags?.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20"
-                        >
+                      {study.tags?.map((tag, tagIndex) => <span key={tagIndex} className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20">
                           {tag}
-                        </span>
-                      ))}
+                        </span>)}
                     </div>
                     
                     <div className="flex items-center gap-2 mb-3">
@@ -148,121 +124,54 @@ const CaseStudies = () => {
                 </CardDescription>
                 
                 <div className="flex items-center gap-2">
-                  {study.productUrl !== '#' && (
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-border text-foreground hover:bg-muted"
-                    >
-                      <a
-                        href={study.productUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2"
-                      >
+                  {study.productUrl !== '#' && <Button asChild variant="outline" size="sm" className="flex-1 border-border text-foreground hover:bg-muted">
+                      <a href={study.productUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                         <span>Visit Project</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
-                    </Button>
-                  )}
+                    </Button>}
                   
-                  {study.proposalUrl !== '#' && (
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className="flex-1 text-primary hover:text-primary/80 hover:bg-muted"
-                    >
-                      <a
-                        href={study.proposalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2"
-                      >
+                  {study.proposalUrl !== '#' && <Button asChild variant="ghost" size="sm" className="flex-1 text-primary hover:text-primary/80 hover:bg-muted">
+                      <a href={study.proposalUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                         <span>See Proposal</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
-                    </Button>
-                  )}
+                    </Button>}
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
         
         {/* No results message */}
-        {filterCaseStudies().length === 0 && (searchTerm || statusFilter !== 'all') && (
-          <div className="text-center py-8 text-muted-foreground">
+        {filterCaseStudies().length === 0 && (searchTerm || statusFilter !== 'all') && <div className="text-center py-8 text-muted-foreground">
             No case studies found matching your criteria. Try adjusting your search or filters.
-          </div>
-        )}
+          </div>}
 
         {/* Additional Resources */}
         <div className="mt-12">
           <div className="bg-muted rounded-lg p-6">
-            <h3 className="font-grotesk font-semibold text-foreground mb-4">Internal Resources</h3>
+            <h3 className="font-grotesk font-semibold text-foreground mb-4">Programs & Resources</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="border-border text-foreground hover:bg-background"
-              >
-                <a
-                  href="https://status.near.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2"
-                >
+              <Button asChild variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
+                <a href="https://status.near.org" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                   NEAR Status Page
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="border-border text-foreground hover:bg-background"
-              >
-                <a
-                  href="https://nearn.io/infra-committee/5/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2"
-                >
+              <Button asChild variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
+                <a href="https://nearn.io/infra-committee/5/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                   Infrastructure Credits Program
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="border-border text-foreground hover:bg-background"
-              >
-                <a
-                  href="https://near.org/security"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2"
-                >
+              <Button asChild variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
+                <a href="https://near.org/security" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                   NEAR Security Program
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="sm"
-                className="border-border text-foreground hover:bg-background"
-              >
-                <a
-                  href="https://nearn.io/beta-testing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2"
-                >
+              <Button asChild variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
+                <a href="https://nearn.io/beta-testing" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                   NEAR Beta Testing Program
                   <ExternalLink className="w-3 h-3" />
                 </a>
@@ -271,8 +180,6 @@ const CaseStudies = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CaseStudies;
