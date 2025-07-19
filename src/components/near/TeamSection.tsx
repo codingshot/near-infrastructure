@@ -96,7 +96,7 @@ const TeamSection = () => {
       'Konrad Merino': '/companies/Masnearfoundationwhitetextmark.png',
       'Dillon Freeman': '/companies/Masnearfoundationwhitetextmark.png',
       'Iker Alustiza': '/companies/near-one-logo-white.svg',
-      'Plug': '/companies/potlock-white.svg'
+      'Plug': '/companies/POTLOCKWhiteTextWordmark.png'
     };
     return logoMap[memberName];
   };
