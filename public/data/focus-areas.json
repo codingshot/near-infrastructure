@@ -163,6 +163,28 @@
     ]
   },
   {
+    "id": "rpc",
+    "title": "RPC",
+    "description": "Remote Procedure Call infrastructure and node services",
+    "examples": [
+      {
+        "name": "Lava Network",
+        "url": "https://lavanet.xyz",
+        "description": "Decentralized RPC network providing reliable blockchain data"
+      },
+      {
+        "name": "FastNEAR",
+        "url": "https://fastnear.com",
+        "description": "High-performance RPC service for NEAR Protocol"
+      },
+      {
+        "name": "BlockPI",
+        "url": "https://blockpi.io",
+        "description": "Multi-chain RPC service with NEAR support"
+      }
+    ]
+  },
+  {
     "id": "onramps-offramps",
     "title": "Onramps / Offramps",
     "description": "Fiat-to-crypto and crypto-to-fiat conversion services",
@@ -177,11 +199,6 @@
         "name": "Ramper",
         "url": "https://www.ramper.xyz/",
         "description": "Web3 onboarding infrastructure"
-      },
-      {
-        "name": "Ping Pay",
-        "url": "https://pingpay.io",
-        "description": "Chain abstracted onramp using NEAR Intents"
       },
       {
         "name": "Transak",
@@ -288,11 +305,6 @@
         "name": "NEAR Intents",
         "url": "https://near-intents.org",
         "description": "Intent-based payment infrastructure"
-      },
-      {
-        "name": "Ping Pay",
-        "url": "https://pingpay.io",
-        "description": "Chain abstracted payment solution"
       }
     ]
   },
