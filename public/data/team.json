@@ -42,8 +42,8 @@
     },
     {
       "name": "Alex Shevchenko",
-      "title": "Co-Founder & CEO of Aurora Labs and Defuse Labs",
-      "bio": "Building NEAR Intents and Aurora ecosystem infrastructure",
+      "title": "Founder of Aurora",
+      "bio": "Co-Founder & CEO of Aurora Labs & Defuse Labs",
       "twitter": "https://x.com/AlexAuroraDev",
       "linkedin": "https://www.linkedin.com/in/alexauroradev"
     },
@@ -56,7 +56,7 @@
     },
     {
       "name": "Evgeny Kuzyakov",
-      "title": "Co-Founder of Fast EAR",
+      "title": "Co-Founder of Fast NEAR",
       "bio": "Ex ProximityFi, NEAR, Google, Facebook. Core protocol contributor",
       "twitter": "https://x.com/ekuzyakov",
       "github": "https://github.com/evgenykuzyakov",
@@ -64,8 +64,8 @@
     },
     {
       "name": "Vlad Frolov",
-      "title": "Co-Founder Devhub, NEAR Protocol Core Contributor",
-      "bio": "Leading developer tooling and infrastructure initiatives",
+      "title": "Co-Founder Devhub",
+      "bio": "NEAR Protocol Core Contributor, Leading developer tooling and infrastructure initiatives",
       "twitter": "https://x.com/Freol",
       "linkedin": "https://www.linkedin.com/in/frolvlad",
       "near": "frol.near"
