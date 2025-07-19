@@ -11,6 +11,23 @@ interface Example {
   recommended?: boolean;
 }
 
+// Mapping of company/project names to their images
+const companyImages: Record<string, string> = {
+  'Aurora': '/companies/aurora.jpg',
+  'Aurora Virtual Chains': '/companies/aurora.jpg',
+  'BlockPI': '/companies/blockpi.jpg',
+  'Chainspect': '/companies/chainspect.jpg',
+  'FastNEAR': '/companies/fastnear.jpg',
+  'Lava Network': '/companies/lavanetwork.jpg',
+  'Meteor Wallet': '/companies/meteorwallet.jpg',
+  'NEAR Blocks': '/companies/nearblocks.jpg',
+  'NEAR Mobile Wallet': '/companies/nearmobile.jpg',
+  'Nightly': '/companies/nightlywallet.jpg',
+  'Ping Pay': '/companies/pingpay.jpg',
+  'Rath.fi Tachyon': '/companies/rathfi.jpg',
+  'Token Terminal': '/companies/tokenterminal.jpg'
+};
+
 interface FocusArea {
   id: string;
   title: string;
@@ -21,7 +38,8 @@ interface FocusArea {
 
 const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
-  const [showExamples, setShowExamples] = useState(true);
+  const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+  const [showExamples, setShowExamples] = useState(false);
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
@@ -30,19 +48,30 @@ const FocusAreas = () => {
       .catch(error => console.error('Error loading focus areas:', error));
   }, []);
 
+  const toggleCard = (cardId: string) => {
+    setExpandedCards(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <section id="focus-areas" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground">
               Our Focus Areas
             </h2>
             <Button
-              variant="outline"
-              size="sm"
               onClick={() => setShowExamples(!showExamples)}
+              variant="outline"
               className="flex items-center gap-2 border-border text-foreground hover:bg-muted"
             >
               {showExamples ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -57,8 +86,10 @@ const FocusAreas = () => {
 
         {/* Focus Areas Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {focusAreas.map((area) => (
-            <Card key={area.id} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+          {focusAreas.map((area) => {
+            const isExpanded = expandedCards.has(area.id);
+            return (
+            <Card key={area.id} className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer" onClick={() => toggleCard(area.id)}>
               <CardHeader>
                 <CardTitle className="text-xl font-grotesk font-semibold text-foreground mb-3 flex items-center justify-between">
                   {area.title}
@@ -68,6 +99,7 @@ const FocusAreas = () => {
                       variant="ghost"
                       size="sm"
                       className="text-primary hover:text-primary/80"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <a
                         href={area.categoryUrl}
@@ -84,16 +116,28 @@ const FocusAreas = () => {
                 </CardDescription>
               </CardHeader>
               
-              {area.examples.length > 0 && showExamples && (
+              {area.examples.length > 0 && showExamples && isExpanded && (
                 <CardContent className="pt-0">
                   <div className="space-y-3">
                     <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
                       Examples on NEAR
                     </h4>
-                    {area.examples.map((example, index) => (
-                      <div key={index} 
-                           className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
-                        <div className="flex-grow">
+                     {area.examples.map((example, index) => {
+                       const hasImage = companyImages[example.name];
+                       return (
+                       <div key={index} 
+                            className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group">
+                         <div className="flex items-start gap-3 flex-grow">
+                           {hasImage && (
+                             <div className="flex-shrink-0">
+                               <img 
+                                 src={hasImage} 
+                                 alt={`${example.name} logo`}
+                                 className="w-8 h-8 rounded object-cover"
+                               />
+                             </div>
+                           )}
+                           <div className="flex-grow min-w-0">
                           <div className="flex items-center gap-2 mb-1">
                             <a
                               href={example.url}
@@ -109,10 +153,11 @@ const FocusAreas = () => {
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {example.description}
-                          </p>
-                        </div>
+                             <p className="text-sm text-muted-foreground leading-relaxed">
+                               {example.description}
+                             </p>
+                           </div>
+                         </div>
                         <div className="flex items-center gap-2 ml-3">
                           {example.twitter && (
                             <Button
@@ -120,6 +165,7 @@ const FocusAreas = () => {
                               variant="ghost"
                               size="sm"
                               className="p-1 h-auto text-muted-foreground hover:text-primary"
+                              onClick={(e) => e.stopPropagation()}
                             >
                               <a
                                 href={example.twitter}
@@ -148,8 +194,9 @@ const FocusAreas = () => {
                             </a>
                           </Button>
                         </div>
-                      </div>
-                    ))}
+                         </div>
+                       );
+                     })}
                   </div>
                   {area.categoryUrl && (
                     <div className="mt-4 pt-4 border-t border-border">
@@ -158,6 +205,7 @@ const FocusAreas = () => {
                         variant="outline" 
                         size="sm" 
                         className="w-full border-border text-foreground hover:bg-muted"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <a 
                           href={area.categoryUrl} 
@@ -174,7 +222,8 @@ const FocusAreas = () => {
                 </CardContent>
               )}
             </Card>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
