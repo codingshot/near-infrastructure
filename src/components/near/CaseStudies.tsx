@@ -168,8 +168,8 @@ const CaseStudies = () => {
 
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-              <CardHeader className="pb-3">
+          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col">
+              <CardHeader className="pb-3 flex-shrink-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <CardTitle className="text-lg font-grotesk font-semibold text-foreground mb-2">
@@ -216,12 +216,12 @@ const CaseStudies = () => {
                 </div>
               </CardHeader>
               
-              <CardContent className="pt-0">
-                <CardDescription className="text-muted-foreground mb-4 leading-relaxed">
+              <CardContent className="pt-0 flex flex-col flex-grow">
+                <CardDescription className="text-muted-foreground mb-4 leading-relaxed flex-grow">
                   {study.description}
                 </CardDescription>
                 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mt-auto">
                   {study.productUrl !== '#' && <Button asChild variant="outline" size="sm" className="flex-1 border-border text-foreground hover:bg-muted">
                       <a href={study.productUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                         <span>Visit Project</span>
