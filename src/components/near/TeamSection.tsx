@@ -88,11 +88,11 @@ const TeamSection = () => {
 
   const getCompanyLogo = (memberName: string) => {
     const logoMap: { [key: string]: string } = {
-      'Bowen Wang': '/companies/aurorawhitesvgtext.svg',
+      'Bowen Wang': '/companies/near-one-logo.svg',
       'Alex Shevchenko': '/companies/aurorawhitesvgtext.svg',
-      'Eric Winer': '/companies/near-one-logo.svg',
+      'Eric Winer': '/companies/nearaiwhite.png',
       'Evgeny Kuzyakov': '/companies/fastnear.jpg',
-      'Vlad Frolov': '/companies/nearnwhite.svg'
+      'Vlad Frolov': '/companies/neardevhubwhitetext.png'
     };
     return logoMap[memberName];
   };
