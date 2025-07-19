@@ -6,7 +6,7 @@ const ProposalProcessTooltip = () => {
   const steps = [
     {
       number: 1,
-      title: 'Respond to RFP',
+      title: 'Respond to RFP or Submit Proposal',
       description: 'Submit your proposal on nearn.io/infra-committee',
       link: 'https://nearn.io/infra-committee/7/1'
     },
