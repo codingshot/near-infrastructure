@@ -48,28 +48,26 @@ const BlogSection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
             Latest Updates
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
-            Stay updated with the latest developments, announcements, and insights from the NEAR Infrastructure Committee.
-          </p>
-        </div>
-
-        {/* View All Articles Button */}
-        <div className="mb-8">
-          <Button
-            asChild
-            variant="outline"
-            className="border-border text-foreground hover:bg-muted"
-          >
-            <a
-              href="https://www.near.org/blog/category/Infrastructure%20Committee"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
+              Stay updated with the latest developments, announcements, and insights from the <span className="near-infra-highlight">near infrastructure</span> Committee.
+            </p>
+            <Button
+              asChild
+              variant="outline"
+              className="border-border text-foreground hover:bg-muted flex-shrink-0"
             >
-              View all articles
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </Button>
+              <a
+                href="https://www.near.org/blog/category/Infrastructure%20Committee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                View all articles
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </Button>
+          </div>
         </div>
 
         {/* Blog Posts Carousel */}

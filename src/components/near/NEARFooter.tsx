@@ -29,7 +29,7 @@ const NEARFooter = () => {
             <div className="mb-4">
               <img 
                 src="/nearinfrastrcuturelogoblack.svg" 
-                alt="NEAR Infrastructure Committee" 
+                alt="near infrastructure Committee" 
                 className="h-12 w-auto brightness-0 invert"
               />
             </div>
@@ -114,7 +114,7 @@ const NEARFooter = () => {
         {/* Bottom Section */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 NEAR Infrastructure Committee.
+            © 2025 <span className="near-infra-highlight">near infrastructure</span> Committee.
           </p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
             <a

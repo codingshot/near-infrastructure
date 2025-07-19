@@ -142,17 +142,26 @@
     color: transparent;
   }
 
-  .metallic-border {
-    background: linear-gradient(
-      90deg,
-      #c0c0c0 0%,
-      #e8e8e8 25%,
-      #ffffff 50%,
-      #e8e8e8 75%,
-      #c0c0c0 100%
-    );
-    background-size: 200% 100%;
-    animation: metallicShine 3s ease-in-out infinite;
+  @keyframes shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .near-infra-highlight {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8, #a8a8a8, #d0d0d0);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 2s ease-in-out infinite;
+    font-weight: 600;
   }
 }
 

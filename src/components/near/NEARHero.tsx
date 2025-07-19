@@ -33,7 +33,7 @@ const NEARHero = () => {
   // All action cards including Apply Credits
   const actionCards = [
     {
-      title: 'Apply for NEAR Infra Credits',
+      title: 'Apply for near infra Credits',
       href: 'https://nearn.io/infra-committee/5/',
       external: true,
       icon: CreditCard,
@@ -61,7 +61,7 @@ const NEARHero = () => {
       href: 'https://nearn.io//listing/near-infrastructure-ecosystem-feedback-page-no-payment/',
       external: true,
       icon: MessageSquare,
-      description: 'Share your thoughts on NEAR infrastructure ecosystem needs.',
+      description: 'Share your thoughts on near infrastructure ecosystem needs.',
       buttonText: 'Give Feedback'
     }
   ];
@@ -79,7 +79,7 @@ const NEARHero = () => {
 
           {/* Description */}
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto text-center">
-            The NEAR Infrastructure Committee (IC) is{' '}
+            The <span className="near-infra-highlight">near infrastructure</span> Committee (IC) is{' '}
             <strong className="text-foreground">a group focused on strengthening the network's foundational infrastructure</strong>.
           </p>
 
@@ -174,15 +174,23 @@ const NEARHero = () => {
                         <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
                           <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                         </div>
-                        <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {card.title}
-                        </CardTitle>
+                         <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
+                           {card.title === 'Apply for near infra Credits' ? (
+                             <>Apply for <span className="near-infra-highlight">near infra</span> Credits</>
+                           ) : (
+                             card.title
+                           )}
+                         </CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <CardDescription className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
-                        {card.description}
-                      </CardDescription>
+                       <CardDescription className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+                         {card.description === 'Share your thoughts on near infrastructure ecosystem needs.' ? (
+                           <>Share your thoughts on <span className="near-infra-highlight">near infrastructure</span> ecosystem needs.</>
+                         ) : (
+                           card.description
+                         )}
+                       </CardDescription>
                       <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                         {card.buttonText}
                       </Button>
