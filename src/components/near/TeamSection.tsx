@@ -95,131 +95,135 @@ const TeamSection = () => {
         className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group bg-card border-border hover:border-primary/50 overflow-hidden"
         onClick={() => toggleExpanded(member.name)}
       >
-        <CardContent className="p-4">
-          <div className="flex gap-4">
-            {/* Member Info - Left Side */}
-            <div className="flex-1">
-              <div className="mb-4">
-                <h3 className="text-lg font-grotesk font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-                  {member.name}
-                </h3>
-                <p className="text-primary font-medium text-xs mb-3 uppercase tracking-wide">
-                  {member.title}
-                </p>
-                
-                {/* Bio - Expandable */}
-                <div className="relative">
-                  <p className={`text-muted-foreground leading-relaxed transition-all duration-300 ${
-                    isExpanded ? 'text-xs' : 'text-xs line-clamp-2'
-                  }`}>
-                    {member.bio}
+        <CardContent className="p-0">
+          <div className="p-4">
+            <div className="flex gap-4">
+              {/* Member Info - Left Side */}
+              <div className="flex-1">
+                <div className="mb-4">
+                  <h3 className="text-lg font-grotesk font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                    {member.name}
+                  </h3>
+                  <p className="text-primary font-medium text-xs mb-3 uppercase tracking-wide">
+                    {member.title}
                   </p>
-                  {!isExpanded && member.bio && member.bio.length > 100 && (
-                    <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-card to-transparent"></div>
+                  
+                  {/* Bio - Expandable */}
+                  <div className="relative">
+                    <p className={`text-muted-foreground leading-relaxed transition-all duration-300 ${
+                      isExpanded ? 'text-xs' : 'text-xs line-clamp-2'
+                    }`}>
+                      {member.bio}
+                    </p>
+                    {!isExpanded && member.bio && member.bio.length > 100 && (
+                      <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-card to-transparent"></div>
+                    )}
+                  </div>
+                  
+                  {/* Click to expand hint */}
+                  {member.bio && member.bio.length > 100 && (
+                    <div className="mt-2 text-xs text-primary opacity-70 group-hover:opacity-100 transition-opacity">
+                      Click to {isExpanded ? 'collapse' : 'read more'}
+                    </div>
                   )}
                 </div>
-                
-                {/* Click to expand hint */}
-                {member.bio && member.bio.length > 100 && (
-                  <div className="mt-2 text-xs text-primary opacity-70 group-hover:opacity-100 transition-opacity">
-                    Click to {isExpanded ? 'collapse' : 'read more'}
+
+                {/* Member Image - Right Side */}
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full overflow-hidden bg-muted ring-2 ring-background shadow-md group-hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = '/placeholder.svg?height=96&width=96&text=Team';
+                      }}
+                    />
                   </div>
-                )}
-              </div>
-              
-              {/* Social Links - Left Aligned */}
-              <div className="flex gap-2 pt-3 border-t border-border">
-                {member.twitter && (
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <a
-                      href={member.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${member.name} Twitter`}
-                    >
-                      <Twitter className="w-4 h-4" />
-                    </a>
-                  </Button>
-                )}
-                
-                {member.linkedin && (
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${member.name} LinkedIn`}
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                  </Button>
-                )}
-                
-                {member.github && (
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <a
-                      href={member.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${member.name} GitHub`}
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  </Button>
-                )}
-                
-                {member.near && (
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <a
-                      href={`https://${member.near}.social`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                       aria-label={`${member.name} NEAR Social`}
-                       className="flex items-center gap-1"
-                     >
-                       <img src="/favicon.ico" alt="NEAR" className="w-4 h-4" />
-                    </a>
-                  </Button>
-                )}
+                </div>
               </div>
             </div>
-
-            {/* Member Image - Right Side */}
-            <div className="flex-shrink-0">
-              <div className="w-16 h-16 rounded-full overflow-hidden bg-muted ring-2 ring-background shadow-md group-hover:scale-105 transition-transform duration-300">
-                <img 
-                  src={member.image} 
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = '/placeholder.svg?height=96&width=96&text=Team';
-                  }}
-                />
-              </div>
+          </div>
+          
+          {/* Social Links - Full Width with Border */}
+          <div className="px-4 pb-4 pt-3 border-t border-border">
+            <div className="flex gap-2">
+              {member.twitter && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a
+                    href={member.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} Twitter`}
+                  >
+                    <Twitter className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+              
+              {member.linkedin && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} LinkedIn`}
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+              
+              {member.github && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a
+                    href={member.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name} GitHub`}
+                  >
+                    <Github className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+              
+              {member.near && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="p-2 h-auto text-muted-foreground hover:text-primary hover:bg-muted rounded-full transition-all"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a
+                    href={`https://${member.near}.social`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                     aria-label={`${member.name} NEAR Social`}
+                     className="flex items-center gap-1"
+                   >
+                     <img src="/favicon.ico" alt="NEAR" className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
             </div>
           </div>
         </CardContent>

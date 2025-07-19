@@ -6,7 +6,7 @@ const ProposalProcessTooltip = () => {
   const steps = [
     {
       number: 1,
-      title: 'Respond to RFP',
+      title: 'Respond to RFP or Submit Proposal',
       description: 'Submit your proposal on nearn.io/infra-committee',
       link: 'https://nearn.io/infra-committee/7/1'
     },
@@ -29,21 +29,36 @@ const ProposalProcessTooltip = () => {
       number: 5,
       title: 'Committee Vote',
       description: 'Decisions are voted on during these Monday meetings'
+    },
+    {
+      number: 6,
+      title: 'KYC',
+      description: 'Know your customer or business for payment'
+    },
+    {
+      number: 7,
+      title: 'Submit Milestones',
+      description: 'Submit milestones and get rest of funding'
+    },
+    {
+      number: 8,
+      title: 'Ecosystem Sync',
+      description: 'Contact NEAR Ecosystem, marketing, relevant stakeholders and sync with team on ecosystem go to market'
     }
   ];
 
   return (
     <div className="mt-12 pt-8 border-t border-border">
-      <div className="mb-8 text-center">
-        <h3 className="text-2xl md:text-3xl font-grotesk font-semibold text-foreground mb-4">
+      <div className="mb-8 flex flex-col md:flex-row md:justify-between md:items-end">
+        <h3 className="text-2xl md:text-3xl font-grotesk font-semibold text-foreground mb-4 md:mb-0">
           How to Submit and Track Your Proposal
         </h3>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-muted-foreground max-w-2xl md:text-right">
           Follow these steps to submit your proposal and participate in our decision-making process
         </p>
       </div>
       
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {steps.map((step) => {
           return (
             <Card 
