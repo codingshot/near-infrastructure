@@ -23,9 +23,9 @@ const NEARNavbar = () => {
               aria-label="NEAR Infrastructure Committee - Home"
             >
               <img 
-                src="/favicon.ico" 
-                alt="NEAR Infrastructure Committee Logo" 
-                className="w-7 h-7 md:w-8 md:h-8 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)] transition-all duration-300" 
+                src="/nearinfrastrcuturelogoblack.svg" 
+                alt="NEAR Infrastructure Committee" 
+                className="h-7 md:h-8 w-auto drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)] transition-all duration-300" 
               />
               <span className="font-grotesk font-semibold text-foreground text-sm md:text-lg lg:text-xl hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-all duration-300">
                 <span className="hidden sm:inline">NEAR INFRA</span>
