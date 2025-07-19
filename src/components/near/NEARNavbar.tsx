@@ -7,8 +7,8 @@ const NEARNavbar = () => {
 
   // Simplified navbar - main navigation moved to hero cards
   const quickLinks = [
-    { title: 'Get Funding', href: 'https://nearn.io/infra-committee/7', external: true },
     { title: 'RFPs', href: 'https://nearn.io/infra-committee/', external: true },
+    { title: 'Get Funding', href: 'https://nearn.io/infra-committee/7', external: true },
   ];
 
   return (
@@ -37,7 +37,7 @@ const NEARNavbar = () => {
                       href={item.href}
                       target={item.external ? '_blank' : undefined}
                       rel={item.external ? 'noopener noreferrer' : undefined}
-                      className="metallic-gradient px-3 xl:px-4 py-2 text-sm font-bold transition-colors duration-200 whitespace-nowrap order-first"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 px-3 xl:px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.title}
                     </a>
@@ -83,7 +83,7 @@ const NEARNavbar = () => {
                       href={item.href}
                       target={item.external ? '_blank' : undefined}
                       rel={item.external ? 'noopener noreferrer' : undefined}
-                      className="metallic-gradient block px-3 py-2 text-base font-bold rounded-md transition-colors order-first"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 block px-3 py-2 text-base font-medium rounded-md transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.title}
