@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Linkedin, Twitter, Github, ExternalLink, Search } from 'lucide-react';
+import { Linkedin, Twitter, Github, ExternalLink, Search, X } from 'lucide-react';
 
 interface TeamMember {
   name: string;
@@ -69,6 +69,10 @@ const TeamSection = () => {
       member.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.bio.toLowerCase().includes(searchTerm.toLowerCase())
     );
+  };
+
+  const clearSearch = () => {
+    setSearchTerm('');
   };
 
   const toggleExpanded = (memberName: string) => {
@@ -234,15 +238,26 @@ const TeamSection = () => {
           {/* Search and Toggle Row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             {/* Search */}
-            <div className="w-full sm:max-w-md relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search team members..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-background border-border focus:border-primary"
-              />
+            <div className="w-full sm:max-w-md relative flex gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search team members..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-background border-border focus:border-primary"
+                />
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearSearch}
+                className="px-3 py-2 h-auto"
+                aria-label="Search team members"
+              >
+                <Search className="w-4 h-4" />
+              </Button>
             </div>
 
             {/* Team Toggle */}
@@ -273,8 +288,18 @@ const TeamSection = () => {
                 {filterMembers(teamData.infrastructureCommittee).map((member, index) => renderMember(member, index))}
               </div>
               {filterMembers(teamData.infrastructureCommittee).length === 0 && searchTerm && (
-                <div className="text-center py-8 text-muted-foreground">
-                  No team members found matching "{searchTerm}"
+                <div className="text-center py-8">
+                  <p className="text-muted-foreground mb-4">
+                    No team members found matching "{searchTerm}"
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={clearSearch}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Clear Filter
+                  </Button>
                 </div>
               )}
             </div>
@@ -286,8 +311,18 @@ const TeamSection = () => {
                 {filterMembers(teamData.workingGroup).map((member, index) => renderMember(member, index))}
               </div>
               {filterMembers(teamData.workingGroup).length === 0 && searchTerm && (
-                <div className="text-center py-8 text-muted-foreground">
-                  No team members found matching "{searchTerm}"
+                <div className="text-center py-8">
+                  <p className="text-muted-foreground mb-4">
+                    No team members found matching "{searchTerm}"
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={clearSearch}
+                    className="inline-flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Clear Filter
+                  </Button>
                 </div>
               )}
             </div>
