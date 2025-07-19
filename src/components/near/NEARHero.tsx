@@ -105,8 +105,8 @@ const NEARHero = () => {
           {/* Action Cards Carousel */}
           <div className="mb-12">
             <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground mb-6">Quick Actions</h2>
-            <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex gap-4 md:gap-6">
+            <div className="overflow-hidden -mx-4 sm:-mx-6 lg:-mx-8" ref={emblaRef}>
+              <div className="flex gap-4 md:gap-6 px-4 sm:px-6 lg:px-8">
                 {actionCards.map((card, index) => {
                   const IconComponent = card.icon;
                   return (
