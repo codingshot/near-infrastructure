@@ -58,7 +58,7 @@ const TeamSection = () => {
       'Iker Alustiza': '/team/iker.jpg',
       'Konrad Merino': '/team/konrad.jpg',
       'Vlad Frolov': '/team/vlad.jpeg',
-      'Dillon Freeman': '/lovable-uploads/af412c03-21e4-4856-82ff-d1a975dc84a9.png',
+      'Dillon Freeman': '/team/dillon.jpg',
       'Plug': '/team/plug.jpg'
     };
     return imageMap[name] || '/placeholder.svg?height=200&width=200&text=Team+Member';
@@ -99,11 +99,11 @@ const TeamSection = () => {
 
   const getCompanyUrl = (memberName: string) => {
     const urlMap: { [key: string]: string } = {
-      'Bowen Wang': 'https://aurora.dev',
+      'Bowen Wang': 'https://nearone.org',
       'Alex Shevchenko': 'https://aurora.dev',
-      'Eric Winer': 'https://nearone.org',
+      'Eric Winer': 'https://near.ai',
       'Evgeny Kuzyakov': 'https://fastnear.com',
-      'Vlad Frolov': 'https://near.ai'
+      'Vlad Frolov': 'https://neardevhub.org'
     };
     return urlMap[memberName];
   };
