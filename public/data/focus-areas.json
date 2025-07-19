@@ -89,6 +89,11 @@
         "description": "Mobile-first crypto wallet"
       },
       {
+        "name": "Ethereum Wallets on NEAR",
+        "url": "https://www.near.org/blog/ethereum-near-mainnet",
+        "description": "Use Ethereum wallets directly on NEAR"
+      },
+      {
         "name": "Intear Wallet",
         "url": "https://wallet.intear.tech",
         "description": "Advanced NEAR wallet features"
