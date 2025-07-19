@@ -39,6 +39,7 @@ interface FocusArea {
 const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
+  const [showExamples, setShowExamples] = useState(false);
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
@@ -64,9 +65,19 @@ const FocusAreas = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground mb-4">
-            Our Focus Areas
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-foreground">
+              Our Focus Areas
+            </h2>
+            <Button
+              onClick={() => setShowExamples(!showExamples)}
+              variant="outline"
+              className="flex items-center gap-2 border-border text-foreground hover:bg-muted"
+            >
+              {showExamples ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              {showExamples ? 'Hide Examples' : 'Show Examples'}
+            </Button>
+          </div>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
             The Infrastructure Committee will consider any proposal that helps make the network 
             a more compelling place for web3 builders and users. That includes, but is not limited to, these key areas:
@@ -105,7 +116,7 @@ const FocusAreas = () => {
                 </CardDescription>
               </CardHeader>
               
-              {area.examples.length > 0 && isExpanded && (
+              {area.examples.length > 0 && showExamples && isExpanded && (
                 <CardContent className="pt-0">
                   <div className="space-y-3">
                     <h4 className="font-grotesk font-medium text-foreground text-sm uppercase tracking-wide">
