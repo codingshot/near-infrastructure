@@ -31,7 +31,7 @@ const TeamSection = () => {
     fetch('/data/team.json')
       .then(response => response.json())
       .then(data => {
-        // Map images from file names for team members
+        // Use image from JSON data, fallback to mapping only if not provided
         const processedData = {
           workingGroup: data.workingGroup.map((member: TeamMember) => ({
             ...member,
@@ -55,7 +55,10 @@ const TeamSection = () => {
       'Eric Winer': '/team/ericwiner.png',
       'Evgeny Kuzyakov': '/team/evgeny.jpg',
       'Iker Alustiza': '/team/iker.jpg',
-      'Konrad Merino': '/team/konrad.jpg'
+      'Konrad Merino': '/team/konrad.jpg',
+      'Vlad Frolov': '/team/vlad.jpeg',
+      'Dillon Freeman': '/lovable-uploads/af412c03-21e4-4856-82ff-d1a975dc84a9.png',
+      'Plug': '/team/plug.jpg'
     };
     return imageMap[name] || '/placeholder.svg?height=200&width=200&text=Team+Member';
   };
