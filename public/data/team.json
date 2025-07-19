@@ -20,7 +20,7 @@
       "title": "Partnerships at NEAR Foundation",
       "bio": "Leading strategic partnerships and ecosystem development initiatives",
       "linkedin": "https://www.linkedin.com/in/dillonjfreeman",
-      "image": "/team/dillon.jpeg"
+      "image": "/lovable-uploads/af412c03-21e4-4856-82ff-d1a975dc84a9.png"
     },
     {
       "name": "Plug",
@@ -38,21 +38,24 @@
       "bio": "Leading protocol development and core infrastructure improvements",
       "twitter": "https://x.com/BowenWang18",
       "linkedin": "https://www.linkedin.com/in/bowen-wang-84b978a3",
-      "near": "bowen.near"
+      "near": "bowen.near",
+      "image": "/team/bowen.jpg"
     },
     {
       "name": "Alex Shevchenko",
       "title": "Founder of Aurora",
       "bio": "Co-Founder & CEO of Aurora Labs & Defuse Labs",
       "twitter": "https://x.com/AlexAuroraDev",
-      "linkedin": "https://www.linkedin.com/in/alexauroradev"
+      "linkedin": "https://www.linkedin.com/in/alexauroradev",
+      "image": "/team/alexaurora.jpg"
     },
     {
       "name": "Eric Winer",
       "title": "CTO at NEAR.ai",
       "bio": "Ex CTO at Pagoda (NEAR Inc), Ex Nifty Gateway, Ex Gemini",
       "twitter": "https://x.com/eric_winer",
-      "near": "eric3.near"
+      "near": "eric3.near",
+      "image": "/team/ericwiner.png"
     },
     {
       "name": "Evgeny Kuzyakov",
@@ -60,7 +63,8 @@
       "bio": "Ex ProximityFi, NEAR, Google, Facebook. Core protocol contributor",
       "twitter": "https://x.com/ekuzyakov",
       "github": "https://github.com/evgenykuzyakov",
-      "near": "mob.near"
+      "near": "mob.near",
+      "image": "/team/evgeny.jpg"
     },
     {
       "name": "Vlad Frolov",
@@ -68,7 +72,8 @@
       "bio": "NEAR Protocol Core Contributor, Leading developer tooling and infrastructure initiatives",
       "twitter": "https://x.com/Freol",
       "linkedin": "https://www.linkedin.com/in/frolvlad",
-      "near": "frol.near"
+      "near": "frol.near",
+      "image": "/team/vlad.jpeg"
     }
   ]
 }
