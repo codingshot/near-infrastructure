@@ -22,7 +22,7 @@ const NEARNavbar = () => {
                 <span className="text-white font-bold text-xs md:text-sm">NIC</span>
               </div>
               <span className="font-display font-semibold text-gray-900 text-sm md:text-lg lg:text-xl">
-                <span className="hidden sm:inline">NEAR Infrastructure Committee</span>
+                <span className="hidden sm:inline">NEAR INFRA</span>
                 <span className="sm:hidden">NEAR IC</span>
               </span>
             </a>
