@@ -20,7 +20,7 @@
     "tags": ["Wallets", "User Experience"]
   },
   {
-    "name": "MyNEAR Wallet Transition",
+    "name": "MyNEAR Wallet",
     "description": "Supporting community wallet infrastructure transition",
     "status": "Completed",
     "fundingDate": "2024-Q1",
@@ -40,14 +40,154 @@
     "tags": ["Wallets", "Protocol Development"]
   },
   {
+    "name": "Nightly Wallet",
+    "description": "Multi-chain wallet with NEAR integration",
+    "status": "Approved",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/nightly.png",
+    "productUrl": "https://nightly.app",
+    "proposalUrl": "#",
+    "tags": ["Wallets", "Multi-chain"]
+  },
+  {
+    "name": "PingPay",
+    "description": "Chain abstracted onramp using NEAR Intents",
+    "status": "In Development",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/pingpay.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Chain Abstraction", "Payments"]
+  },
+  {
+    "name": "Intear Indexer",
+    "description": "Advanced blockchain data indexing solution",
+    "status": "In Development",
+    "fundingDate": "2024-Q2",
+    "logo": "/placeholder-logos/intear.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Indexing", "Analytics"]
+  },
+  {
+    "name": "Chainspect Services",
+    "description": "Blockchain monitoring and analytics tools",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/chainspect.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Analytics", "Monitoring"]
+  },
+  {
+    "name": "Hot Wallet Selector",
+    "description": "Wallet selection interface for Hot ecosystem",
+    "status": "In Development",
+    "fundingDate": "2024-Q2",
+    "logo": "/placeholder-logos/hotwalletsel.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Wallets", "Developer Tools"]
+  },
+  {
+    "name": "Lucid Wallet Selector",
+    "description": "Enhanced wallet selection and integration tools",
+    "status": "Approved",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/lucid.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Wallets", "Developer Tools"]
+  },
+  {
+    "name": "BigQuery Integration",
+    "description": "NEAR blockchain data integration with Google BigQuery",
+    "status": "Completed",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/bigquery.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Analytics", "Data Integration"]
+  },
+  {
+    "name": "HotCraft",
+    "description": "Chain abstracted NFT Marketplace",
+    "status": "In Development",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/hotcraft.png",
+    "productUrl": "https://hotcraft.art",
+    "proposalUrl": "#",
+    "tags": ["NFTs", "Chain Abstraction", "Marketplace"]
+  },
+  {
+    "name": "Token Terminal",
+    "description": "Blockchain analytics and token metrics platform",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q2",
+    "logo": "/placeholder-logos/tokenterminal.png",
+    "productUrl": "https://tokenterminal.com",
+    "proposalUrl": "#",
+    "tags": ["Analytics", "Metrics"]
+  },
+  {
+    "name": "NEAR Treasury by DevHub",
+    "description": "Treasury management and transparency platform",
+    "status": "Completed",
+    "fundingDate": "2024-Q2",
+    "logo": "/placeholder-logos/treasury.png",
+    "productUrl": "https://neartreasury.com",
+    "proposalUrl": "#",
+    "tags": ["Governance", "Treasury"]
+  },
+  {
+    "name": "BlockPI RPC Services",
+    "description": "High-performance RPC infrastructure services",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/blockpi.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Infrastructure", "RPC"]
+  },
+  {
+    "name": "FastNEAR RPC",
+    "description": "Optimized RPC services for NEAR blockchain",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/placeholder-logos/fastnear.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Infrastructure", "RPC"]
+  },
+  {
     "name": "NEARBlocks",
-    "description": "NEAR's primary block explorer and network monitoring",
+    "description": "NEAR's main block explorer and network monitoring",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/nearblocks.png",
     "productUrl": "https://nearblocks.io",
     "proposalUrl": "#",
     "tags": ["Explorers", "Analytics"]
+  },
+  {
+    "name": "RathFI",
+    "description": "Chain Abstracted relayer infrastructure",
+    "status": "In Development",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/rathfi.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Chain Abstraction", "Relayer"]
+  },
+  {
+    "name": "Hot Chain Abstracted Relayer",
+    "description": "Cross-chain relayer for seamless transactions",
+    "status": "In Development",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/hotrelayer.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Chain Abstraction", "Relayer"]
   },
   {
     "name": "FastAuth 2.0",
@@ -57,6 +197,16 @@
     "logo": "/placeholder-logos/fastauth.png",
     "productUrl": "#",
     "proposalUrl": "#",
-    "tags": ["Wallets", "Authentication"]
+    "tags": ["Authentication", "Wallets"]
+  },
+  {
+    "name": "1 Click Connect",
+    "description": "Simplified wallet connection system by Peersyst",
+    "status": "Approved",
+    "fundingDate": "2024-Q3",
+    "logo": "/placeholder-logos/oneclick.png",
+    "productUrl": "#",
+    "proposalUrl": "#",
+    "tags": ["Wallets", "User Experience"]
   }
 ]
