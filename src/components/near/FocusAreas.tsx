@@ -21,7 +21,7 @@ interface FocusArea {
 
 const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
-  const [showExamples, setShowExamples] = useState(true);
+  const [showExamples, setShowExamples] = useState(false);
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
