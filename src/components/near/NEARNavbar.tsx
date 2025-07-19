@@ -8,7 +8,7 @@ const NEARNavbar = () => {
   // Simplified navbar - main navigation moved to hero cards
   const quickLinks = [
     { title: 'Get Funding', href: 'https://nearn.io/infra-committee/7', external: true },
-    { title: 'RFP', href: 'https://nearn.io/infra-committee/', external: true },
+    { title: 'RFPs', href: 'https://nearn.io/infra-committee/', external: true },
   ];
 
   return (

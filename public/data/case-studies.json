@@ -12,7 +12,7 @@
   {
     "name": "Meteor Wallet",
     "description": "Modern NEAR wallet with enhanced user experience",
-    "status": "In Development",
+    "status": "Maintenance",
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/meteor.png",
     "productUrl": "https://meteorwallet.app",
@@ -32,7 +32,7 @@
   {
     "name": "HERE and Hot Wallet",
     "description": "Hot wallet infrastructure for improved accessibility",
-    "status": "In Development",
+    "status": "Maintenance",
     "fundingDate": "2024-Q2",
     "logo": "/placeholder-logos/hot.png",
     "productUrl": "#",
@@ -42,7 +42,7 @@
   {
     "name": "Nightly Wallet",
     "description": "Multi-chain wallet with NEAR integration",
-    "status": "Approved",
+    "status": "Maintenance",
     "fundingDate": "2024-Q3",
     "logo": "/placeholder-logos/nightly.png",
     "productUrl": "https://nightly.app",
@@ -62,7 +62,7 @@
   {
     "name": "Intear Indexer",
     "description": "Advanced blockchain data indexing solution",
-    "status": "In Development",
+    "status": "Maintenance",
     "fundingDate": "2024-Q2",
     "logo": "/placeholder-logos/intear.png",
     "productUrl": "#",
@@ -92,7 +92,7 @@
   {
     "name": "Lucid Wallet Selector",
     "description": "Enhanced wallet selection and integration tools",
-    "status": "Approved",
+    "status": "In Development",
     "fundingDate": "2024-Q3",
     "logo": "/placeholder-logos/lucid.png",
     "productUrl": "#",
@@ -102,7 +102,7 @@
   {
     "name": "BigQuery Integration",
     "description": "NEAR blockchain data integration with Google BigQuery",
-    "status": "Completed",
+    "status": "Maintenance",
     "fundingDate": "2024-Q1",
     "logo": "/placeholder-logos/bigquery.png",
     "productUrl": "#",
@@ -132,7 +132,7 @@
   {
     "name": "NEAR Treasury by DevHub",
     "description": "Treasury management and transparency platform",
-    "status": "Completed",
+    "status": "Maintenance",
     "fundingDate": "2024-Q2",
     "logo": "/placeholder-logos/treasury.png",
     "productUrl": "https://neartreasury.com",
@@ -202,7 +202,7 @@
   {
     "name": "1 Click Connect",
     "description": "Simplified wallet connection system by Peersyst",
-    "status": "Approved",
+    "status": "In Development",
     "fundingDate": "2024-Q3",
     "logo": "/placeholder-logos/oneclick.png",
     "productUrl": "#",
