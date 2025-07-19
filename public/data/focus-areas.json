@@ -438,7 +438,13 @@
     "id": "chain-abstraction-tooling",
     "title": "Chain Abstraction Tooling",
     "description": "Tools and infrastructure for chain abstraction",
-    "examples": []
+    "examples": [
+      {
+        "name": "1-Click API",
+        "url": "https://docs.near-intents.org/near-intents/integration/distribution-channels/1click-api",
+        "description": "REST API for cross-chain liquidity and chain abstracted transactions"
+      }
+    ]
   },
   {
     "id": "tooling",
