@@ -66,7 +66,7 @@ const CaseStudies = () => {
             Funded Projects
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
-            Explore the projects and infrastructure improvements we've funded to strengthen the NEAR ecosystem.
+            Explore the projects and infrastructure improvements we've funded to strengthen the network.
           </p>
           
           {/* Search and Filters */}

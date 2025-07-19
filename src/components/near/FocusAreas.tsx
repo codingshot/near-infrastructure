@@ -38,7 +38,7 @@ const FocusAreas = () => {
             Our Focus Areas
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            The Infrastructure Committee will consider any proposal that helps make the NEAR ecosystem 
+            The Infrastructure Committee will consider any proposal that helps make the network 
             a more compelling place for web3 builders and users. That includes, but is not limited to, these key areas:
           </p>
         </div>
