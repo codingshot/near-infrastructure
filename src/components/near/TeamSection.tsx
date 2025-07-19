@@ -88,11 +88,15 @@ const TeamSection = () => {
 
   const getCompanyLogo = (memberName: string) => {
     const logoMap: { [key: string]: string } = {
-      'Bowen Wang': '/companies/near-one-logo.svg',
+      'Bowen Wang': '/companies/near-one-logo-white.svg',
       'Alex Shevchenko': '/companies/aurorawhitesvgtext.svg',
       'Eric Winer': '/companies/nearaiwhite.png',
       'Evgeny Kuzyakov': '/companies/fastnear.jpg',
-      'Vlad Frolov': '/companies/neardevhubwhitetext.png'
+      'Vlad Frolov': '/companies/neardevhubwhitetext.png',
+      'Konrad Merino': '/companies/Masnearfoundationwhitetextmark.png',
+      'Dillon Freeman': '/companies/Masnearfoundationwhitetextmark.png',
+      'Iker Alustiza': '/companies/near-one-logo-white.svg',
+      'Plug': '/companies/potlock-white.svg'
     };
     return logoMap[memberName];
   };
@@ -103,7 +107,11 @@ const TeamSection = () => {
       'Alex Shevchenko': 'https://aurora.dev',
       'Eric Winer': 'https://near.ai',
       'Evgeny Kuzyakov': 'https://fastnear.com',
-      'Vlad Frolov': 'https://neardevhub.org'
+      'Vlad Frolov': 'https://neardevhub.org',
+      'Konrad Merino': 'https://near.foundation',
+      'Dillon Freeman': 'https://near.foundation',
+      'Iker Alustiza': 'https://nearone.org',
+      'Plug': 'https://potlock.org'
     };
     return urlMap[memberName];
   };
