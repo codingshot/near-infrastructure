@@ -2,21 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Calendar } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
 interface BlogPost {
   title: string;
   date: string;
   url: string;
   excerpt: string;
+  image?: string;
 }
 
 const BlogSection = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 4000 })]);
 
   useEffect(() => {
     fetch('/data/blog-posts.json')
       .then(response => response.json())
-      .then(data => setBlogPosts(data))
+      .then(data => {
+        // Add default images to blog posts
+        const postsWithImages = data.map((post: BlogPost, index: number) => ({
+          ...post,
+          image: post.image || `/placeholder.svg?height=200&width=400&text=Blog+${index + 1}`
+        }));
+        setBlogPosts(postsWithImages);
+      })
       .catch(error => console.error('Error loading blog posts:', error));
   }, []);
 
@@ -57,44 +68,43 @@ const BlogSection = () => {
           </Button>
         </div>
 
-        {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogPosts.map((post, index) => (
-            <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{formatDate(post.date)}</span>
-                </div>
-                <CardTitle className="text-lg font-semibold text-gray-900 leading-tight">
-                  {post.title}
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="pt-0">
-                <CardDescription className="text-gray-600 mb-4 leading-relaxed">
-                  {post.excerpt}
-                </CardDescription>
-                
-                <Button
-                  asChild
-                  variant="outline"
-                  size="sm"
-                  className="w-full"
+        {/* Blog Posts Carousel */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {blogPosts.map((post, index) => (
+              <div key={index} className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 pl-4">
+                <Card 
+                  className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
+                  onClick={() => window.open(post.url, '_blank')}
                 >
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
-                  >
-                    <span>Read Article</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                  {/* Blog Image */}
+                  <div className="aspect-video overflow-hidden rounded-t-lg">
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg font-semibold text-gray-900 leading-tight group-hover:text-near-600 transition-colors">
+                      {post.title}
+                    </CardTitle>
+                    <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>{formatDate(post.date)}</span>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="pt-0">
+                    <CardDescription className="text-gray-600 leading-relaxed">
+                      {post.excerpt}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
