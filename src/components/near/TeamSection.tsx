@@ -97,6 +97,17 @@ const TeamSection = () => {
     return logoMap[memberName];
   };
 
+  const getCompanyUrl = (memberName: string) => {
+    const urlMap: { [key: string]: string } = {
+      'Bowen Wang': 'https://aurora.dev',
+      'Alex Shevchenko': 'https://aurora.dev',
+      'Eric Winer': 'https://nearone.org',
+      'Evgeny Kuzyakov': 'https://fastnear.com',
+      'Vlad Frolov': 'https://near.ai'
+    };
+    return urlMap[memberName];
+  };
+
   const renderMember = (member: TeamMember, index: number) => {
     const isExpanded = expandedCards.has(member.name);
     
@@ -239,14 +250,22 @@ const TeamSection = () => {
               {/* Company Logo - Bottom Right */}
               {getCompanyLogo(member.name) && (
                 <div className="flex-shrink-0">
-                  <img 
-                    src={getCompanyLogo(member.name)} 
-                    alt={`${member.name} company`}
-                    className="w-8 h-8 object-contain opacity-60 group-hover:opacity-100 transition-opacity"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
+                  <a
+                    href={getCompanyUrl(member.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="block hover:scale-110 transition-transform duration-200"
+                  >
+                    <img 
+                      src={getCompanyLogo(member.name)} 
+                      alt={`${member.name} company`}
+                      className="w-8 h-8 object-contain opacity-60 group-hover:opacity-100 transition-opacity"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  </a>
                 </div>
               )}
             </div>
