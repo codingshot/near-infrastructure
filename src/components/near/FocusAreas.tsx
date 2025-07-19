@@ -24,7 +24,7 @@ interface FocusArea {
 const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
-  const [showExamples, setShowExamples] = useState(false);
+  const [showExamples, setShowExamples] = useState(true);
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
