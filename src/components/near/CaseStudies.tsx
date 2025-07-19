@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Search, Filter } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface CaseStudy {
   name: string;
@@ -16,6 +18,8 @@ interface CaseStudy {
 
 const CaseStudies = () => {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
 
   useEffect(() => {
     fetch('/data/case-studies.json')
@@ -41,6 +45,17 @@ const CaseStudies = () => {
     }
   };
 
+  const filterCaseStudies = () => {
+    return caseStudies.filter(study => {
+      const matchesSearch = study.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           study.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || study.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  };
+
+  const uniqueStatuses = Array.from(new Set(caseStudies.map(study => study.status)));
+
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,14 +64,47 @@ const CaseStudies = () => {
           <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
             Past Funded Case Studies
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
             Explore the projects and infrastructure improvements we've funded to strengthen the NEAR ecosystem.
           </p>
+          
+          {/* Search and Filters */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="flex flex-col sm:flex-row gap-4">
+              {/* Search */}
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search case studies..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 border-gray-200 focus:border-near-300"
+                />
+              </div>
+              
+              {/* Status Filter */}
+              <div className="sm:w-48">
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="border-gray-200 focus:border-near-300">
+                    <Filter className="w-4 h-4 mr-2" />
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Statuses</SelectItem>
+                    {uniqueStatuses.map(status => (
+                      <SelectItem key={status} value={status}>{status}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {caseStudies.map((study, index) => (
+          {filterCaseStudies().map((study, index) => (
             <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
@@ -68,9 +116,6 @@ const CaseStudies = () => {
                       <Badge className={getStatusColor(study.status)}>
                         {study.status}
                       </Badge>
-                      <span className="text-xs text-gray-500">
-                        Funded {study.fundingDate}
-                      </span>
                     </div>
                   </div>
                   {/* Logo placeholder */}
@@ -130,6 +175,13 @@ const CaseStudies = () => {
             </Card>
           ))}
         </div>
+        
+        {/* No results message */}
+        {filterCaseStudies().length === 0 && (searchTerm || statusFilter !== 'all') && (
+          <div className="text-center py-8 text-gray-500">
+            No case studies found matching your criteria. Try adjusting your search or filters.
+          </div>
+        )}
 
         {/* Additional Resources */}
         <div className="mt-12 text-center">
