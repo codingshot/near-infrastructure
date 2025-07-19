@@ -39,52 +39,52 @@
       {
         "name": "Fungible Token Core (NEP-141)",
         "url": "https://nomicon.io/Standards/Tokens/FungibleToken/Core",
-        "description": "Defines the core logic for fungible tokens, including methods for transfers (`ft_transfer`), balance checks (`ft_balance_of`), and the innovative `ft_transfer_call` function. This function allows a user to send tokens to a contract and trigger a function on that contract in one atomic transaction."
+        "description": "Core fungible token standard with transfer and balance methods"
       },
       {
         "name": "Fungible Token Metadata (NEP-148)",
         "url": "https://nomicon.io/Standards/Tokens/FungibleToken/Metadata",
-        "description": "An extension to the core standard that allows contracts to store and expose metadata about the token. This includes details like the token's name (e.g., 'Wrapped NEAR'), symbol (e.g., 'wNEAR'), and decimals of precision."
+        "description": "Token metadata extension for names, symbols, and decimals"
       },
       {
         "name": "Fungible Token Events (NEP-297)",
         "url": "https://nomicon.io/Standards/Tokens/FungibleToken/Event",
-        "description": "A standard for emitting structured log events for token activities like transfers, minting, and burning. This allows indexers and dApps to reliably track token movements and other important actions."
+        "description": "Structured logging for token transfers and activities"
       },
       {
         "name": "NFT Core (NEP-171)",
         "url": "https://nomicon.io/Standards/Tokens/NonFungibleToken/Core",
-        "description": "Establishes the fundamental interface for NFTs. It defines the basic functions required for transferring tokens, identifying token owners, and tracking the total supply. This is the base upon which all other NFT extensions are built."
+        "description": "Fundamental NFT interface for transfers and ownership"
       },
       {
         "name": "NFT Metadata (NEP-177)",
         "url": "https://nomicon.io/Standards/Tokens/NonFungibleToken/Metadata",
-        "description": "An extension that allows NFT contracts to provide detailed information about each unique token. This can include a title, description, media URL, and other attributes that define the token's specific characteristics."
+        "description": "NFT metadata standard for titles, descriptions, and media"
       },
       {
         "name": "NFT Approval Management (NEP-178)",
         "url": "https://nomicon.io/Standards/Tokens/NonFungibleToken/ApprovalManagement",
-        "description": "This standard allows token owners to grant other accounts permission to transfer their NFTs. It supports approving a single transfer to a specific account or granting universal approval to an account (like a marketplace) to transfer any of the owner's NFTs from that collection."
+        "description": "NFT approval system for marketplace and transfer permissions"
       },
       {
         "name": "NFT Enumeration (NEP-181)",
         "url": "https://nomicon.io/Standards/Tokens/NonFungibleToken/Enumeration",
-        "description": "Provides methods for retrieving lists of NFTs. This extension allows dApps to easily query all tokens on a contract, view all tokens owned by a specific account, and get the total supply, making collections more discoverable."
+        "description": "Methods for querying NFT collections and ownership lists"
       },
       {
         "name": "NFT Royalty Payout (NEP-199)",
         "url": "https://nomicon.io/Standards/Tokens/NonFungibleToken/Payout",
-        "description": "A standard for implementing on-chain royalty payments. It enables creators to specify royalty percentages and beneficiaries, ensuring they automatically receive a portion of the proceeds from secondary sales of their NFTs on compliant marketplaces."
+        "description": "On-chain royalty payments for secondary NFT sales"
       },
       {
         "name": "NFT Events (NEP-297)",
         "url": "https://nomicon.io/Standards/Tokens/NonFungibleToken/Event",
-        "description": "Defines a standardized format for logging NFT-related events, such as minting, transfers, and burning. This creates a reliable and parsable history of an NFT's lifecycle, which is essential for indexers, wallets, and marketplaces."
+        "description": "Standardized logging for NFT lifecycle events"
       },
       {
         "name": "Linkdrop",
         "url": "https://github.com/near-apps/near-linkdrop",
-        "description": "A powerful pattern for user onboarding that allows sending assets (NEAR or tokens) to people who may not have a NEAR account. A special URL is generated containing a temporary private key that controls the funded assets. When the recipient clicks the link, their wallet uses the key to sign a transaction, creating an account and/or claiming the assets. While more of a de-facto standard than a formal NEP, its implementation is widely used across the ecosystem."
+        "description": "User onboarding pattern for sending assets via shareable links"
       }
     ]
   },
