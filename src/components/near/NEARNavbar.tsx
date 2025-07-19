@@ -6,10 +6,10 @@ const NEARNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { title: 'Submit A Proposal', href: 'https://nearn.io/infra-committee/7', external: true },
-    { title: 'See RFPs', href: 'https://nearn.io/infra-committee/', external: true },
+    { title: 'Get Funding', href: 'https://nearn.io/infra-committee/7', external: true },
+    { title: 'RFP', href: 'https://nearn.io/infra-committee/', external: true },
     { title: 'Feedback', href: 'https://nearn.io//listing/near-infrastructure-ecosystem-feedback-page-no-payment/', external: true },
-    { title: 'Our Focus Areas', href: '#focus-areas' },
+    { title: 'Focus', href: '#focus-areas' },
     { title: 'Team', href: '#team' },
     { title: 'Blog', href: '#blog' },
   ];
