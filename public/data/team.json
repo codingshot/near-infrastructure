@@ -6,14 +6,14 @@
       "bio": "Ex Kraken executive focused on partner success and ecosystem growth",
       "twitter": "https://x.com/swisshustler",
       "linkedin": "https://www.linkedin.com/in/konradmerino",
-      "image": "/lovable-uploads/22d31f51-c174-40a7-bd95-00e4ad00eaf3.png"
+      "image": "/team/konrad.jpg"
     },
     {
       "name": "Iker Alustiza",
       "title": "Partner Engineer at NEAR One",
       "bio": "Ex Tech Integrations Lead at Parity Technologies, specializing in blockchain infrastructure",
       "linkedin": "https://www.linkedin.com/in/iker-alustiza-beitia-68803a2b",
-      "image": "/lovable-uploads/5663820f-6c97-4492-9210-9eaa1a8dc415.png"
+      "image": "/team/iker.jpg"
     },
     {
       "name": "Dillon Freeman",
@@ -27,7 +27,8 @@
       "title": "Public Goods at NEAR Foundation",
       "bio": "Core contributor at POTLOCK, focused on public goods funding and ecosystem development",
       "twitter": "https://x.com/plugrel",
-      "near": "plugrel.near"
+      "near": "plugrel.near",
+      "image": "/team/plug.jpg"
     }
   ],
   "infrastructureCommittee": [
