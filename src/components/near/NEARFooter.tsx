@@ -30,7 +30,7 @@ const NEARFooter = () => {
               <img 
                 src="/nearinfrastrcuturelogoblack.svg" 
                 alt="near infrastructure Committee" 
-                className="h-12 w-auto brightness-0 invert logo-glow"
+                className="h-12 w-auto filter drop-shadow-[0_0_10px_rgba(34,197,94,0.5)] brightness-0 invert"
               />
             </div>
             <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
