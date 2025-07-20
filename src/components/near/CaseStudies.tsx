@@ -246,7 +246,7 @@ const CaseStudies = () => {
         {/* No results message */}
         {filterCaseStudies().length === 0 && hasActiveFilters && (
           <div className="text-center py-8">
-            <p className="text-muted-foreground mb-4">
+            <p className="text-muted-foreground mb-4 text-center">
               No projects found matching your criteria.
             </p>
             <Button 
