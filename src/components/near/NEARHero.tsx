@@ -74,9 +74,9 @@ const NEARHero = () => {
         <div className="hero-text max-w-4xl mx-auto text-center">
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight text-center">
-            <span className="near-infra-highlight">near infrastructure</span>
+            <span className="metallic-gradient">strengthening</span>
             <br />
-            <span className="metallic-gradient">Committee</span> (IC)
+            <span className="near-infra-highlight">near infrastructure</span>
           </h1>
 
           {/* Description */}
