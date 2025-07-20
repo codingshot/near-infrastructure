@@ -54,29 +54,32 @@ const NetworkCable = ({
     (start[2] + end[2]) / 2
   ];
 
+  // Simple rotation calculation using lookAt
+  const direction = new THREE.Vector3(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
+  direction.normalize();
+  
+  // Calculate rotation angles
+  const rotationY = Math.atan2(direction.x, direction.z);
+  const rotationX = -Math.asin(direction.y);
+
   useFrame((state) => {
-    if (meshRef.current) {
-      // Subtle rotation around its axis
-      meshRef.current.rotation.z += 0.005;
-      
+    if (meshRef.current && meshRef.current.material) {
       // Data flow animation - pulse along the cable
       const time = state.clock.elapsedTime + index * 0.5;
       const intensity = 0.2 + Math.sin(time * 3) * 0.1;
-      (meshRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity = intensity;
+      const material = meshRef.current.material as THREE.MeshStandardMaterial;
+      if (material && material.emissiveIntensity !== undefined) {
+        material.emissiveIntensity = intensity;
+      }
     }
   });
-
-  // Calculate rotation to align cylinder with cable direction
-  const direction = new THREE.Vector3(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
-  const up = new THREE.Vector3(0, 1, 0);
-  const quaternion = new THREE.Quaternion().setFromUnitVectors(up, direction.normalize());
 
   return (
     <Cylinder 
       ref={meshRef}
       position={midpoint}
       args={[0.02, 0.02, distance, 8]}
-      rotation={[quaternion.x, quaternion.y, quaternion.z]}
+      rotation={[rotationX, rotationY, 0]}
     >
       <meshStandardMaterial 
         color="#64748b" 
