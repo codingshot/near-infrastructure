@@ -281,6 +281,12 @@
     "categoryUrl": "https://nearcatalog.xyz/category/on-off-ramp",
     "examples": [
       {
+        "name": "PingPay",
+        "url": "https://pingpay.io",
+        "description": "Chain abstracted onramp using NEAR Intents",
+        "logo": "/companies/pingpay.jpg"
+      },
+      {
         "name": "Onramper",
         "url": "https://www.onramper.com/",
         "description": "Global fiat onramp aggregator",
@@ -402,6 +408,12 @@
     "title": "Payments",
     "description": "Payment processing and transaction solutions",
     "examples": [
+      {
+        "name": "PingPay",
+        "url": "https://pingpay.io",
+        "description": "Chain abstracted onramp using NEAR Intents",
+        "logo": "/companies/pingpay.jpg"
+      },
       {
         "name": "NEAR Intents",
         "url": "https://near-intents.org",
