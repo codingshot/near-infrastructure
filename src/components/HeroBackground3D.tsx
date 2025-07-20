@@ -71,7 +71,7 @@ function SquareStroke({ position, rotation, scale }: { position: [number, number
       
       {/* Plus symbols at corners */}
       {plusPoints.reduce((acc, _, index, arr) => {
-        if (index % 2 === 0) {
+        if (index % 2 === 0 && index + 1 < arr.length) {
           acc.push(
             <Line
               key={`plus-${index}`}
