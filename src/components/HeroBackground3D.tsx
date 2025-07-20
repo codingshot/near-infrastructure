@@ -3,6 +3,18 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 
+// Safe point validation function
+const isValidPoint = (point: any): point is [number, number, number] => {
+  return Array.isArray(point) && 
+         point.length === 3 && 
+         point.every(coord => typeof coord === 'number' && !isNaN(coord) && isFinite(coord));
+};
+
+// Safe points array validation
+const validatePoints = (points: any[]): [number, number, number][] => {
+  return points.filter(isValidPoint);
+};
+
 // Individual square stroke component
 function SquareStroke({ position, rotation, scale }: { position: [number, number, number], rotation: [number, number, number], scale: number }) {
   const meshRef = useRef<THREE.Group>(null);
@@ -16,22 +28,21 @@ function SquareStroke({ position, rotation, scale }: { position: [number, number
     }
   });
 
-  // Create square with + on edge points
+  // Create square points
   const squarePoints = useMemo(() => {
     const size = 0.5 * scale;
     const points: [number, number, number][] = [
-      // Main square
       [-size, -size, 0],
       [size, -size, 0],
       [size, size, 0],
       [-size, size, 0],
       [-size, -size, 0], // Close the square
     ];
-    return points;
+    return validatePoints(points);
   }, [scale]);
 
-  // Create + symbols at corners
-  const plusPoints = useMemo(() => {
+  // Create plus lines as separate pairs
+  const plusLines = useMemo(() => {
     const size = 0.5 * scale;
     const plusSize = 0.1 * scale;
     const corners: [number, number, number][] = [
@@ -41,64 +52,65 @@ function SquareStroke({ position, rotation, scale }: { position: [number, number
       [-size, size, 0],
     ];
     
-    const allPlusPoints: [number, number, number][] = [];
+    const lines: { horizontal: [number, number, number][], vertical: [number, number, number][] }[] = [];
+    
     corners.forEach(([x, y, z]) => {
-      // Ensure coordinates are valid numbers
       if (typeof x === 'number' && typeof y === 'number' && typeof z === 'number' && 
           !isNaN(x) && !isNaN(y) && !isNaN(z)) {
-        // Horizontal line of +
-        allPlusPoints.push(
-          [x - plusSize, y, z],
-          [x + plusSize, y, z]
-        );
-        // Vertical line of +
-        allPlusPoints.push(
-          [x, y - plusSize, z],
-          [x, y + plusSize, z]
-        );
+        lines.push({
+          horizontal: validatePoints([
+            [x - plusSize, y, z],
+            [x + plusSize, y, z]
+          ]),
+          vertical: validatePoints([
+            [x, y - plusSize, z],
+            [x, y + plusSize, z]
+          ])
+        });
       }
     });
     
-    return allPlusPoints;
+    return lines;
   }, [scale]);
 
   return (
     <group ref={meshRef} position={position} rotation={rotation}>
       {/* Main square stroke */}
-      <Line
-        points={squarePoints}
-        color="#14B8A6"
-        lineWidth={2}
-        transparent
-        opacity={0.6}
-      />
+      {squarePoints.length >= 2 && (
+        <Line
+          points={squarePoints}
+          color="#14B8A6"
+          lineWidth={2}
+          transparent
+          opacity={0.6}
+        />
+      )}
       
       {/* Plus symbols at corners */}
-      {plusPoints.reduce((acc, _, index, arr) => {
-        if (index % 2 === 0 && index + 1 < arr.length) {
-          const point1 = arr[index];
-          const point2 = arr[index + 1];
-          
-          // Ensure both points are valid arrays with 3 numbers
-          if (point1 && point2 && 
-              Array.isArray(point1) && Array.isArray(point2) &&
-              point1.length === 3 && point2.length === 3 &&
-              point1.every(coord => typeof coord === 'number' && !isNaN(coord)) &&
-              point2.every(coord => typeof coord === 'number' && !isNaN(coord))) {
-            acc.push(
-              <Line
-                key={`plus-${index}`}
-                points={[point1, point2]}
-                color="#14B8A6"
-                lineWidth={1.5}
-                transparent
-                opacity={0.8}
-              />
-            );
-          }
-        }
-        return acc;
-      }, [] as React.ReactElement[])}
+      {plusLines.map((plusLine, index) => (
+        <React.Fragment key={`plus-group-${index}`}>
+          {plusLine.horizontal.length === 2 && (
+            <Line
+              key={`plus-h-${index}`}
+              points={plusLine.horizontal}
+              color="#14B8A6"
+              lineWidth={1.5}
+              transparent
+              opacity={0.8}
+            />
+          )}
+          {plusLine.vertical.length === 2 && (
+            <Line
+              key={`plus-v-${index}`}
+              points={plusLine.vertical}
+              color="#14B8A6"
+              lineWidth={1.5}
+              transparent
+              opacity={0.8}
+            />
+          )}
+        </React.Fragment>
+      ))}
     </group>
   );
 }
@@ -124,18 +136,20 @@ function ConnectionLines() {
         Math.sin(angle) * radius
       ]);
     }
-    return points;
+    return validatePoints(points);
   }, []);
 
   return (
     <group ref={lineRef}>
-      <Line
-        points={connectionPoints}
-        color="#14B8A6"
-        lineWidth={1}
-        transparent
-        opacity={0.3}
-      />
+      {connectionPoints.length >= 2 && (
+        <Line
+          points={connectionPoints}
+          color="#14B8A6"
+          lineWidth={1}
+          transparent
+          opacity={0.3}
+        />
+      )}
     </group>
   );
 }
@@ -164,7 +178,12 @@ function MetallicHighlights() {
         rotation: [0, 0, angle] as [number, number, number],
         scale: 0.3 + Math.sin(i) * 0.1
       };
-    });
+    }).filter(highlight => 
+      isValidPoint(highlight.position) && 
+      isValidPoint(highlight.rotation) &&
+      typeof highlight.scale === 'number' && 
+      !isNaN(highlight.scale)
+    );
   }, []);
 
   return (
@@ -201,7 +220,12 @@ function Scene() {
         ] as [number, number, number],
         scale: 0.5 + Math.random() * 0.5
       };
-    });
+    }).filter(square => 
+      isValidPoint(square.position) && 
+      isValidPoint(square.rotation) &&
+      typeof square.scale === 'number' && 
+      !isNaN(square.scale)
+    );
   }, []);
 
   return (
@@ -245,6 +269,9 @@ const HeroBackground3D: React.FC = () => {
           background: 'transparent',
           width: '100%',
           height: '100%'
+        }}
+        onError={(error) => {
+          console.error('Three.js Canvas error:', error);
         }}
       >
         <Scene />
