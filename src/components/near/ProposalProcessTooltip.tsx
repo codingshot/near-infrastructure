@@ -95,7 +95,7 @@ const ProposalProcessTooltip = () => {
       
       <div className="mt-8 p-4 bg-muted/50 rounded-lg">
         <p className="text-sm text-muted-foreground text-center">
-          <strong>Note:</strong> The NF Working Group meets on Wednesdays to prepare strategy, administrative work, and workflows.
+          <strong>Note:</strong> The Working Group meets on Wednesdays to prepare strategy, administrative work, and workflows.
         </p>
       </div>
     </div>
