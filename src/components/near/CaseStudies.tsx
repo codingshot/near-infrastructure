@@ -114,15 +114,15 @@ const CaseStudies = () => {
           </p>
           
           {/* Search and Filters */}
-          <div className="flex flex-col gap-4">
-            {/* Top row - Search */}
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            {/* Search */}
             <div className="w-full sm:max-w-md relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input type="text" placeholder="Search projects..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-background border-border focus:border-primary" />
             </div>
 
-            {/* Bottom row - Filters */}
-            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+            {/* Filters */}
+            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center w-full sm:w-auto">
               <Filter className="w-4 h-4 text-muted-foreground hidden sm:block" />
               
               {/* Status Filter */}
