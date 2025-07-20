@@ -99,6 +99,7 @@ const CaseStudies = () => {
   };
 
   const uniqueStatuses = Array.from(new Set(caseStudies.map(study => study.status)));
+  const uniqueTags = Array.from(new Set(caseStudies.flatMap(study => study.tags)));
   const hasActiveFilters = searchTerm || statusFilter !== 'all' || selectedTags.length > 0;
   return <section id="case-studies" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,36 +114,65 @@ const CaseStudies = () => {
           </p>
           
           {/* Search and Filters */}
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            {/* Search */}
+          <div className="flex flex-col gap-4">
+            {/* Top row - Search */}
             <div className="w-full sm:max-w-md relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input type="text" placeholder="Search projects..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10 bg-background border-border focus:border-primary" />
             </div>
 
-            {/* Filter */}
-            <div className="w-full sm:w-auto flex items-center gap-2">
-              <Filter className="w-4 h-4 text-muted-foreground" />
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-full sm:w-[180px] bg-background border-border">
-                  <SelectValue placeholder="All statuses" />
-                </SelectTrigger>
-                <SelectContent className="bg-background border-border">
-                  <SelectItem value="all" className="text-foreground">All Statuses</SelectItem>
-                  <SelectItem value="Completed" className="text-foreground">Completed</SelectItem>
-                  <SelectItem value="In Development" className="text-foreground">In Development</SelectItem>
-                  <SelectItem value="Maintenance" className="text-foreground">Maintenance</SelectItem>
-                  <SelectItem value="In KYC" className="text-foreground">In KYC</SelectItem>
-                  <SelectItem value="Approved" className="text-foreground">Approved</SelectItem>
-                </SelectContent>
-              </Select>
+            {/* Bottom row - Filters */}
+            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+              <Filter className="w-4 h-4 text-muted-foreground hidden sm:block" />
+              
+              {/* Status Filter */}
+              <div className="w-full sm:w-auto">
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-full sm:w-[180px] bg-background border-border">
+                    <SelectValue placeholder="All statuses" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border-border z-50">
+                    <SelectItem value="all" className="text-foreground">All Statuses</SelectItem>
+                    {uniqueStatuses.map((status) => (
+                      <SelectItem key={status} value={status} className="text-foreground">{status}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Tag Filter */}
+              <div className="w-full sm:w-auto">
+                <Select value="" onValueChange={(value) => value && handleTagClick(value)}>
+                  <SelectTrigger className="w-full sm:w-[180px] bg-background border-border">
+                    <SelectValue placeholder="Select tag" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border-border z-50">
+                    {uniqueTags.map((tag) => (
+                      <SelectItem key={tag} value={tag} className="text-foreground">{tag}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
 
-          {/* Active Tags Display */}
-          {selectedTags.length > 0 && (
+          {/* Active Filters Display */}
+          {hasActiveFilters && (
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="text-sm text-muted-foreground">Active filters:</span>
+              
+              {/* Active Status Filter */}
+              {statusFilter !== 'all' && (
+                <Badge 
+                  className={`${getStatusColor(statusFilter)} border flex items-center gap-1 hover:opacity-80 cursor-pointer`}
+                  onClick={() => setStatusFilter('all')}
+                >
+                  {statusFilter}
+                  <X className="w-3 h-3" />
+                </Badge>
+              )}
+              
+              {/* Active Tag Filters */}
               {selectedTags.map((tag) => (
                 <Badge 
                   key={tag} 
@@ -154,6 +184,7 @@ const CaseStudies = () => {
                   <X className="w-3 h-3" />
                 </Badge>
               ))}
+              
               <Button 
                 variant="ghost" 
                 size="sm" 
