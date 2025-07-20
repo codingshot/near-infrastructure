@@ -192,7 +192,9 @@ const NEARHero = () => {
                            card.description
                          )}
                        </CardDescription>
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                      <Button 
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground pointer-events-none"
+                      >
                         {card.buttonText}
                       </Button>
                     </CardContent>
