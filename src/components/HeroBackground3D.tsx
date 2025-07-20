@@ -43,16 +43,20 @@ function SquareStroke({ position, rotation, scale }: { position: [number, number
     
     const allPlusPoints: [number, number, number][] = [];
     corners.forEach(([x, y, z]) => {
-      // Horizontal line of +
-      allPlusPoints.push(
-        [x - plusSize, y, z],
-        [x + plusSize, y, z]
-      );
-      // Vertical line of +
-      allPlusPoints.push(
-        [x, y - plusSize, z],
-        [x, y + plusSize, z]
-      );
+      // Ensure coordinates are valid numbers
+      if (typeof x === 'number' && typeof y === 'number' && typeof z === 'number' && 
+          !isNaN(x) && !isNaN(y) && !isNaN(z)) {
+        // Horizontal line of +
+        allPlusPoints.push(
+          [x - plusSize, y, z],
+          [x + plusSize, y, z]
+        );
+        // Vertical line of +
+        allPlusPoints.push(
+          [x, y - plusSize, z],
+          [x, y + plusSize, z]
+        );
+      }
     });
     
     return allPlusPoints;
@@ -72,16 +76,26 @@ function SquareStroke({ position, rotation, scale }: { position: [number, number
       {/* Plus symbols at corners */}
       {plusPoints.reduce((acc, _, index, arr) => {
         if (index % 2 === 0 && index + 1 < arr.length) {
-          acc.push(
-            <Line
-              key={`plus-${index}`}
-              points={[arr[index], arr[index + 1]]}
-              color="#14B8A6"
-              lineWidth={1.5}
-              transparent
-              opacity={0.8}
-            />
-          );
+          const point1 = arr[index];
+          const point2 = arr[index + 1];
+          
+          // Ensure both points are valid arrays with 3 numbers
+          if (point1 && point2 && 
+              Array.isArray(point1) && Array.isArray(point2) &&
+              point1.length === 3 && point2.length === 3 &&
+              point1.every(coord => typeof coord === 'number' && !isNaN(coord)) &&
+              point2.every(coord => typeof coord === 'number' && !isNaN(coord))) {
+            acc.push(
+              <Line
+                key={`plus-${index}`}
+                points={[point1, point2]}
+                color="#14B8A6"
+                lineWidth={1.5}
+                transparent
+                opacity={0.8}
+              />
+            );
+          }
         }
         return acc;
       }, [] as React.ReactElement[])}
