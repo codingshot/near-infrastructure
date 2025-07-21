@@ -129,37 +129,39 @@ const FocusAreas = () => {
                                   />
                                 </div>
                               )}
-                            <div className="flex-grow min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                               {example.url && example.url !== '#' ? (
-                                  <a
-                                    href={example.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
-                                  >
+                             <div className="flex-grow min-w-0">
+                             <div className="flex items-center gap-2 mb-1">
+                                {example.url && example.url !== '#' ? (
+                                   <a
+                                     href={example.url}
+                                     target="_blank"
+                                     rel="noopener noreferrer"
+                                     className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
+                                   >
+                                    {example.name}
+                                  </a>
+                               ) : (
+                                 <span className="font-grotesk font-medium text-foreground">
                                    {example.name}
-                                 </a>
-                              ) : (
-                                <span className="font-grotesk font-medium text-foreground">
-                                  {example.name}
-                                </span>
-                              )}
-                              {example.recommended && (
-                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                  Recommended
-                                </span>
-                              )}
-                              {example.funded && (
-                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 border border-green-500/20">
-                                  Funded
-                                </span>
-                              )}
-                           </div>
-                              <p className="text-sm text-muted-foreground leading-relaxed">
-                                {example.description}
-                              </p>
+                                 </span>
+                               )}
                             </div>
+                               <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+                                 {example.description}
+                               </p>
+                               <div className="flex items-center gap-2 flex-wrap">
+                                 {example.recommended && (
+                                   <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                     Recommended
+                                   </span>
+                                 )}
+                                 {example.funded && (
+                                   <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 border border-green-500/20">
+                                     Funded
+                                   </span>
+                                 )}
+                               </div>
+                             </div>
                           </div>
                           <div className="flex items-center gap-2 ml-3">
                             {example.twitter && (
