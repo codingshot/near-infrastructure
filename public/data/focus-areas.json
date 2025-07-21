@@ -407,7 +407,8 @@
         "name": "Hot Relayer",
         "url": "#",
         "description": "Chain abstraction relayer",
-        "logo": "/companies/hot.jpg"
+        "logo": "/companies/hot.jpg",
+        "funded": true
       },
       {
         "name": "Bitte Relayer",
@@ -482,6 +483,33 @@
         "url": "https://docs.intear.tech/",
         "description": "Comprehensive NEAR data API",
         "logo": "/companies/intear.jpg",
+        "funded": true
+      }
+    ]
+  },
+  {
+    "id": "analytics",
+    "title": "Analytics",
+    "description": "On-chain analytics and blockchain data insights",
+    "examples": [
+      {
+        "name": "Pikespeak.ai",
+        "url": "https://pikespeak.ai",
+        "description": "Advanced analytics and insights platform",
+        "logo": "/companies/pikespeak.jpg"
+      },
+      {
+        "name": "Chainspect",
+        "url": "https://chainspect.app/",
+        "description": "Blockchain monitoring and analytics tools",
+        "logo": "/companies/chainspect.jpg",
+        "funded": true
+      },
+      {
+        "name": "Token Terminal",
+        "url": "https://tokenterminal.com",
+        "description": "Blockchain analytics and token metrics platform",
+        "logo": "/companies/tokenterminal.jpg",
         "funded": true
       }
     ]
