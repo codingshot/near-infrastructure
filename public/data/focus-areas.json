@@ -129,7 +129,8 @@
       {
         "name": "Fast Auth 2.0",
         "url": "#",
-        "description": "Streamlined authentication for NEAR applications"
+        "description": "Streamlined authentication for NEAR applications",
+        "funded": true
       },
       {
         "name": "Wallet Selector",
@@ -420,10 +421,11 @@
         "description": "Meta-transaction standard"
       },
       {
-        "name": "Rath.fi Tachyon",
+        "name": "RathFi Tachyon",
         "url": "https://certain-occupation-46b.notion.site/Tachyon-The-High-Speed-Relayer-1838187f313080499de4dd7eab597c54/",
         "description": "High-speed relayer infrastructure",
-        "logo": "/companies/rath.jpg"
+        "logo": "/companies/rath.jpg",
+        "funded": true
       }
     ]
   },
@@ -509,6 +511,13 @@
         "funded": true
       },
       {
+        "name": "NEAR Treasury",
+        "url": "https://neartreasury.com",
+        "description": "Treasury/multisig management built on Sputnik v2 with cross chain payments",
+        "logo": "/companies/neartreasury.png",
+        "funded": true
+      },
+      {
         "name": "NEAR Intents",
         "url": "https://near-intents.org",
         "description": "Intent-based payment infrastructure"
@@ -549,6 +558,18 @@
         "name": "1-Click API",
         "url": "https://docs.near-intents.org/near-intents/integration/distribution-channels/1click-api",
         "description": "REST API for cross-chain liquidity and chain abstracted transactions"
+      },
+      {
+        "name": "Fast Auth 2.0",
+        "url": "#",
+        "description": "Next-generation authentication system for chain abstraction",
+        "funded": true
+      },
+      {
+        "name": "1 Click Connect",
+        "url": "#",
+        "description": "Simplified wallet connection system for seamless user experience",
+        "funded": true
       }
     ]
   },
@@ -565,7 +586,8 @@
       {
         "name": "Fast Auth 2.0",
         "url": "#",
-        "description": "Streamlined authentication solution"
+        "description": "Streamlined authentication solution",
+        "funded": true
       },
       {
         "name": "Hot Wallet Selector",
