@@ -161,7 +161,17 @@
     "tags": ["RPC"]
   },
   {
-    "name": "NEARBlocks",
+    "name": "FastNEAR ReadRPC",
+    "description": "Pagoda legacy ReadRPC now mantained by FastNEAR",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/fastnear.jpg",
+    "productUrl": "https://github.com/near/read-rpc",
+    "proposalUrl": "#",
+    "tags": ["RPC"]
+  },
+  {
+    "name": "NEARBlocks Explorer",
     "description": "NEAR's main block explorer and network monitoring",
     "status": "Maintenance",
     "fundingDate": "2024-Q1",
@@ -169,6 +179,16 @@
     "productUrl": "https://nearblocks.io",
     "proposalUrl": "#",
     "tags": ["Explorers", "Analytics"]
+  },
+  {
+    "name": "KitWallet",
+    "description": "Pagoda legacy KitWallet SDK now mantained by NEARBlocks",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/nearblocks.jpg",
+    "productUrl": "https://nearblocks.io",
+    "proposalUrl": "#",
+    "tags": ["Tooling"]
   },
   {
     "name": "RathFI",
