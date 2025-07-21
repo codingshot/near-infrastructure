@@ -9,6 +9,7 @@ interface Example {
   description: string;
   twitter?: string;
   recommended?: boolean;
+  funded?: boolean;
   logo?: string;
 }
 
@@ -25,6 +26,7 @@ const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [showExamples, setShowExamples] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
@@ -43,6 +45,10 @@ const FocusAreas = () => {
       }
       return newSet;
     });
+  };
+
+  const handleImageError = (imageUrl: string) => {
+    setImageErrors(prev => new Set(prev).add(imageUrl));
   };
 
   return (
@@ -112,16 +118,17 @@ const FocusAreas = () => {
                         <div key={index} 
                              className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group"
                              onClick={(e) => e.stopPropagation()}>
-                          <div className="flex items-start gap-3 flex-grow">
-                             {example.logo && (
-                               <div className="flex-shrink-0">
-                                 <img 
-                                   src={example.logo} 
-                                   alt={`${example.name} logo`}
-                                   className="w-8 h-8 rounded-full object-cover"
-                                 />
-                               </div>
-                             )}
+                           <div className="flex items-start gap-3 flex-grow">
+                              {example.logo && !imageErrors.has(example.logo) && (
+                                <div className="flex-shrink-0">
+                                  <img 
+                                    src={example.logo} 
+                                    alt={`${example.name} logo`}
+                                    className="w-8 h-8 rounded-full object-cover"
+                                    onError={() => handleImageError(example.logo!)}
+                                  />
+                                </div>
+                              )}
                             <div className="flex-grow min-w-0">
                             <div className="flex items-center gap-2 mb-1">
                                {example.url && example.url !== '#' ? (
@@ -138,11 +145,16 @@ const FocusAreas = () => {
                                   {example.name}
                                 </span>
                               )}
-                             {example.recommended && (
-                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                 Recommended
-                               </span>
-                             )}
+                              {example.recommended && (
+                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                  Recommended
+                                </span>
+                              )}
+                              {example.funded && (
+                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 border border-green-500/20">
+                                  Funded
+                                </span>
+                              )}
                            </div>
                               <p className="text-sm text-muted-foreground leading-relaxed">
                                 {example.description}

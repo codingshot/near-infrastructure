@@ -98,7 +98,8 @@
         "name": "Meteor Wallet",
         "url": "https://meteorwallet.app",
         "description": "Modern NEAR wallet with advanced features",
-        "logo": "/companies/meteorwallet.jpg"
+        "logo": "/companies/meteorwallet.jpg",
+        "funded": true
       },
       {
         "name": "NEAR Mobile Wallet",
@@ -116,7 +117,8 @@
         "name": "Nightly",
         "url": "https://nightly.app/",
         "description": "Secure multi-chain wallet",
-        "logo": "/companies/nightlywallet.jpg"
+        "logo": "/companies/nightlywallet.jpg",
+        "funded": true
       },
       {
         "name": "OKX Wallet",
@@ -143,7 +145,8 @@
         "name": "Hot Wallet",
         "url": "https://hot-labs.org/",
         "description": "Chain abstraction wallet",
-        "logo": "/companies/hot.jpg"
+        "logo": "/companies/hot.jpg",
+        "funded": true
       },
       {
         "name": "Ledger",
@@ -291,12 +294,6 @@
         "description": "High-performance RPC service for NEAR Protocol",
         "logo": "/companies/fastnear.jpg",
         "funded": true
-      },
-      {
-        "name": "fast-near web4",
-        "url": "https://github.com/vgrichina/fast-near",
-        "description": "Open-source fast NEAR RPC implementation",
-        "logo": "/companies/fastnear.jpg"
       },
       {
         "name": "GetBlock",
@@ -574,7 +571,8 @@
         "name": "Hot Wallet Selector",
         "url": "https://github.com/hot-dao/near-selector",
         "description": "Enhanced wallet selection interface",
-        "logo": "/companies/hot.jpg"
+        "logo": "/companies/hot.jpg",
+        "funded": true
       }
     ]
   },
