@@ -63,13 +63,15 @@ const NetworkCable = ({
   const rotationX = -Math.asin(direction.y);
 
   useFrame((state) => {
-    if (meshRef.current && meshRef.current.material) {
+    if (meshRef.current) {
       // Data flow animation - pulse along the cable
       const time = state.clock.elapsedTime + index * 0.5;
       const intensity = 0.2 + Math.sin(time * 3) * 0.1;
-      const material = meshRef.current.material as THREE.MeshStandardMaterial;
-      if (material && material.emissiveIntensity !== undefined) {
-        material.emissiveIntensity = intensity;
+      
+      // Safely access material
+      const material = meshRef.current.material;
+      if (material && typeof material === 'object' && 'emissiveIntensity' in material) {
+        (material as any).emissiveIntensity = intensity;
       }
     }
   });
