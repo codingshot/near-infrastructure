@@ -6,7 +6,12 @@
       "bio": "Ex Kraken executive focused on partner success and ecosystem growth",
       "twitter": "https://x.com/swisshustler",
       "linkedin": "https://www.linkedin.com/in/konradmerino",
-      "image": "/team/konrad.jpg"
+      "image": "/team/konrad.jpg",
+      "company": {
+        "name": "NEAR Foundation",
+        "logo": "/companies/Masnearfoundationwhitetextmark.png",
+        "url": "https://near.foundation"
+      }
     },
     {
       "name": "Iker Alustiza",
@@ -14,14 +19,24 @@
       "bio": "Ex Tech Integrations Lead at Parity Technologies, specializing in blockchain infrastructure",
       "linkedin": "https://www.linkedin.com/in/iker-alustiza-beitia-68803a2b",
       "twitter": "https://x.com/IkerNear",
-      "image": "/team/iker.jpg"
+      "image": "/team/iker.jpg",
+      "company": {
+        "name": "NEAR One",
+        "logo": "/companies/near-one-logo-white.svg",
+        "url": "https://nearone.org"
+      }
     },
     {
       "name": "Dillon Freeman",
       "title": "Partnerships at NEAR Foundation",
       "bio": "Leading strategic partnerships and ecosystem development initiatives",
       "linkedin": "https://www.linkedin.com/in/dillonjfreeman",
-      "image": "/team/dillon.jpeg"
+      "image": "/team/dillon.jpeg",
+      "company": {
+        "name": "NEAR Foundation",
+        "logo": "/companies/Masnearfoundationwhitetextmark.png",
+        "url": "https://near.foundation"
+      }
     },
     {
       "name": "Plug",
@@ -29,7 +44,12 @@
       "bio": "Core contributor at POTLOCK, focused on public goods funding and ecosystem development",
       "twitter": "https://x.com/plugrel",
       "near": "plugrel.near",
-      "image": "/team/plug.jpg"
+      "image": "/team/plug.jpg",
+      "company": {
+        "name": "POTLOCK",
+        "logo": "/companies/POTLOCKWhiteTextWordmark.png",
+        "url": "https://potlock.org"
+      }
     }
   ],
   "infrastructureCommittee": [

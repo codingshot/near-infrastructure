@@ -9,6 +9,7 @@ interface Example {
   description: string;
   twitter?: string;
   recommended?: boolean;
+  funded?: boolean;
   logo?: string;
 }
 
@@ -25,6 +26,7 @@ const FocusAreas = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [showExamples, setShowExamples] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetch('/data/focus-areas.json')
@@ -43,6 +45,10 @@ const FocusAreas = () => {
       }
       return newSet;
     });
+  };
+
+  const handleImageError = (imageUrl: string) => {
+    setImageErrors(prev => new Set(prev).add(imageUrl));
   };
 
   return (
@@ -109,83 +115,94 @@ const FocusAreas = () => {
                     </h4>
                      {area.examples.map((example, index) => {
                         return (
-                        <div key={index} 
-                             className="flex items-start justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group"
-                             onClick={(e) => e.stopPropagation()}>
-                          <div className="flex items-start gap-3 flex-grow">
-                             {example.logo && (
+                         <div key={index} 
+                              className="flex flex-col p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors group"
+                              onClick={(e) => e.stopPropagation()}>
+                           {/* Name and Image Row */}
+                           <div className="flex items-center gap-3 mb-2">
+                             {example.logo && !imageErrors.has(example.logo) && (
                                <div className="flex-shrink-0">
                                  <img 
                                    src={example.logo} 
                                    alt={`${example.name} logo`}
                                    className="w-8 h-8 rounded-full object-cover"
+                                   onError={() => handleImageError(example.logo!)}
                                  />
                                </div>
                              )}
-                            <div className="flex-grow min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
+                             <div className="flex items-center justify-between flex-grow">
                                {example.url && example.url !== '#' ? (
-                                  <a
-                                    href={example.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
-                                  >
+                                 <a
+                                   href={example.url}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="font-grotesk font-medium text-foreground group-hover:text-primary transition-colors"
+                                 >
                                    {example.name}
                                  </a>
-                              ) : (
-                                <span className="font-grotesk font-medium text-foreground">
-                                  {example.name}
-                                </span>
-                              )}
+                               ) : (
+                                 <span className="font-grotesk font-medium text-foreground">
+                                   {example.name}
+                                 </span>
+                               )}
+                               <div className="flex items-center gap-2 ml-3">
+                                 {example.twitter && (
+                                   <Button
+                                     asChild
+                                     variant="ghost"
+                                     size="sm"
+                                     className="p-1 h-auto text-muted-foreground hover:text-primary"
+                                   >
+                                     <a
+                                       href={example.twitter}
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       aria-label={`${example.name} Twitter`}
+                                     >
+                                       <Twitter className="w-3 h-3" />
+                                     </a>
+                                   </Button>
+                                 )}
+                                 {example.url && example.url !== '#' && (
+                                   <Button
+                                     asChild
+                                     variant="ghost"
+                                     size="sm"
+                                     className="p-1 h-auto text-muted-foreground hover:text-primary"
+                                   >
+                                     <a
+                                       href={example.url}
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       aria-label={`Visit ${example.name}`}
+                                     >
+                                       <ExternalLink className="w-3 h-3" />
+                                     </a>
+                                   </Button>
+                                 )}
+                               </div>
+                             </div>
+                           </div>
+                           
+                           {/* Description - Full Width */}
+                           <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+                             {example.description}
+                           </p>
+                           
+                           {/* Tags */}
+                           <div className="flex items-center gap-2 flex-wrap">
                              {example.recommended && (
                                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
                                  Recommended
                                </span>
                              )}
+                             {example.funded && (
+                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-600 border border-green-500/20">
+                                 Funded
+                               </span>
+                             )}
                            </div>
-                              <p className="text-sm text-muted-foreground leading-relaxed">
-                                {example.description}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-2 ml-3">
-                            {example.twitter && (
-                              <Button
-                                asChild
-                                variant="ghost"
-                                size="sm"
-                                className="p-1 h-auto text-muted-foreground hover:text-primary"
-                              >
-                                 <a
-                                   href={example.twitter}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   aria-label={`${example.name} Twitter`}
-                                 >
-                                  <Twitter className="w-3 h-3" />
-                                </a>
-                              </Button>
-                            )}
-                            {example.url && example.url !== '#' && (
-                              <Button
-                                asChild
-                                variant="ghost"
-                                size="sm"
-                                className="p-1 h-auto text-muted-foreground hover:text-primary"
-                              >
-                                 <a
-                                   href={example.url}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
-                                   aria-label={`Visit ${example.name}`}
-                                 >
-                                  <ExternalLink className="w-3 h-3" />
-                                </a>
-                              </Button>
-                            )}
                          </div>
-                          </div>
                         );
                      })}
                   </div>
