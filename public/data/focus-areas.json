@@ -163,12 +163,16 @@
       {
         "name": "MetaMask Snap",
         "url": "https://snaps.metamask.io/snap/npm/near-snap/plugin/",
-        "description": "NEAR integration for MetaMask"
+        "description": "NEAR integration for MetaMask",
+        "logo": "/companies/metamask.jpg"
+
       },
       {
         "name": "Trust Wallet",
         "url": "https://trustwallet.com/near-wallet",
-        "description": "Mobile-first crypto wallet"
+        "description": "Mobile-first crypto wallet",
+        "logo": "/companies/trustwallet.jpg"
+
       },
       {
         "name": "Ethereum Wallets on NEAR",
@@ -640,12 +644,15 @@
       {
         "name": "Chain Signatures",
         "url": "https://docs.near.org/chain-abstraction/chain-signatures",
-        "description": "Cross-chain signature verification"
+        "description": "Cross-chain signature verification",
+        "logo": "/companies/chainsignatures.png"
       },
       {
         "name": "Data Availability",
         "url": "https://docs.near.org/chain-abstraction/data-availability",
-        "description": "Cross-chain data availability solutions"
+        "description": "Cross-chain data availability solutions",
+        "logo": "/companies/nufflelabs.jpg"
+
       }
     ]
   }
