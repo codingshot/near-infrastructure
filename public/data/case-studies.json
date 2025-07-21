@@ -219,7 +219,26 @@
     "productUrl": "https://staking.com/",
     "proposalUrl": "#",
     "tags": ["Staking"]
-
+  },
+    {
+    "name": "Mercuryo Mastercard",
+    "description": "NEAR powered fiat cards",
+    "status": "Development",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/mercuryo.jpg",
+    "productUrl": "https://staking.com/",
+    "proposalUrl": "#",
+    "tags": ["Payments"]
+  },
+  {
+    "name": "Cosmonic: WASM Update",
+    "description": "Cosmonic: WASM Update",
+    "status": "Development",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/cosmonic.jpg",
+    "productUrl": "https://cosmonic.com/",
+    "proposalUrl": "#",
+    "tags": ["Tooling"]
   },
   {
     "name": "Valhalla Security",
