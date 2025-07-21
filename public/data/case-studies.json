@@ -211,6 +211,17 @@
     "tags": ["Wallets", "Chain Abstraction"]
   },
   {
+    "name": "NEARWeek staking.com",
+    "description": "NEARWeek staking.com",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/nearweek.jpg",
+    "productUrl": "https://staking.com/",
+    "proposalUrl": "#",
+    "tags": ["Staking"]
+
+  },
+  {
     "name": "Valhalla Security",
     "description": "Maintaining NEAR's bug bounty program and security program",
     "status": "Maintenance",
