@@ -276,7 +276,8 @@
         "name": "BlockPI",
         "url": "https://blockpi.io",
         "description": "Multi-chain RPC service with NEAR support",
-        "logo": "/companies/blockpi.jpg"
+        "logo": "/companies/blockpi.jpg",
+        "funded": true
       },
       {
         "name": "dRPC",
@@ -288,7 +289,8 @@
         "name": "FastNEAR",
         "url": "https://fastnear.com",
         "description": "High-performance RPC service for NEAR Protocol",
-        "logo": "/companies/fastnear.jpg"
+        "logo": "/companies/fastnear.jpg",
+        "funded": true
       },
       {
         "name": "fast-near web4",
@@ -312,7 +314,8 @@
         "name": "Lava Network",
         "url": "https://www.lavanet.xyz/get-started/near",
         "description": "Decentralized RPC network with NEAR integration guide",
-        "logo": "/companies/lavanetwork.jpg"
+        "logo": "/companies/lavanetwork.jpg",
+        "funded": true
       },
       {
         "name": "Lavender.Five Nodes",
@@ -374,7 +377,8 @@
         "name": "PingPay",
         "url": "https://pingpay.io",
         "description": "Chain abstracted onramp using NEAR Intents",
-        "logo": "/companies/pingpay.jpg"
+        "logo": "/companies/pingpay.jpg",
+        "funded": true
       },
       {
         "name": "Onramper",
@@ -436,6 +440,7 @@
         "url": "https://nearblocks.io",
         "description": "Primary NEAR Protocol block explorer (Recommended)",
         "recommended": true,
+        "funded": true,
         "logo": "/companies/nearblocks.jpg"
       },
       {
@@ -477,7 +482,8 @@
         "name": "Intear API",
         "url": "https://docs.intear.tech/",
         "description": "Comprehensive NEAR data API",
-        "logo": "/companies/intear.jpg"
+        "logo": "/companies/intear.jpg",
+        "funded": true
       }
     ]
   },
@@ -502,7 +508,8 @@
         "name": "PingPay",
         "url": "https://pingpay.io",
         "description": "Chain abstracted onramp using NEAR Intents",
-        "logo": "/companies/pingpay.jpg"
+        "logo": "/companies/pingpay.jpg",
+        "funded": true
       },
       {
         "name": "NEAR Intents",
