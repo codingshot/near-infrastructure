@@ -1,35 +1,34 @@
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, useMemo, useCallback } from 'react';
+import { Canvas, useFrame, ThreeElements } from '@react-three/fiber';
 import * as THREE from 'three';
 
-// Network node component
+// Simple network node component with basic Three.js objects
 const NetworkNode = ({ position }: { position: [number, number, number] }) => {
   const meshRef = useRef<THREE.Mesh>(null);
   
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.01;
-      // Subtle pulsing effect
       const scale = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
       meshRef.current.scale.setScalar(scale);
     }
   });
 
+  const geometry = useMemo(() => new THREE.SphereGeometry(0.1, 16, 16), []);
+  const material = useMemo(() => new THREE.MeshStandardMaterial({
+    color: new THREE.Color("#22c55e"),
+    metalness: 0.8,
+    roughness: 0.2,
+    emissive: new THREE.Color("#22c55e"),
+    emissiveIntensity: 0.3
+  }), []);
+
   return (
-    <mesh ref={meshRef} position={position}>
-      <sphereGeometry args={[0.1, 16, 16]} />
-      <meshStandardMaterial 
-        color="#22c55e" 
-        metalness={0.8} 
-        roughness={0.2}
-        emissive="#22c55e"
-        emissiveIntensity={0.3}
-      />
-    </mesh>
+    <mesh ref={meshRef} position={position} geometry={geometry} material={material} />
   );
 };
 
-// Network cable component
+// Simple network cable component
 const NetworkCable = ({ 
   start, 
   end, 
@@ -40,54 +39,56 @@ const NetworkCable = ({
   index: number;
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
   
-  // Calculate cable properties
-  const distance = Math.sqrt(
-    Math.pow(end[0] - start[0], 2) + 
-    Math.pow(end[1] - start[1], 2) + 
-    Math.pow(end[2] - start[2], 2)
-  );
-  
-  const midpoint: [number, number, number] = [
-    (start[0] + end[0]) / 2,
-    (start[1] + end[1]) / 2,
-    (start[2] + end[2]) / 2
-  ];
+  const { geometry, position, rotation, material } = useMemo(() => {
+    const distance = Math.sqrt(
+      Math.pow(end[0] - start[0], 2) + 
+      Math.pow(end[1] - start[1], 2) + 
+      Math.pow(end[2] - start[2], 2)
+    );
+    
+    const midpoint: [number, number, number] = [
+      (start[0] + end[0]) / 2,
+      (start[1] + end[1]) / 2,
+      (start[2] + end[2]) / 2
+    ];
 
-  // Simple rotation calculation using lookAt
-  const direction = new THREE.Vector3(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
-  direction.normalize();
-  
-  // Calculate rotation angles
-  const rotationY = Math.atan2(direction.x, direction.z);
-  const rotationX = -Math.asin(direction.y);
+    const direction = new THREE.Vector3(end[0] - start[0], end[1] - start[1], end[2] - start[2]);
+    direction.normalize();
+    
+    const rotationY = Math.atan2(direction.x, direction.z);
+    const rotationX = -Math.asin(direction.y);
+
+    return {
+      geometry: new THREE.CylinderGeometry(0.02, 0.02, distance, 8),
+      position: midpoint,
+      rotation: [rotationX, rotationY, 0] as [number, number, number],
+      material: new THREE.MeshStandardMaterial({
+        color: new THREE.Color("#64748b"),
+        metalness: 0.9,
+        roughness: 0.1,
+        emissive: new THREE.Color("#3b82f6"),
+        emissiveIntensity: 0.2
+      })
+    };
+  }, [start, end]);
 
   useFrame((state) => {
-    if (materialRef.current) {
-      // Data flow animation - pulse along the cable
+    if (meshRef.current && meshRef.current.material) {
       const time = state.clock.elapsedTime + index * 0.5;
       const intensity = 0.2 + Math.sin(time * 3) * 0.1;
-      materialRef.current.emissiveIntensity = intensity;
+      (meshRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity = intensity;
     }
   });
 
   return (
     <mesh 
       ref={meshRef}
-      position={midpoint}
-      rotation={[rotationX, rotationY, 0]}
-    >
-      <cylinderGeometry args={[0.02, 0.02, distance, 8]} />
-      <meshStandardMaterial 
-        ref={materialRef}
-        color="#64748b" 
-        metalness={0.9} 
-        roughness={0.1}
-        emissive="#3b82f6"
-        emissiveIntensity={0.2}
-      />
-    </mesh>
+      position={position}
+      rotation={rotation}
+      geometry={geometry}
+      material={material}
+    />
   );
 };
 
