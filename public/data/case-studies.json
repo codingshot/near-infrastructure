@@ -211,6 +211,36 @@
     "tags": ["Wallets", "Chain Abstraction"]
   },
   {
+    "name": "NEARWeek staking.com",
+    "description": "NEARWeek staking.com",
+    "status": "Maintenance",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/nearweek.jpg",
+    "productUrl": "https://staking.com/",
+    "proposalUrl": "#",
+    "tags": ["Staking"]
+  },
+    {
+    "name": "Mercuryo Mastercard",
+    "description": "NEAR powered fiat cards",
+    "status": "Development",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/mercuryo.jpg",
+    "productUrl": "https://staking.com/",
+    "proposalUrl": "#",
+    "tags": ["Payments"]
+  },
+  {
+    "name": "Cosmonic: WASM Update",
+    "description": "Cosmonic: WASM Update",
+    "status": "Development",
+    "fundingDate": "2024-Q1",
+    "logo": "/companies/cosmonic.jpg",
+    "productUrl": "https://cosmonic.com/",
+    "proposalUrl": "#",
+    "tags": ["Tooling"]
+  },
+  {
     "name": "Valhalla Security",
     "description": "Maintaining NEAR's bug bounty program and security program",
     "status": "Maintenance",
