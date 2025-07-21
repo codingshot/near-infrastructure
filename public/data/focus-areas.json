@@ -255,10 +255,34 @@
     "description": "Remote Procedure Call infrastructure and node services",
     "examples": [
       {
-        "name": "Lava Network",
-        "url": "https://lavanet.xyz",
-        "description": "Decentralized RPC network providing reliable blockchain data",
-        "logo": "/companies/lavanetwork.jpg"
+        "name": "1RPC",
+        "url": "https://docs.1rpc.io/overview/about-1rpc",
+        "description": "Privacy-focused RPC service with MEV protection",
+        "logo": "/companies/1rpc.jpg"
+      },
+      {
+        "name": "All That Node",
+        "url": "https://www.allthatnode.com/",
+        "description": "Enterprise-grade blockchain infrastructure services",
+        "logo": "/companies/allthatnode.jpg"
+      },
+      {
+        "name": "Ankr",
+        "url": "https://www.ankr.com/docs/rpc-service/chains/chains-list/#near",
+        "description": "Decentralized Web3 infrastructure with NEAR RPC support",
+        "logo": "/companies/ankr.jpg"
+      },
+      {
+        "name": "BlockPI",
+        "url": "https://blockpi.io",
+        "description": "Multi-chain RPC service with NEAR support",
+        "logo": "/companies/blockpi.jpg"
+      },
+      {
+        "name": "dRPC",
+        "url": "https://drpc.org/",
+        "description": "Decentralized RPC network for reliable blockchain access",
+        "logo": "/companies/drpc.jpg"
       },
       {
         "name": "FastNEAR",
@@ -267,10 +291,76 @@
         "logo": "/companies/fastnear.jpg"
       },
       {
-        "name": "BlockPI",
-        "url": "https://blockpi.io",
-        "description": "Multi-chain RPC service with NEAR support",
-        "logo": "/companies/blockpi.jpg"
+        "name": "fast-near web4",
+        "url": "https://github.com/vgrichina/fast-near",
+        "description": "Open-source fast NEAR RPC implementation",
+        "logo": "/companies/fastnear.jpg"
+      },
+      {
+        "name": "GetBlock",
+        "url": "https://getblock.io/nodes/near/",
+        "description": "Instant access to NEAR blockchain via dedicated nodes",
+        "logo": "/companies/getblock.jpg"
+      },
+      {
+        "name": "Grove",
+        "url": "https://grove.city",
+        "description": "Decentralized RPC infrastructure network",
+        "logo": "/companies/grove.jpg"
+      },
+      {
+        "name": "Lava Network",
+        "url": "https://www.lavanet.xyz/get-started/near",
+        "description": "Decentralized RPC network with NEAR integration guide",
+        "logo": "/companies/lavanetwork.jpg"
+      },
+      {
+        "name": "Lavender.Five Nodes",
+        "url": "https://lavenderfive.com/",
+        "description": "Professional validator and infrastructure services",
+        "logo": "/companies/lavenderfive.jpg"
+      },
+      {
+        "name": "NodeReal",
+        "url": "https://nodereal.io",
+        "description": "One-stop blockchain infrastructure and services",
+        "logo": "/companies/nodereal.jpg"
+      },
+      {
+        "name": "NOWNodes",
+        "url": "https://nownodes.io/",
+        "description": "Premium blockchain nodes and API services",
+        "logo": "/companies/nownodes.jpg"
+      },
+      {
+        "name": "OMNIA",
+        "url": "https://omniatech.io",
+        "description": "Next-generation blockchain infrastructure platform",
+        "logo": "/companies/omnia.jpg"
+      },
+      {
+        "name": "QuickNode",
+        "url": "https://www.quicknode.com/chains/near",
+        "description": "Fast and reliable NEAR blockchain endpoints",
+        "logo": "/companies/quicknode.jpg"
+      },
+      {
+        "name": "Seracle",
+        "url": "https://docs.seracle.com/",
+        "description": "Multi-chain RPC infrastructure with comprehensive documentation",
+        "logo": "/companies/seracle.jpg"
+      },
+      {
+        "name": "Tatum",
+        "url": "https://tatum.io/chain/near/",
+        "description": "Complete blockchain development platform with NEAR support",
+        "logo": "/companies/tatum.jpg"
+      },
+      {
+        "name": "Zeeve",
+        "url": "https://www.zeeve.io/",
+        "description": "Enterprise blockchain infrastructure and node management",
+        "logo": "/companies/zeeve.jpg"
       }
     ]
   },
