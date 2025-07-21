@@ -1,6 +1,5 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Cylinder, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Network node component
@@ -17,7 +16,8 @@ const NetworkNode = ({ position }: { position: [number, number, number] }) => {
   });
 
   return (
-    <Sphere ref={meshRef} position={position} args={[0.1, 16, 16]}>
+    <mesh ref={meshRef} position={position}>
+      <sphereGeometry args={[0.1, 16, 16]} />
       <meshStandardMaterial 
         color="#22c55e" 
         metalness={0.8} 
@@ -25,7 +25,7 @@ const NetworkNode = ({ position }: { position: [number, number, number] }) => {
         emissive="#22c55e"
         emissiveIntensity={0.3}
       />
-    </Sphere>
+    </mesh>
   );
 };
 
@@ -40,6 +40,7 @@ const NetworkCable = ({
   index: number;
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
+  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
   
   // Calculate cable properties
   const distance = Math.sqrt(
@@ -63,34 +64,30 @@ const NetworkCable = ({
   const rotationX = -Math.asin(direction.y);
 
   useFrame((state) => {
-    if (meshRef.current) {
+    if (materialRef.current) {
       // Data flow animation - pulse along the cable
       const time = state.clock.elapsedTime + index * 0.5;
       const intensity = 0.2 + Math.sin(time * 3) * 0.1;
-      
-      // Safely access material
-      const material = meshRef.current.material;
-      if (material && typeof material === 'object' && 'emissiveIntensity' in material) {
-        (material as any).emissiveIntensity = intensity;
-      }
+      materialRef.current.emissiveIntensity = intensity;
     }
   });
 
   return (
-    <Cylinder 
+    <mesh 
       ref={meshRef}
       position={midpoint}
-      args={[0.02, 0.02, distance, 8]}
       rotation={[rotationX, rotationY, 0]}
     >
+      <cylinderGeometry args={[0.02, 0.02, distance, 8]} />
       <meshStandardMaterial 
+        ref={materialRef}
         color="#64748b" 
         metalness={0.9} 
         roughness={0.1}
         emissive="#3b82f6"
         emissiveIntensity={0.2}
       />
-    </Cylinder>
+    </mesh>
   );
 };
 
