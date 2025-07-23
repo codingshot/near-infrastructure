@@ -59,11 +59,11 @@ const NEARHero = () => {
       buttonText: 'Give Feedback'
     },
     {
-      title: 'Join the near infra Credits program',
+      title: 'Join the Credits program',
       href: 'https://nearn.io/infra-committee/5/',
       external: true,
       icon: CreditCard,
-      description: 'Are you an infra provider that wants your builders subsidized? Apply to get your infra client credits',
+      description: 'Are you an infra provider that wants your builders subsidized? Apply to get your clients infra credits',
       buttonText: 'Apply Now'
     }
   ];
