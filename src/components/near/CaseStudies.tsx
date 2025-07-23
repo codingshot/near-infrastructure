@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ExternalLink, Search, Filter, X } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -22,6 +23,7 @@ const CaseStudies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [credits, setCredits] = useState([]);
 
   // URL parameter management
   useEffect(() => {
@@ -46,6 +48,17 @@ const CaseStudies = () => {
   };
 
   useEffect(() => {
+    const loadCredits = async () => {
+      try {
+        const response = await fetch('/data/credits.json');
+        const data = await response.json();
+        setCredits(data);
+      } catch (error) {
+        console.error('Error loading credits:', error);
+      }
+    };
+    loadCredits();
+    
     fetch('/data/case-studies.json').then(response => response.json()).then(data => setCaseStudies(data)).catch(error => console.error('Error loading case studies:', error));
   }, []);
 
@@ -301,12 +314,50 @@ const CaseStudies = () => {
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </Button>
-              <Button asChild variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
-                <a href="https://nearn.io/infra-committee/5/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                  Infrastructure Credits Program
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
+                    <span className="flex items-center justify-center gap-2">
+                      Infrastructure Credits Program
+                    </span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-grotesk font-semibold">
+                      Get <span className="near-infra-highlight">near infra</span> Credits
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      Get free infrastructure credits if you are a serious builder. Choose from our partner providers:
+                    </p>
+                    {credits.map((credit, idx) => (
+                      <Card key={idx} className="p-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-lg mb-2">{credit.name}</h3>
+                            <p className="text-muted-foreground mb-4">{credit.description}</p>
+                          </div>
+                        </div>
+                        <Button asChild className="w-full">
+                          <a href={credit.link} target="_blank" rel="noopener noreferrer">
+                            Get Credits <ExternalLink className="w-4 h-4 ml-2" />
+                          </a>
+                        </Button>
+                      </Card>
+                    ))}
+                    <div className="mt-6 p-4 bg-muted/50 rounded-lg border">
+                      <p className="text-sm text-muted-foreground">
+                        Are you a NEAR Infra provider and want your clients subsidized, apply for your own credit program{' '}
+                        <a href="https://nearn.io/infra-committee/5/" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:no-underline">
+                          here
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
               <Button variant="outline" size="sm" className="border-border text-muted-foreground cursor-default">
                 NEAR Security Program
               </Button>
