@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
-import { findItemBySlug } from '@/utils/slugs';
+import { findItemBySlug, generateSlug } from '@/utils/slugs';
 import SEO from '@/components/SEO';
 
 interface TeamMember {
@@ -33,6 +34,7 @@ const TeamDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [member, setMember] = useState<TeamMember | null>(null);
+  const [otherMembers, setOtherMembers] = useState<TeamMember[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -43,6 +45,14 @@ const TeamDetail = () => {
         const allMembers = [...data.workingGroup, ...data.infrastructureCommittee];
         const foundMember = findItemBySlug(allMembers, slug || '');
         setMember(foundMember || null);
+        
+        // Get other team members (exclude current member)
+        if (foundMember) {
+          const others = allMembers
+            .filter((m: TeamMember) => generateSlug(m.name) !== slug)
+            .slice(0, 6);
+          setOtherMembers(others);
+        }
       } catch (error) {
         console.error('Error loading team member:', error);
       } finally {
@@ -280,6 +290,52 @@ const TeamDetail = () => {
               </div>
             </CardContent>
           </Card>
+
+          {otherMembers.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-2xl font-grotesk font-semibold text-foreground mb-8">
+                Other Team Members
+              </h2>
+              <Carousel className="w-full">
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {otherMembers.map((otherMember) => (
+                    <CarouselItem key={generateSlug(otherMember.name)} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <Card 
+                        className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                        onClick={() => navigate(`/team/${generateSlug(otherMember.name)}`)}
+                      >
+                        <CardContent className="p-6">
+                          <div className="text-center">
+                            <div className="w-16 h-16 mx-auto rounded-full overflow-hidden bg-muted mb-4">
+                              <img 
+                                src={otherMember.image} 
+                                alt={otherMember.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.src = '/placeholder.svg?height=64&width=64&text=Team';
+                                }}
+                              />
+                            </div>
+                            <h3 className="font-grotesk font-semibold text-foreground mb-1 line-clamp-1">
+                              {otherMember.name}
+                            </h3>
+                            <p className="text-primary font-medium text-sm mb-2 uppercase tracking-wide line-clamp-1">
+                              {otherMember.title}
+                            </p>
+                            <p className="text-muted-foreground text-xs line-clamp-3 leading-relaxed">
+                              {otherMember.bio}
+                            </p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </div>
+          )}
         </div>
       </main>
       <NEARFooter />
