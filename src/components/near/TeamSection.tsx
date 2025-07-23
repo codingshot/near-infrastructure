@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Linkedin, Twitter, Github, ExternalLink, Search, X } from 'lucide-react';
 import ProposalProcessTooltip from './ProposalProcessTooltip';
+import { generateSlug } from '@/utils/slugs';
 
 interface TeamMember {
   name: string;
@@ -23,6 +25,7 @@ interface TeamData {
 }
 
 const TeamSection = () => {
+  const navigate = useNavigate();
   const [teamData, setTeamData] = useState<TeamData>({ workingGroup: [], infrastructureCommittee: [] });
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());

@@ -7,6 +7,7 @@ import TeamSection from "@/components/near/TeamSection";
 import CaseStudies from "@/components/near/CaseStudies";
 import BlogSection from "@/components/near/BlogSection";
 import NEARFooter from "@/components/near/NEARFooter";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   // Initialize intersection observer to detect when elements enter viewport
@@ -54,8 +55,34 @@ const Index = () => {
     });
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NEAR Infrastructure Committee",
+    "url": "https://nearinfra.com",
+    "logo": "https://nearinfra.com/logo.svg",
+    "sameAs": [
+      "https://twitter.com/nearprotocol",
+      "https://github.com/near",
+      "https://near.org"
+    ],
+    "description": "The NEAR Infrastructure Committee (IC) is a group within the NEAR ecosystem focused on strengthening the network's foundational infrastructure.",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "NEAR Foundation",
+      "url": "https://near.foundation"
+    }
+  };
+
   return (
     <div className="min-h-screen">
+      <SEO
+        title="NEAR Infrastructure Committee | Strengthening NEAR's Infrastructure"
+        description="The NEAR Infrastructure Committee funds and supports critical infrastructure for the NEAR Protocol ecosystem. Submit proposals, explore RFPs, and join us in building essential Web3 infrastructure."
+        keywords="NEAR Protocol, blockchain infrastructure, Web3 infrastructure, NEAR ecosystem, blockchain development, NEAR Foundation, infrastructure committee, blockchain RFP, NEAR grants"
+        canonical="https://nearinfra.com/"
+        structuredData={structuredData}
+      />
       <NEARNavbar />
       <main>
         <NEARHero />

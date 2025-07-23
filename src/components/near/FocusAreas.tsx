@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Twitter, Eye, EyeOff } from 'lucide-react';
+import { generateSlug } from '@/utils/slugs';
 
 interface Example {
   name: string;
@@ -23,6 +25,7 @@ interface FocusArea {
 }
 
 const FocusAreas = () => {
+  const navigate = useNavigate();
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const [expandedCards, setExpandedCards] = useState<Set<string>>(new Set());
   const [showExamples, setShowExamples] = useState(false);
@@ -80,9 +83,9 @@ const FocusAreas = () => {
           {focusAreas.map((area) => {
             const isExpanded = expandedCards.has(area.id);
             return (
-            <Card key={area.id} className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer" onClick={() => toggleCard(area.id)}>
+            <Card key={area.id} className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={() => toggleCard(area.id)}>
               <CardHeader>
-                <CardTitle className="text-xl font-grotesk font-semibold text-foreground mb-3 flex items-center justify-between">
+                <CardTitle className="text-xl font-grotesk font-semibold text-foreground mb-3 flex items-center justify-between group-hover:text-primary transition-colors">
                   {area.title}
                   {area.categoryUrl && (
                     <Button
@@ -93,10 +96,10 @@ const FocusAreas = () => {
                       onClick={(e) => e.stopPropagation()}
                     >
                        <a
-                         href={area.categoryUrl}
-                         target="_blank"
-                         rel="noopener noreferrer"
-                       >
+                          href={area.categoryUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                         <ExternalLink className="w-4 h-4" />
                       </a>
                     </Button>
