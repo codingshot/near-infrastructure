@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen, CreditCard } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -9,6 +10,20 @@ import HeroBackground3D from '../HeroBackground3D';
 
 const NEARHero = () => {
   const [showStats, setShowStats] = useState(false);
+  const [credits, setCredits] = useState([]);
+
+  useEffect(() => {
+    const loadCredits = async () => {
+      try {
+        const response = await fetch('/data/credits.json');
+        const data = await response.json();
+        setCredits(data);
+      } catch (error) {
+        console.error('Error loading credits:', error);
+      }
+    };
+    loadCredits();
+  }, []);
   
   const [emblaRef] = useEmblaCarousel(
     { 
@@ -59,12 +74,13 @@ const NEARHero = () => {
       buttonText: 'Give Feedback'
     },
     {
-      title: 'Join the Credits program',
+      title: 'Get near infra Credits',
       href: 'https://nearn.io/infra-committee/5/',
       external: true,
       icon: CreditCard,
-      description: 'Are you an infra provider that wants your builders subsidized? Apply to get your clients infra credits',
-      buttonText: 'Apply Now'
+      description: 'Get free infrastructure credits if you are a serious builder',
+      buttonText: 'Get Credits',
+      showPopup: true
     }
   ];
 
@@ -167,39 +183,80 @@ const NEARHero = () => {
           <div className="flex gap-4 md:gap-6 px-4 sm:px-6 lg:px-8">
             {actionCards.map((card, index) => {
               const IconComponent = card.icon;
+              
+              const CardComponent = (
+                <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:translate-y-[-2px] h-full">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
+                        <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                      </div>
+                       <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
+                         {card.title === 'Get near infra Credits' ? (
+                           <>Get <span className="near-infra-highlight">near infra</span> Credits</>
+                         ) : (
+                           card.title
+                         )}
+                       </CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                     <CardDescription className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+                       {card.description === 'Share your thoughts on near infrastructure ecosystem needs.' ? (
+                         <>Share your thoughts on <span className="near-infra-highlight">near infrastructure</span> ecosystem needs.</>
+                       ) : (
+                         card.description
+                       )}
+                     </CardDescription>
+                    <Button 
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground pointer-events-none"
+                    >
+                      {card.buttonText}
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+
               return (
                 <div key={index} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
-                  <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:translate-y-[-2px] h-full" 
-                        onClick={() => window.open(card.href, '_blank', 'noopener,noreferrer')}>
-                    <CardHeader className="pb-3">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
-                          <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                  {card.showPopup ? (
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        {CardComponent}
+                      </DialogTrigger>
+                      <DialogContent className="max-w-2xl">
+                        <DialogHeader>
+                          <DialogTitle className="text-2xl font-grotesk font-semibold">
+                            Get <span className="near-infra-highlight">near infra</span> Credits
+                          </DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-4">
+                          <p className="text-muted-foreground">
+                            Get free infrastructure credits if you are a serious builder. Choose from our partner providers:
+                          </p>
+                          {credits.map((credit, idx) => (
+                            <Card key={idx} className="p-4">
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                  <h3 className="font-semibold text-lg mb-2">{credit.name}</h3>
+                                  <p className="text-muted-foreground mb-4">{credit.description}</p>
+                                </div>
+                              </div>
+                              <Button asChild className="w-full">
+                                <a href={credit.link} target="_blank" rel="noopener noreferrer">
+                                  Get Credits <ExternalLink className="w-4 h-4 ml-2" />
+                                </a>
+                              </Button>
+                            </Card>
+                          ))}
                         </div>
-                         <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
-                           {card.title === 'Apply for near infra Credits' ? (
-                             <>Apply for <span className="near-infra-highlight">near infra</span> Credits</>
-                           ) : (
-                             card.title
-                           )}
-                         </CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                       <CardDescription className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
-                         {card.description === 'Share your thoughts on near infrastructure ecosystem needs.' ? (
-                           <>Share your thoughts on <span className="near-infra-highlight">near infrastructure</span> ecosystem needs.</>
-                         ) : (
-                           card.description
-                         )}
-                       </CardDescription>
-                      <Button 
-                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground pointer-events-none"
-                      >
-                        {card.buttonText}
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      </DialogContent>
+                    </Dialog>
+                  ) : (
+                    <div onClick={() => window.open(card.href, '_blank', 'noopener,noreferrer')}>
+                      {CardComponent}
+                    </div>
+                  )}
                 </div>
               );
             })}
