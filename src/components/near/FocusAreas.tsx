@@ -83,7 +83,7 @@ const FocusAreas = () => {
           {focusAreas.map((area) => {
             const isExpanded = expandedCards.has(area.id);
             return (
-            <Card key={area.id} className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={() => navigate(`/areas/${generateSlug(area.title)}`)}>
+            <Card key={area.id} className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={() => toggleCard(area.id)}>
               <CardHeader>
                 <CardTitle className="text-xl font-grotesk font-semibold text-foreground mb-3 flex items-center justify-between group-hover:text-primary transition-colors">
                   {area.title}

@@ -126,7 +126,7 @@ const TeamSection = () => {
       <Card 
         key={index} 
         className="h-full hover:shadow-lg transition-all duration-300 cursor-pointer group bg-card border-border hover:border-primary/50 overflow-hidden"
-        onClick={() => navigate(`/team/${generateSlug(member.name)}`)}
+        onClick={() => toggleExpanded(member.name)}
       >
         <CardContent className="p-0">
           <div className="p-4">

@@ -215,7 +215,7 @@ const CaseStudies = () => {
 
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer group" onClick={() => navigate(`/projects/${generateSlug(study.name)}`)}>
+          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col group">
               <CardHeader className="pb-3 flex-shrink-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
