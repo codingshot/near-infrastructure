@@ -1,4 +1,6 @@
 import SEO from '@/components/SEO';
+import NEARNavbar from '@/components/near/NEARNavbar';
+import NEARFooter from '@/components/near/NEARFooter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -68,8 +70,9 @@ const Audit = () => {
           "url": "https://nearinfra.com/audit"
         }}
       />
-
-      <div className="container mx-auto px-4 py-12">
+      <NEARNavbar />
+      <main className="pt-20 pb-16">
+        <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
@@ -321,7 +324,9 @@ const Audit = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
+        </div>
+      </main>
+      <NEARFooter />
     </div>
   );
 };
