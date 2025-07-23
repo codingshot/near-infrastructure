@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Users, Briefcase, Target } from 'lucide-react';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
+import { generateSlug } from '@/utils/slugs';
 
 interface CaseStudy {
   name: string;
@@ -47,6 +48,7 @@ interface FocusArea {
 }
 
 const Pages = () => {
+  const navigate = useNavigate();
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [teamData, setTeamData] = useState<TeamData>({ workingGroup: [], infrastructureCommittee: [] });
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
@@ -103,11 +105,11 @@ const Pages = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {caseStudies.slice(0, 6).map((project, index) => (
-                <Card key={index} className="group hover:shadow-lg transition-shadow">
+                <Card key={index} className="group hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/projects/${generateSlug(project.name)}`)}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div>
-                        <CardTitle className="text-lg">{project.name}</CardTitle>
+                        <CardTitle className="text-lg group-hover:text-primary transition-colors">{project.name}</CardTitle>
                         <Badge 
                           variant={project.status === 'Active' ? 'default' : 'secondary'}
                           className="mt-2"
@@ -135,11 +137,6 @@ const Pages = () => {
                         </Badge>
                       ))}
                     </div>
-                    <Button asChild size="sm" className="w-full">
-                      <Link to={`/projects#${generateSlug(project.name)}`}>
-                        View Details
-                      </Link>
-                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -159,7 +156,7 @@ const Pages = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...teamData.infrastructureCommittee, ...teamData.workingGroup].slice(0, 6).map((member, index) => (
-                <Card key={index} className="group hover:shadow-lg transition-shadow">
+                <Card key={index} className="group hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/team/${generateSlug(member.name)}`)}>
                   <CardHeader>
                     <div className="flex items-start gap-4">
                       <img 
@@ -168,7 +165,7 @@ const Pages = () => {
                         className="w-16 h-16 rounded-full object-cover"
                       />
                       <div className="flex-1">
-                        <CardTitle className="text-lg">{member.name}</CardTitle>
+                        <CardTitle className="text-lg group-hover:text-primary transition-colors">{member.name}</CardTitle>
                         <CardDescription className="text-sm font-medium text-primary">
                           {member.title}
                         </CardDescription>
@@ -184,11 +181,6 @@ const Pages = () => {
                     <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
                       {member.bio}
                     </p>
-                    <Button asChild size="sm" className="w-full">
-                      <Link to={`/team#${generateSlug(member.name)}`}>
-                        View Profile
-                      </Link>
-                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -208,9 +200,9 @@ const Pages = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {focusAreas.slice(0, 6).map((area, index) => (
-                <Card key={index} className="group hover:shadow-lg transition-shadow">
+                <Card key={index} className="group hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/areas/${generateSlug(area.title)}`)}>
                   <CardHeader>
-                    <CardTitle className="text-lg">{area.title}</CardTitle>
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors">{area.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="mb-4 line-clamp-3">
@@ -233,11 +225,6 @@ const Pages = () => {
                         )}
                       </div>
                     </div>
-                    <Button asChild size="sm" className="w-full">
-                      <Link to={`/areas#${generateSlug(area.title)}`}>
-                        Explore Area
-                      </Link>
-                    </Button>
                   </CardContent>
                 </Card>
               ))}

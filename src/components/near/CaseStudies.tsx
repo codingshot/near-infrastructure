@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ExternalLink, Search, Filter, X } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { generateSlug } from '@/utils/slugs';
 
 interface CaseStudy {
   name: string;
@@ -19,6 +21,7 @@ interface CaseStudy {
 }
 
 const CaseStudies = () => {
+  const navigate = useNavigate();
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -212,11 +215,11 @@ const CaseStudies = () => {
 
         {/* Case Studies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col">
+          {filterCaseStudies().map((study, index) => <Card key={index} className="h-full bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer group" onClick={() => navigate(`/projects/${generateSlug(study.name)}`)}>
               <CardHeader className="pb-3 flex-shrink-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-lg font-grotesk font-semibold text-foreground mb-2">
+                    <CardTitle className="text-lg font-grotesk font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {study.name}
                     </CardTitle>
                     
@@ -224,7 +227,10 @@ const CaseStudies = () => {
                     <div className="flex flex-wrap items-center gap-2 mb-3">
                       <Badge 
                         className={`${getStatusColor(study.status)} border flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity`}
-                        onClick={() => setStatusFilter(study.status)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setStatusFilter(study.status);
+                        }}
                       >
                         {study.status}
                       </Badge>
@@ -232,7 +238,10 @@ const CaseStudies = () => {
                         <span 
                           key={tagIndex} 
                           className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium border border-primary/20 hover:bg-primary/20 cursor-pointer transition-colors flex-shrink-0"
-                          onClick={() => handleTagClick(tag)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleTagClick(tag);
+                          }}
                         >
                           {tag}
                         </span>
@@ -269,14 +278,14 @@ const CaseStudies = () => {
                 </CardDescription>
                 
                 <div className="flex items-center gap-2 mt-auto">
-                  {study.productUrl !== '#' && <Button asChild variant="outline" size="sm" className="flex-1 border-border text-foreground hover:bg-muted">
+                  {study.productUrl !== '#' && <Button asChild variant="outline" size="sm" className="flex-1 border-border text-foreground hover:bg-muted" onClick={(e) => e.stopPropagation()}>
                       <a href={study.productUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                         <span>Visit Project</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </Button>}
                   
-                  {study.proposalUrl !== '#' && <Button asChild variant="ghost" size="sm" className="flex-1 text-primary hover:text-primary/80 hover:bg-muted">
+                  {study.proposalUrl !== '#' && <Button asChild variant="ghost" size="sm" className="flex-1 text-primary hover:text-primary/80 hover:bg-muted" onClick={(e) => e.stopPropagation()}>
                       <a href={study.proposalUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                         <span>See Proposal</span>
                         <ExternalLink className="w-3 h-3" />
