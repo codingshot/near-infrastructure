@@ -4,9 +4,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
-import { findItemBySlug } from '@/utils/slugs';
+import { findItemBySlug, generateSlug } from '@/utils/slugs';
 import SEO from '@/components/SEO';
 
 interface CaseStudy {
@@ -24,6 +25,7 @@ const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [project, setProject] = useState<CaseStudy | null>(null);
+  const [relatedProjects, setRelatedProjects] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,6 +35,14 @@ const ProjectDetail = () => {
         const data = await response.json();
         const foundProject = findItemBySlug<CaseStudy>(data, slug || '');
         setProject(foundProject || null);
+        
+        // Get related projects (exclude current project)
+        if (foundProject) {
+          const related = data
+            .filter((p: CaseStudy) => generateSlug(p.name) !== slug)
+            .slice(0, 6);
+          setRelatedProjects(related);
+        }
       } catch (error) {
         console.error('Error loading project:', error);
       } finally {
@@ -232,6 +242,66 @@ const ProjectDetail = () => {
               </div>
             </CardContent>
           </Card>
+
+          {relatedProjects.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-2xl font-grotesk font-semibold text-foreground mb-8">
+                Related Projects
+              </h2>
+              <Carousel className="w-full">
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {relatedProjects.map((relatedProject) => (
+                    <CarouselItem key={generateSlug(relatedProject.name)} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <Card 
+                        className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                        onClick={() => navigate(`/projects/${generateSlug(relatedProject.name)}`)}
+                      >
+                        <CardHeader>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <CardTitle className="text-lg font-grotesk font-semibold text-foreground mb-2 line-clamp-2">
+                                {relatedProject.name}
+                              </CardTitle>
+                              <Badge className={`${getStatusColor(relatedProject.status)} border text-xs`}>
+                                {relatedProject.status}
+                              </Badge>
+                            </div>
+                            {relatedProject.logo && (
+                              <div className="w-10 h-10 rounded-full overflow-hidden bg-muted flex items-center justify-center ml-3">
+                                <img 
+                                  src={relatedProject.logo} 
+                                  alt={`${relatedProject.name} logo`}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+                                    if (nextElement) nextElement.style.display = 'flex';
+                                  }}
+                                />
+                                <span 
+                                  className="text-primary font-semibold text-xs flex items-center justify-center w-full h-full"
+                                  style={{ display: 'none' }}
+                                >
+                                  {relatedProject.name.substring(0, 2).toUpperCase()}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <CardDescription className="text-muted-foreground text-sm line-clamp-3">
+                            {relatedProject.description}
+                          </CardDescription>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </div>
+          )}
         </div>
       </main>
       <NEARFooter />

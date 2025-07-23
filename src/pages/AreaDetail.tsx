@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ExternalLink, Twitter } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
-import { findItemBySlug } from '@/utils/slugs';
+import { findItemBySlug, generateSlug } from '@/utils/slugs';
 import SEO from '@/components/SEO';
 
 interface Example {
@@ -30,6 +31,7 @@ const AreaDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [area, setArea] = useState<FocusArea | null>(null);
+  const [relatedAreas, setRelatedAreas] = useState<FocusArea[]>([]);
   const [loading, setLoading] = useState(true);
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
@@ -39,7 +41,16 @@ const AreaDetail = () => {
         const response = await fetch('/data/focus-areas.json');
         const data = await response.json();
         const foundArea = findItemBySlug(data.map((area: FocusArea) => ({ ...area, name: area.title })), slug || '');
-        setArea(foundArea ? data.find((area: FocusArea) => area.title === foundArea.name) || null : null);
+        const currentArea = foundArea ? data.find((area: FocusArea) => area.title === foundArea.name) || null : null;
+        setArea(currentArea);
+        
+        // Get related areas (exclude current area)
+        if (currentArea) {
+          const related = data
+            .filter((a: FocusArea) => generateSlug(a.title) !== slug)
+            .slice(0, 6);
+          setRelatedAreas(related);
+        }
       } catch (error) {
         console.error('Error loading focus area:', error);
       } finally {
@@ -255,6 +266,46 @@ const AreaDetail = () => {
                   </Card>
                 ))}
               </div>
+            </div>
+          )}
+
+          {relatedAreas.length > 0 && (
+            <div className="mt-16">
+              <h2 className="text-2xl font-grotesk font-semibold text-foreground mb-8">
+                Related Focus Areas
+              </h2>
+              <Carousel className="w-full">
+                <CarouselContent className="-ml-2 md:-ml-4">
+                  {relatedAreas.map((relatedArea) => (
+                    <CarouselItem key={generateSlug(relatedArea.title)} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                      <Card 
+                        className="bg-card border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                        onClick={() => navigate(`/areas/${generateSlug(relatedArea.title)}`)}
+                      >
+                        <CardHeader>
+                          <CardTitle className="text-lg font-grotesk font-semibold text-foreground mb-2 line-clamp-2">
+                            {relatedArea.title}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <CardDescription className="text-muted-foreground text-sm line-clamp-4">
+                            {relatedArea.description}
+                          </CardDescription>
+                          {relatedArea.examples.length > 0 && (
+                            <div className="mt-3 pt-3 border-t border-border">
+                              <p className="text-xs text-muted-foreground">
+                                {relatedArea.examples.length} example{relatedArea.examples.length !== 1 ? 's' : ''}
+                              </p>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             </div>
           )}
         </div>
