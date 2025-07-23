@@ -6,6 +6,7 @@ import { ArrowLeft, ExternalLink, Twitter } from 'lucide-react';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
 import { findItemBySlug } from '@/utils/slugs';
+import SEO from '@/components/SEO';
 
 interface Example {
   name: string;
@@ -73,6 +74,11 @@ const AreaDetail = () => {
   if (!area) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO
+          title="Focus Area Not Found | NEAR Infrastructure Committee"
+          description="The requested focus area could not be found. Explore other NEAR infrastructure focus areas and development priorities."
+          noIndex={true}
+        />
         <NEARNavbar />
         <main className="pt-20 pb-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,8 +105,33 @@ const AreaDetail = () => {
     );
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${area.title} - NEAR Infrastructure Focus Area`,
+    "description": area.description,
+    "url": `https://nearinfra.com/areas/${slug}`,
+    "about": {
+      "@type": "Thing",
+      "name": area.title,
+      "description": area.description
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "NEAR Infrastructure Committee",
+      "url": "https://nearinfra.com"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={`${area.title} | NEAR Infrastructure Focus Area`}
+        description={`${area.description} Explore ${area.title} projects, examples, and development opportunities in the NEAR Protocol ecosystem.`}
+        keywords={`${area.title}, NEAR infrastructure, blockchain development, Web3 focus area, NEAR Protocol, infrastructure development`}
+        canonical={`https://nearinfra.com/areas/${slug}`}
+        structuredData={structuredData}
+      />
       <NEARNavbar />
       <main className="pt-20 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

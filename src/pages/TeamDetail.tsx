@@ -6,6 +6,7 @@ import { ArrowLeft, Linkedin, Twitter, Github, ExternalLink } from 'lucide-react
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
 import { findItemBySlug } from '@/utils/slugs';
+import SEO from '@/components/SEO';
 
 interface TeamMember {
   name: string;
@@ -72,6 +73,11 @@ const TeamDetail = () => {
   if (!member) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO
+          title="Team Member Not Found | NEAR Infrastructure Committee"
+          description="The requested team member could not be found. Meet other members of the NEAR Infrastructure Committee and Working Group."
+          noIndex={true}
+        />
         <NEARNavbar />
         <main className="pt-20 pb-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,8 +104,35 @@ const TeamDetail = () => {
     );
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": member.name,
+    "jobTitle": member.title,
+    "description": member.bio,
+    "url": `https://nearinfra.com/team/${slug}`,
+    "image": member.image,
+    "worksFor": {
+      "@type": "Organization",
+      "name": "NEAR Infrastructure Committee",
+      "url": "https://nearinfra.com"
+    },
+    "sameAs": [
+      member.twitter,
+      member.linkedin,
+      member.github
+    ].filter(Boolean)
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={`${member.name} | NEAR Infrastructure Committee Team`}
+        description={`${member.bio} Meet ${member.name}, ${member.title} at the NEAR Infrastructure Committee.`}
+        keywords={`${member.name}, NEAR infrastructure, ${member.title}, blockchain expert, NEAR Protocol team, Web3 professional`}
+        canonical={`https://nearinfra.com/team/${slug}`}
+        structuredData={structuredData}
+      />
       <NEARNavbar />
       <main className="pt-20 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

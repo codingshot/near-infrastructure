@@ -7,6 +7,7 @@ import { ArrowLeft, ExternalLink } from 'lucide-react';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
 import { findItemBySlug } from '@/utils/slugs';
+import SEO from '@/components/SEO';
 
 interface CaseStudy {
   name: string;
@@ -79,6 +80,11 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <div className="min-h-screen bg-background">
+        <SEO
+          title="Project Not Found | NEAR Infrastructure Committee"
+          description="The requested project could not be found. Explore other NEAR infrastructure projects and funded initiatives."
+          noIndex={true}
+        />
         <NEARNavbar />
         <main className="pt-20 pb-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -105,8 +111,40 @@ const ProjectDetail = () => {
     );
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${project.name} - NEAR Infrastructure Project`,
+    "description": project.description,
+    "url": `https://nearinfra.com/projects/${slug}`,
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": project.name,
+      "description": project.description,
+      "applicationCategory": "Blockchain Infrastructure",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "NEAR Infrastructure Committee",
+      "url": "https://nearinfra.com"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={`${project.name} | NEAR Infrastructure Project`}
+        description={`${project.description} Learn about this ${project.status.toLowerCase()} project funded by the NEAR Infrastructure Committee.`}
+        keywords={`${project.name}, NEAR infrastructure, ${project.tags.join(', ')}, blockchain project, Web3 development, NEAR Protocol`}
+        canonical={`https://nearinfra.com/projects/${slug}`}
+        structuredData={structuredData}
+      />
       <NEARNavbar />
       <main className="pt-20 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

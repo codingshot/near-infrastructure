@@ -7,6 +7,7 @@ import { ExternalLink, Users, Briefcase, Target } from 'lucide-react';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
 import { generateSlug } from '@/utils/slugs';
+import SEO from '@/components/SEO';
 
 interface CaseStudy {
   name: string;
@@ -77,8 +78,28 @@ const Pages = () => {
     return name.split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "NEAR Infrastructure Explorer",
+    "description": "Explore NEAR infrastructure projects, team members, and focus areas in one comprehensive overview.",
+    "url": "https://nearinfra.com/pages",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "NEAR Infrastructure Resources",
+      "description": "Comprehensive overview of NEAR infrastructure ecosystem"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Explore NEAR Infrastructure | Projects, Team & Focus Areas"
+        description="Comprehensive overview of NEAR infrastructure ecosystem. Explore funded projects, meet our expert team, and discover key focus areas driving the NEAR Protocol forward."
+        keywords="NEAR infrastructure, blockchain ecosystem, NEAR projects overview, infrastructure team, development focus areas, NEAR Protocol ecosystem"
+        canonical="https://nearinfra.com/pages"
+        structuredData={structuredData}
+      />
       <NEARNavbar />
       <main className="pt-20 pb-20">
         <div className="container mx-auto px-4">
