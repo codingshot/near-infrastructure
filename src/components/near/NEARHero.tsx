@@ -33,14 +33,7 @@ const NEARHero = () => {
 
   // All action cards including Apply Credits
   const actionCards = [
-    {
-      title: 'Apply for near infra Credits',
-      href: 'https://nearn.io/infra-committee/5/',
-      external: true,
-      icon: CreditCard,
-      description: 'Get funding for your infrastructure project through our credit program.',
-      buttonText: 'Apply Now'
-    },
+
     {
       title: 'Get Funding',
       href: 'https://nearn.io/infra-committee/7',
@@ -64,6 +57,14 @@ const NEARHero = () => {
       icon: MessageSquare,
       description: 'Share your thoughts on near infrastructure ecosystem needs.',
       buttonText: 'Give Feedback'
+    },
+    {
+      title: 'Join the near infra Credits program',
+      href: 'https://nearn.io/infra-committee/5/',
+      external: true,
+      icon: CreditCard,
+      description: 'Are you an infra provider that wants your builders subsidized? Apply to get your infra client credits',
+      buttonText: 'Apply Now'
     }
   ];
 
