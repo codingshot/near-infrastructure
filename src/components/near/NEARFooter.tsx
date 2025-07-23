@@ -18,6 +18,7 @@ const NEARFooter = () => {
   const resourceLinks = [
     { title: 'NEAR News', url: 'https://nearweek.com' },
     { title: 'NEAR Status', url: 'https://status.near.org' },
+    { title: 'Audit Program', url: '/audit', internal: true },
   ];
 
   return (
@@ -56,15 +57,24 @@ const NEARFooter = () => {
             <ul className="space-y-2">
               {resourceLinks.map((link) => (
                 <li key={link.title}>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1"
-                  >
-                    {link.title}
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
+                  {link.internal ? (
+                    <a
+                      href={link.url}
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    >
+                      {link.title}
+                    </a>
+                  ) : (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-1"
+                    >
+                      {link.title}
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
