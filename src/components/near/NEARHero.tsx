@@ -249,6 +249,14 @@ const NEARHero = () => {
                               </Button>
                             </Card>
                           ))}
+                          <div className="mt-6 p-4 bg-muted/50 rounded-lg border">
+                            <p className="text-sm text-muted-foreground">
+                              Are you a NEAR Infra provider and want your clients subsidized, apply for your own credit program{' '}
+                              <a href="https://nearn.io/infra-committee/5/" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:no-underline">
+                                here
+                              </a>
+                            </p>
+                          </div>
                         </div>
                       </DialogContent>
                     </Dialog>
