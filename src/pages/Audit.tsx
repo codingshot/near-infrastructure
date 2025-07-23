@@ -4,9 +4,30 @@ import NEARFooter from '@/components/near/NEARFooter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter } from 'lucide-react';
+import { generateSlug } from '@/utils/slugs';
+import { useState, useEffect } from 'react';
 
 const Audit = () => {
+  const [dillonData, setDillonData] = useState<any>(null);
+  
+  useEffect(() => {
+    const loadTeamData = async () => {
+      try {
+        const response = await fetch('/data/team.json');
+        const data = await response.json();
+        const allMembers = [...data.workingGroup, ...data.infrastructureCommittee];
+        const dillon = allMembers.find((member: any) => member.name.includes('Dillon'));
+        setDillonData(dillon);
+      } catch (error) {
+        console.error('Error loading team data:', error);
+      }
+    };
+    
+    loadTeamData();
+  }, []);
+
   const pastExamples = [
     'Templar Protocol',
     'Fast Auth 2.0'
@@ -245,7 +266,73 @@ const Audit = () => {
           <Card>
             <CardContent className="p-6">
               <p className="text-muted-foreground mb-4">
-                By this point, you should already have a contact in the NEAR Ecosystem who can forward you to Dillion at NEAR Foundation.
+                By this point, you should already have a contact in the NEAR Ecosystem who can forward you to{' '}
+                {dillonData ? (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button 
+                        className="text-primary hover:text-primary/80 underline font-medium cursor-pointer"
+                        onClick={() => window.location.href = `/team/${generateSlug(dillonData.name)}`}
+                      >
+                        {dillonData.name}
+                      </button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80 p-0" align="start">
+                      <Card className="border-0 shadow-lg">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-3">
+                            <div className="w-12 h-12 rounded-full overflow-hidden bg-muted flex items-center justify-center">
+                              <img 
+                                src={dillonData.image} 
+                                alt={dillonData.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.currentTarget.src = '/placeholder.svg?height=48&width=48&text=Team';
+                                }}
+                              />
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="font-grotesk font-semibold text-foreground mb-1">
+                                {dillonData.name}
+                              </h4>
+                              <p className="text-primary font-medium text-xs mb-2 uppercase tracking-wide">
+                                {dillonData.title}
+                              </p>
+                              <p className="text-muted-foreground text-xs line-clamp-3 leading-relaxed mb-3">
+                                {dillonData.bio}
+                              </p>
+                              <div className="flex items-center gap-2">
+                                {dillonData.linkedin && (
+                                  <a
+                                    href={dillonData.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-muted-foreground hover:text-primary"
+                                  >
+                                    <Linkedin className="w-3 h-3" />
+                                  </a>
+                                )}
+                                {dillonData.twitter && (
+                                  <a
+                                    href={dillonData.twitter}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-muted-foreground hover:text-primary"
+                                  >
+                                    <Twitter className="w-3 h-3" />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </PopoverContent>
+                  </Popover>
+                ) : (
+                  <span className="text-primary font-medium">Dillon Freeman</span>
+                )}{' '}
+                at NEAR Foundation.
               </p>
               <Button asChild>
                 <a href="/team" className="inline-flex items-center">
