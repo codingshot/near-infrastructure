@@ -1,24 +1,31 @@
 [
   {
     "title": "NEAR Infrastructure Committee Announces Chain Abstracted Relayer RFP Winners",
-    "date": "June 20, 2024",
+    "date": "June 20, 2025",
     "url": "https://www.near.org/blog/near-infrastructure-committee-announces-chain-abstracted-relayer-rfp-winners",
     "excerpt": "Announcing the winners of our chain abstracted relayer RFP to enhance cross-chain functionality.",
     "image": "/blog/bloginfrastructurecomitteewinnersrelayer.webp"
   },
   {
     "title": "Deprecation of NEAR.org and Pagoda.co RPC Endpoints",
-    "date": "May 19, 2024",
+    "date": "May 19, 2025",
     "url": "https://www.near.org/blog/deprecation-of-near-org-and-pagoda-co-rpc-endpoints",
     "excerpt": "Important updates regarding RPC endpoint changes and migration paths for developers.",
     "image": "/blog/blogdefault.webp"
   },
   {
-    "title": "RFPs Now Open to Maintain Critical Infrastructure on NEAR",
-    "date": "September 24, 2024",
-    "url": "https://www.near.org/blog/rfps-now-open-to-maintain-critical-infrastructure-on-near",
-    "excerpt": "New opportunities for maintaining and improving NEAR's critical infrastructure components.",
-    "image": "/blog/blogrfpsopentomantaininfrastructure.webp"
+    "title": "Chain Abstraction Needs Gas Abstraction: RFP Published",
+    "date": "April 16, 2025",
+    "url": "https://www.near.org/blog/chain-abstraction-needs-gas-abstraction-rfp",
+    "excerpt": "Publishing RFP for gas abstraction solutions to enhance chain abstraction capabilities.",
+    "image": "/blog/blogchainabstractedrelayer.webp"
+  },
+  {
+    "title": "RFPs Now Open for Fast Auth and Multichain One-Click",
+    "date": "February 10, 2025",
+    "url": "https://www.near.org/blog/rfps-now-open-for-fast-auth-and-multichain-one-click",
+    "excerpt": "New RFPs focused on improving authentication and multichain user experience.",
+    "image": "/blog/blogrfpfastauth.webp"
   },
   {
     "title": "NEAR Infrastructure Committee: First Year Recap & 2025 Priorities",
@@ -28,18 +35,11 @@
     "image": "/blog/blog2024infrarecap.webp"
   },
   {
-    "title": "RFPs Now Open for Fast Auth and Multichain One-Click",
-    "date": "February 10, 2024",
-    "url": "https://www.near.org/blog/rfps-now-open-for-fast-auth-and-multichain-one-click",
-    "excerpt": "New RFPs focused on improving authentication and multichain user experience.",
-    "image": "/blog/blogrfpfastauth.webp"
-  },
-  {
-    "title": "Chain Abstraction Needs Gas Abstraction: RFP Published",
-    "date": "April 16, 2024",
-    "url": "https://www.near.org/blog/chain-abstraction-needs-gas-abstraction-rfp",
-    "excerpt": "Publishing RFP for gas abstraction solutions to enhance chain abstraction capabilities.",
-    "image": "/blog/blogchainabstractedrelayer.webp"
+    "title": "RFPs Now Open to Maintain Critical Infrastructure on NEAR",
+    "date": "September 24, 2024",
+    "url": "https://www.near.org/blog/rfps-now-open-to-maintain-critical-infrastructure-on-near",
+    "excerpt": "New opportunities for maintaining and improving NEAR's critical infrastructure components.",
+    "image": "/blog/blogrfpsopentomantaininfrastructure.webp"
   },
   {
     "title": "NEAR Launches Infrastructure Committee with $4 Million in Funding",
