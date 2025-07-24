@@ -367,8 +367,10 @@ const CaseStudies = () => {
                   </div>
                 </DialogContent>
               </Dialog>
-              <Button variant="outline" size="sm" className="border-border text-muted-foreground cursor-default">
-                NEAR Security Program
+              <Button asChild variant="outline" size="sm" className="border-border text-foreground hover:bg-background">
+                <a href="/audit" className="flex items-center justify-center gap-2">
+                  NEAR Security Program
+                </a>
               </Button>
               <Button variant="outline" size="sm" className="border-border text-muted-foreground cursor-default">
                 NEAR QA Program
