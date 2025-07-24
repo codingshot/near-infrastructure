@@ -1,26 +1,38 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ArrowLeft, Home, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import NEARNavbar from "@/components/near/NEARNavbar";
+import NEARFooter from "@/components/near/NEARFooter";
 import SEO from "@/components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.error(
       "404 Error: User attempted to access non-existent route:",
       location.pathname
     );
-  }, [location.pathname]);
+    
+    // Auto-redirect to home page after 10 seconds
+    const timer = setTimeout(() => {
+      navigate("/");
+    }, 10000);
+    
+    return () => clearTimeout(timer);
+  }, [location.pathname, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Page Not Found | NEAR Infrastructure Committee"
         description="The page you're looking for doesn't exist. Return to the NEAR Infrastructure Committee homepage to explore our projects, team, and focus areas."
         noIndex={true}
       />
+      <NEARNavbar />
+      <main className="pt-20 pb-16 flex items-center justify-center min-h-[calc(100vh-160px)]">
       <div className="text-center max-w-md mx-auto px-4">
         {/* Animated 404 with metallic effect */}
         <h1 className="text-8xl md:text-9xl font-bold mb-4 metallic-gradient">
@@ -32,8 +44,12 @@ const NotFound = () => {
           Page Not Found
         </h2>
         
-        <p className="text-lg text-muted-foreground mb-8 max-w-sm mx-auto">
+        <p className="text-lg text-muted-foreground mb-4 max-w-sm mx-auto">
           The page you're looking for doesn't exist or has been moved to a different location.
+        </p>
+        
+        <p className="text-sm text-muted-foreground/70 mb-8">
+          You'll be automatically redirected to the home page in 10 seconds.
         </p>
 
         {/* Action buttons */}
@@ -48,7 +64,7 @@ const NotFound = () => {
           </Button>
           
           <Button 
-            onClick={() => window.location.href = "/"} 
+            onClick={() => navigate("/")} 
             className="w-full sm:w-auto logo-glow"
           >
             <Home className="w-4 h-4 mr-2" />
@@ -61,6 +77,8 @@ const NotFound = () => {
           <Search className="w-16 h-16 mx-auto animate-pulse" />
         </div>
       </div>
+      </main>
+      <NEARFooter />
     </div>
   );
 };
