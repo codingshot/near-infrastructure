@@ -63,25 +63,27 @@ const QA = () => {
       return;
     }
 
-    // Base calculation factors
-    const baseFactors: { [key: string]: { base: number; complexity: number } } = {
-      'rust-smart-contract': { base: 5, complexity: 0.01 },
-      'chain-signatures': { base: 8, complexity: 0.015 },
-      'pen-testing': { base: 7, complexity: 0.008 },
-      'other': { base: 6, complexity: 0.012 }
+    // Enhanced calculation factors for better accuracy
+    const baseFactors: { [key: string]: { base: number; complexity: number; multiplier: number } } = {
+      'rust-smart-contract': { base: 4, complexity: 0.012, multiplier: 1.2 },
+      'chain-signatures': { base: 7, complexity: 0.018, multiplier: 1.5 },
+      'pen-testing': { base: 6, complexity: 0.010, multiplier: 1.1 },
+      'other': { base: 5, complexity: 0.015, multiplier: 1.3 }
     };
 
     const factor = baseFactors[auditType] || baseFactors['other'];
 
-    // Calculate days based on lines of code
-    const assessmentDays = Math.max(2, Math.ceil(factor.base + (linesOfCode * factor.complexity * 0.3)));
-    const testingDays = Math.max(3, Math.ceil(factor.base * 1.5 + (linesOfCode * factor.complexity * 0.5)));
-    const analysisDays = Math.max(2, Math.ceil(factor.base * 0.8 + (linesOfCode * factor.complexity * 0.2)));
-    const reportDays = Math.max(2, Math.ceil(factor.base * 0.6 + (linesOfCode * factor.complexity * 0.1)));
+    // Enhanced calculations with complexity scaling
+    const complexityScale = Math.min(1 + (linesOfCode / 10000) * 0.5, 2.5); // Cap at 2.5x for very large codebases
+    
+    const assessmentDays = Math.max(2, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
+    const testingDays = Math.max(3, Math.ceil((factor.base * 1.5 + (linesOfCode * factor.complexity * 0.5)) * factor.multiplier));
+    const analysisDays = Math.max(2, Math.ceil((factor.base * 0.8 + (linesOfCode * factor.complexity * 0.2)) * complexityScale));
+    const reportDays = Math.max(2, Math.ceil((factor.base * 0.6 + (linesOfCode * factor.complexity * 0.1)) * 1.1));
 
-    // Calculate total (including fixed planning and review days)
-    const planningDays = 6; // 3-5 + 2-3 average
-    const reviewDays = 2;
+    // Dynamic planning and review days based on project size
+    const planningDays = linesOfCode > 5000 ? 7 : linesOfCode > 2000 ? 6 : 5;
+    const reviewDays = linesOfCode > 10000 ? 3 : 2;
     const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays;
 
     let completion = '-';
@@ -134,8 +136,8 @@ const QA = () => {
                 </h1>
                 
                 <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto text-center">
-                  Professional QA expertise for lean teams, helping improve product quality and accelerate development cycles in the{' '}
-                  <span className="near-infra-highlight">NEAR ecosystem</span>
+                  Professional QA expertise for lean teams, helping{' '}
+                  <span className="near-infra-highlight">accelerate launches to mainnet on NEAR</span>
                 </p>
               </div>
             </div>
@@ -146,9 +148,9 @@ const QA = () => {
               
               {/* Program Objectives */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">Program Objectives</h2>
-                  <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">Program Objectives</h2>
+                  <p className="text-lg text-muted-foreground max-w-3xl text-left">
                     The NEAR Testing Program serves several key strategic objectives for our ecosystem
                   </p>
                 </div>
@@ -254,9 +256,9 @@ const QA = () => {
 
               {/* How to Prepare */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">How to Prepare for QA Testing</h2>
-                  <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">How to Prepare for QA Testing</h2>
+                  <p className="text-lg text-muted-foreground max-w-3xl text-left">
                     To make the most of the NEAR Testing Program, here are key steps to prepare your application
                   </p>
                 </div>
@@ -350,8 +352,8 @@ const QA = () => {
 
               {/* How to Apply */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">How to Apply</h2>
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">How to Apply</h2>
                   <Card className="max-w-2xl mx-auto">
                     <CardContent className="pt-6">
                       <p className="text-muted-foreground mb-4">
@@ -486,9 +488,9 @@ const QA = () => {
 
               {/* Past Examples */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">Past Examples</h2>
-                  <p className="text-lg text-muted-foreground">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">Past Examples</h2>
+                  <p className="text-lg text-muted-foreground text-left">
                     Projects that have successfully completed our testing program
                   </p>
                 </div>
@@ -530,9 +532,9 @@ const QA = () => {
 
               {/* Expedited Process */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">Expedited Process Features</h2>
-                  <p className="text-lg text-muted-foreground">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">Expedited Process Features</h2>
+                  <p className="text-lg text-muted-foreground text-left">
                     Projects with these features can get expedited in the process
                   </p>
                 </div>
@@ -598,8 +600,8 @@ const QA = () => {
 
               {/* Success Metrics */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">Success Metrics</h2>
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">Success Metrics</h2>
                 </div>
                 
                 <Card className="bg-primary/5 border-primary/20">
@@ -613,9 +615,9 @@ const QA = () => {
 
               {/* Audit Calculator */}
               <section className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground">Audit Calculator</h2>
-                  <p className="text-lg text-muted-foreground">
+                <div className="space-y-4">
+                  <h2 className="text-3xl md:text-4xl font-grotesk font-bold text-foreground text-left">Audit Calculator</h2>
+                  <p className="text-lg text-muted-foreground text-left">
                     Estimate timeline and completion date for your security audit
                   </p>
                 </div>
@@ -792,7 +794,29 @@ const QA = () => {
                               </div>
                               <div className="flex justify-between items-center">
                                 <span className="text-muted-foreground">Estimated Completion Date:</span>
-                                <span className="font-medium font-mono">{calculatedDays.completion}</span>
+                                {calculatedDays.completion === 'Set start date to calculate' ? (
+                                  <Popover>
+                                    <PopoverTrigger asChild>
+                                      <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:underline">
+                                        {calculatedDays.completion}
+                                      </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0" align="end">
+                                      <Calendar
+                                        mode="single"
+                                        selected={startDate}
+                                        onSelect={(date) => {
+                                          setStartDate(date);
+                                          updateCalculation(linesOfCode, auditType, date);
+                                        }}
+                                        initialFocus
+                                        className={cn("p-3 pointer-events-auto")}
+                                      />
+                                    </PopoverContent>
+                                  </Popover>
+                                ) : (
+                                  <span className="font-medium font-mono">{calculatedDays.completion}</span>
+                                )}
                               </div>
                             </CardContent>
                           </Card>
