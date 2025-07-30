@@ -628,7 +628,7 @@ const QA = () => {
                       <div className="flex items-start gap-3">
                         <AlertTriangle className="w-6 h-6 text-yellow-600 dark:text-yellow-400 mt-0.5" />
                         <div>
-                          <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">⚠️ Coming Soon & Not Accurate Disclaimer</h3>
+                          <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">Coming Soon & Not Accurate Disclaimer</h3>
                           <p className="text-sm text-yellow-800 dark:text-yellow-200">
                             This calculator provides rough estimates only and is currently in development. Actual audit times may vary significantly based on code complexity, dependencies, and other factors.
                           </p>
