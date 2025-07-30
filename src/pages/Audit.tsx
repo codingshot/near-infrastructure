@@ -60,28 +60,30 @@ const Audit = () => {
       return;
     }
 
-    // Enhanced calculation factors for better accuracy
+    // More reasonable calculation factors
     const baseFactors: { [key: string]: { base: number; complexity: number; multiplier: number } } = {
-      'rust-smart-contract': { base: 4, complexity: 0.012, multiplier: 1.2 },
-      'chain-signatures': { base: 7, complexity: 0.018, multiplier: 1.5 },
-      'pen-testing': { base: 6, complexity: 0.010, multiplier: 1.1 },
-      'other': { base: 5, complexity: 0.015, multiplier: 1.3 }
+      'rust-smart-contract': { base: 2, complexity: 0.006, multiplier: 1.0 },
+      'chain-signatures': { base: 3, complexity: 0.008, multiplier: 1.2 },
+      'pen-testing': { base: 3, complexity: 0.005, multiplier: 0.9 },
+      'other': { base: 2.5, complexity: 0.007, multiplier: 1.1 }
     };
 
     const factor = baseFactors[auditType] || baseFactors['other'];
 
-    // Enhanced calculations with complexity scaling
-    const complexityScale = Math.min(1 + (linesOfCode / 10000) * 0.5, 2.5); // Cap at 2.5x for very large codebases
+    // More reasonable complexity scaling - less aggressive growth
+    const complexityScale = Math.min(1 + (linesOfCode / 20000) * 0.3, 1.8); // Cap at 1.8x for very large codebases
     
-    const assessmentDays = Math.max(2, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
-    const testingDays = Math.max(3, Math.ceil((factor.base * 1.5 + (linesOfCode * factor.complexity * 0.5)) * factor.multiplier));
-    const analysisDays = Math.max(2, Math.ceil((factor.base * 0.8 + (linesOfCode * factor.complexity * 0.2)) * complexityScale));
-    const reportDays = Math.max(2, Math.ceil((factor.base * 0.6 + (linesOfCode * factor.complexity * 0.1)) * 1.1));
+    // More reasonable day calculations
+    const assessmentDays = Math.max(1, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.4)) * complexityScale));
+    const testingDays = Math.max(2, Math.ceil((factor.base * 1.2 + (linesOfCode * factor.complexity * 0.6)) * factor.multiplier));
+    const analysisDays = Math.max(1, Math.ceil((factor.base * 0.7 + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
+    const reportDays = Math.max(1, Math.ceil((factor.base * 0.5 + (linesOfCode * factor.complexity * 0.2)) * 1.0));
 
-    // Dynamic planning and review days based on project size
-    const planningDays = linesOfCode > 5000 ? 7 : linesOfCode > 2000 ? 6 : 5;
-    const reviewDays = linesOfCode > 10000 ? 3 : 2;
-    const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays;
+    // More reasonable planning and review days
+    const planningDays = linesOfCode > 8000 ? 4 : linesOfCode > 3000 ? 3 : 2;
+    const reviewDays = linesOfCode > 15000 ? 2 : 1;
+    const remediationDays = 7; // Default 1 week for revisions
+    const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays + remediationDays;
 
     let completion = 'Set start date to calculate';
     if (startDate) {
@@ -608,7 +610,7 @@ const Audit = () => {
                         </div>
                         <div className="flex justify-between items-center">
                           <span>Remediation verification (if needed)</span>
-                          <Badge variant="outline">Calculate based on findings</Badge>
+                          <Badge variant="outline">7 days</Badge>
                         </div>
                       </CardContent>
                     </Card>
