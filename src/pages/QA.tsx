@@ -499,15 +499,15 @@ const QA = () => {
                   <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <CardHeader>
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
-                          <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+                        <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
+                          <Clock className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                         </div>
                         <CardTitle>Templar Finance</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
-                        Completed
+                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">
+                        In Progress
                       </Badge>
                     </CardContent>
                   </Card>
@@ -515,15 +515,15 @@ const QA = () => {
                   <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <CardHeader>
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
-                          <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+                        <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
+                          <Clock className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                         </div>
                         <CardTitle>Fast Auth 2.0</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">
-                        Completed
+                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">
+                        In Progress
                       </Badge>
                     </CardContent>
                   </Card>
