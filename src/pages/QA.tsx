@@ -518,7 +518,7 @@ const QA = () => {
                         <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
                           <Clock className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                         </div>
-                        <CardTitle>Sialor lend</CardTitle>
+                        <CardTitle>Sailor Lend</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent>
