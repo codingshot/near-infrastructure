@@ -8,6 +8,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ExternalLink, Github, Twitter, Linkedin } from "lucide-react";
 import { generateSlug } from '@/utils/slugs';
+import HeroBackground3D from '@/components/HeroBackground3D';
 
 const QA = () => {
   const navigate = useNavigate();
@@ -113,18 +114,27 @@ const QA = () => {
       <div className="min-h-screen bg-background">
         <NEARNavbar />
         
-        <main className="pt-20">
-          <div className="container mx-auto px-4 py-12 max-w-4xl">
-            <div className="space-y-12">
-              {/* Header */}
-              <div className="text-center space-y-4">
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-                  NEAR Testing Program
+        <main>
+          <section className="relative pt-20 md:pt-24 pb-12 md:pb-16 bg-background overflow-hidden">
+            <HeroBackground3D />
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <div className="hero-text max-w-4xl mx-auto text-center mb-12 md:mb-16">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight text-center">
+                  <span className="metallic-gradient">NEAR Testing</span>
+                  <br />
+                  <span className="near-infra-highlight">Program</span>
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  NEAR Testing Program is another support program similar to NEAR Security Program. We want to make sure testing so we team up with professional QA engineers to test products predefects for lean teams, with a hyper focus on space.
+                
+                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto text-center">
+                  Professional QA expertise for lean teams, helping improve product quality and accelerate development cycles in the{' '}
+                  <span className="near-infra-highlight">NEAR ecosystem</span>
                 </p>
               </div>
+            </div>
+          </section>
+
+          <div className="container mx-auto px-4 py-12 max-w-4xl">
+            <div className="space-y-12">
 
               {/* Program Objectives */}
               <section className="space-y-6">
