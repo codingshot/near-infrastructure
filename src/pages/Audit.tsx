@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock } from 'lucide-react';
+import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock, Edit } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
@@ -13,11 +13,14 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar } from '@/components/ui/calendar';
 import { generateSlug } from '@/utils/slugs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { useSearchParams } from 'react-router-dom';
 
 const Audit = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const calculatorRef = useRef<HTMLDivElement>(null);
   const [dillonData, setDillonData] = useState<any>(null);
   const [linesOfCode, setLinesOfCode] = useState<number>(0);
   const [auditType, setAuditType] = useState<string>('rust-smart-contract');
@@ -45,9 +48,43 @@ const Audit = () => {
     };
     
     loadTeamData();
-  }, []);
+    
+    // Load URL parameters if present
+    const urlLinesOfCode = searchParams.get('lines');
+    const urlAuditType = searchParams.get('type');
+    const urlStartDate = searchParams.get('start');
+    
+    if (urlLinesOfCode || urlAuditType || urlStartDate) {
+      const lines = urlLinesOfCode ? parseInt(urlLinesOfCode) : 0;
+      const type = urlAuditType || 'rust-smart-contract';
+      const start = urlStartDate ? new Date(urlStartDate) : undefined;
+      
+      if (lines) setLinesOfCode(lines);
+      if (urlAuditType) setAuditType(type);
+      if (start && !isNaN(start.getTime())) setStartDate(start);
+      
+      updateCalculation(lines, type, start);
+      
+      // Scroll to calculator section
+      setTimeout(() => {
+        calculatorRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [searchParams]);
+
+  const updateUrlParams = (lines: number, type: string, date: Date | undefined) => {
+    const newParams = new URLSearchParams();
+    if (lines > 0) newParams.set('lines', lines.toString());
+    if (type) newParams.set('type', type);
+    if (date) newParams.set('start', date.toISOString().split('T')[0]);
+    
+    setSearchParams(newParams);
+  };
 
   const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined) => {
+    // Update URL parameters
+    updateUrlParams(linesOfCode, auditType, startDate);
+    
     if (!linesOfCode || linesOfCode <= 0) {
       setCalculatedDays({
         assessment: 'Calculate based on inputs',
@@ -93,10 +130,10 @@ const Audit = () => {
     }
 
     setCalculatedDays({
-      assessment: `${assessmentDays}`,
-      testing: `${testingDays}`,
-      analysis: `${analysisDays}`,
-      report: `${reportDays}`,
+      assessment: `${assessmentDays} day${assessmentDays !== 1 ? 's' : ''}`,
+      testing: `${testingDays} day${testingDays !== 1 ? 's' : ''}`,
+      analysis: `${analysisDays} day${analysisDays !== 1 ? 's' : ''}`,
+      report: `${reportDays} day${reportDays !== 1 ? 's' : ''}`,
       total: `${totalDays} days`,
       completion
     });
@@ -448,7 +485,7 @@ const Audit = () => {
         </div>
 
         {/* Audit Calculator */}
-        <div className="mb-12">
+        <div className="mb-12" ref={calculatorRef}>
           <h2 className="text-3xl font-bold mb-6 text-foreground">Audit Calculator</h2>
           <p className="text-lg text-muted-foreground mb-8">
             Estimate timeline and completion date for your security audit
@@ -494,7 +531,7 @@ const Audit = () => {
                       updateCalculation(linesOfCode, value, startDate);
                     }}
                   >
-                    <SelectTrigger className="text-base">
+                    <SelectTrigger className="text-base" data-testid="audit-type-select">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -544,9 +581,22 @@ const Audit = () => {
                   <div className="space-y-6">
                     <Card>
                       <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <Clock className="w-5 h-5" />
-                          Planning Phase
+                        <CardTitle className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-5 h-5" />
+                            Planning Phase
+                          </div>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              const element = document.getElementById('lines-of-code');
+                              element?.focus();
+                              element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }}
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3">
@@ -563,9 +613,22 @@ const Audit = () => {
                     
                     <Card>
                       <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <Shield className="w-5 h-5" />
-                          Audit Execution
+                        <CardTitle className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <Shield className="w-5 h-5" />
+                            Audit Execution
+                          </div>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              const element = document.querySelector('[data-testid="audit-type-select"]') as HTMLElement;
+                              element?.click();
+                              element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }}
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3">
@@ -598,9 +661,21 @@ const Audit = () => {
                     
                     <Card>
                       <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <CheckCircle className="w-5 h-5" />
-                          Post-Audit Follow-up
+                        <CardTitle className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5" />
+                            Post-Audit Follow-up
+                          </div>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              const element = document.querySelector('.space-y-3:has(> .space-y-3 > Label)') as HTMLElement;
+                              element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }}
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3">
