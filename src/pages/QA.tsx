@@ -12,6 +12,17 @@ import { generateSlug } from '@/utils/slugs';
 const QA = () => {
   const navigate = useNavigate();
   const [dillonData, setDillonData] = useState<any>(null);
+  const [linesOfCode, setLinesOfCode] = useState<number>(0);
+  const [auditType, setAuditType] = useState<string>('rust-smart-contract');
+  const [startDate, setStartDate] = useState<string>('');
+  const [calculatedDays, setCalculatedDays] = useState<any>({
+    assessment: 'Calculate based on inputs',
+    testing: 'Calculate based on inputs', 
+    analysis: 'Calculate based on inputs',
+    report: 'Calculate based on inputs',
+    total: 'Enter details to calculate',
+    completion: '-'
+  });
   
   useEffect(() => {
     const loadTeamData = async () => {
@@ -28,6 +39,60 @@ const QA = () => {
     
     loadTeamData();
   }, []);
+
+  const updateCalculation = (linesOfCode: number, auditType: string, startDate: string) => {
+    if (!linesOfCode || linesOfCode <= 0) {
+      setCalculatedDays({
+        assessment: 'Calculate based on inputs',
+        testing: 'Calculate based on inputs',
+        analysis: 'Calculate based on inputs', 
+        report: 'Calculate based on inputs',
+        total: 'Enter details to calculate',
+        completion: '-'
+      });
+      return;
+    }
+
+    // Base calculation factors
+    const baseFactors: { [key: string]: { base: number; complexity: number } } = {
+      'rust-smart-contract': { base: 5, complexity: 0.01 },
+      'chain-signatures': { base: 8, complexity: 0.015 },
+      'pen-testing': { base: 7, complexity: 0.008 },
+      'other': { base: 6, complexity: 0.012 }
+    };
+
+    const factor = baseFactors[auditType] || baseFactors['other'];
+
+    // Calculate days based on lines of code
+    const assessmentDays = Math.max(2, Math.ceil(factor.base + (linesOfCode * factor.complexity * 0.3)));
+    const testingDays = Math.max(3, Math.ceil(factor.base * 1.5 + (linesOfCode * factor.complexity * 0.5)));
+    const analysisDays = Math.max(2, Math.ceil(factor.base * 0.8 + (linesOfCode * factor.complexity * 0.2)));
+    const reportDays = Math.max(2, Math.ceil(factor.base * 0.6 + (linesOfCode * factor.complexity * 0.1)));
+
+    // Calculate total (including fixed planning and review days)
+    const planningDays = 6; // 3-5 + 2-3 average
+    const reviewDays = 2;
+    const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays;
+
+    let completion = '-';
+    if (startDate) {
+      const start = new Date(startDate);
+      const completionDate = new Date(start);
+      completionDate.setDate(completionDate.getDate() + totalDays);
+      completion = completionDate.toLocaleDateString();
+    } else {
+      completion = 'Set start date to calculate';
+    }
+
+    setCalculatedDays({
+      assessment: assessmentDays.toString(),
+      testing: testingDays.toString(),
+      analysis: analysisDays.toString(),
+      report: reportDays.toString(),
+      total: `${totalDays} days`,
+      completion
+    });
+  };
 
   const handleDillionClick = () => {
     if (dillonData) {
@@ -268,38 +333,104 @@ const QA = () => {
                 </p>
               </section>
 
-              {/* Timeline */}
+              {/* Audit Calculator */}
               <section className="space-y-6">
-                <h2 className="text-3xl font-bold text-foreground">Timeline</h2>
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-foreground">Timeline for Testing Process</h3>
+                <h2 className="text-3xl font-bold text-foreground">Audit Calculator</h2>
+                <div className="bg-card border rounded-lg p-6 space-y-6">
+                  <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+                    <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                      <strong>⚠️ Coming Soon & Not Accurate Disclaimer:</strong> This calculator provides rough estimates only and is currently in development. Actual audit times may vary significantly based on code complexity, dependencies, and other factors.
+                    </p>
+                  </div>
                   
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Planning Phase:</h4>
-                      <ul className="space-y-2 text-muted-foreground ml-4">
-                        <li>• Reach out 1 month in advance of your alpha launch to allow sufficient time for testing coordination</li>
-                        <li>• Prepare documentation and testing environments</li>
-                      </ul>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Lines of Code</label>
+                      <input
+                        type="number"
+                        placeholder="e.g., 1000"
+                        value={linesOfCode || ''}
+                        className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                        onChange={(e) => {
+                          const newLinesOfCode = parseInt(e.target.value) || 0;
+                          setLinesOfCode(newLinesOfCode);
+                          updateCalculation(newLinesOfCode, auditType, startDate);
+                        }}
+                      />
                     </div>
                     
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Testing Execution:</h4>
-                      <ul className="space-y-2 text-muted-foreground ml-4">
-                        <li>• Initial assessment (_____ days)</li>
-                        <li>• Comprehensive testing (_____ days)</li>
-                        <li>• Final report preparation (_____ days)</li>
-                      </ul>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Audit Type</label>
+                      <select 
+                        value={auditType}
+                        className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                        onChange={(e) => {
+                          setAuditType(e.target.value);
+                          updateCalculation(linesOfCode, e.target.value, startDate);
+                        }}
+                      >
+                        <option value="rust-smart-contract">Rust Smart Contract on NEAR</option>
+                        <option value="chain-signatures">NEAR Chain Signatures</option>
+                        <option value="pen-testing">Penetration Testing</option>
+                        <option value="other">Other Auditing</option>
+                      </select>
                     </div>
                     
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Post-Testing Follow-up:</h4>
-                      <ul className="space-y-2 text-muted-foreground ml-4">
-                        <li>• Review meeting to discuss findings</li>
-                        <li>• Teams address critical issues within _____</li>
-                        <li>• Documentation of fixes required</li>
-                        <li>• Verification testing available for resolved issues</li>
-                      </ul>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">Start Date</label>
+                      <input
+                        type="date"
+                        value={startDate}
+                        className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                        onChange={(e) => {
+                          setStartDate(e.target.value);
+                          updateCalculation(linesOfCode, auditType, e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div id="calculation-results" className="space-y-4">
+                    <div className="border-t pt-4">
+                      <h3 className="text-xl font-semibold text-foreground mb-4">Estimated Timeline</h3>
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">Planning Phase:</h4>
+                          <ul className="space-y-2 text-muted-foreground ml-4">
+                            <li>• Initial consultation and scope definition (<span id="planning-days">3-5</span> days)</li>
+                            <li>• Documentation review and environment setup (<span id="setup-days">2-3</span> days)</li>
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">Audit Execution:</h4>
+                          <ul className="space-y-2 text-muted-foreground ml-4">
+                            <li>• Initial assessment and code analysis (<span className="font-medium">{calculatedDays.assessment}</span> days)</li>
+                            <li>• Comprehensive security testing (<span className="font-medium">{calculatedDays.testing}</span> days)</li>
+                            <li>• Vulnerability analysis and documentation (<span className="font-medium">{calculatedDays.analysis}</span> days)</li>
+                            <li>• Final report preparation (<span className="font-medium">{calculatedDays.report}</span> days)</li>
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">Post-Audit Follow-up:</h4>
+                          <ul className="space-y-2 text-muted-foreground ml-4">
+                            <li>• Review meeting and findings discussion (<span id="review-days">1-2</span> days)</li>
+                            <li>• Remediation verification (if needed) (<span id="verification-days">Calculate based on findings</span> days)</li>
+                          </ul>
+                        </div>
+                        
+                        <div className="bg-primary/10 rounded-lg p-4 mt-4">
+                          <div className="flex justify-between items-center">
+                            <span className="font-semibold text-foreground">Total Estimated Duration:</span>
+                            <span className="text-xl font-bold text-primary">{calculatedDays.total}</span>
+                          </div>
+                          <div className="flex justify-between items-center mt-2">
+                            <span className="text-muted-foreground">Estimated Completion Date:</span>
+                            <span className="font-medium">{calculatedDays.completion}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
