@@ -495,37 +495,33 @@ const QA = () => {
                   </p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
-                          <Clock className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
-                        </div>
+                      <div className="flex items-center justify-between">
                         <CardTitle>Templar Finance</CardTitle>
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
+                          <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">
+                            In Progress
+                          </Badge>
+                        </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">
-                        In Progress
-                      </Badge>
-                    </CardContent>
                   </Card>
 
                   <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                     <CardHeader>
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
-                          <Clock className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
-                        </div>
+                      <div className="flex items-center justify-between">
                         <CardTitle>Sailor Lend</CardTitle>
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
+                          <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">
+                            In Progress
+                          </Badge>
+                        </div>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">
-                        In Progress
-                      </Badge>
-                    </CardContent>
                   </Card>
                 </div>
               </section>
