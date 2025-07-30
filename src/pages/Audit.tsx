@@ -5,7 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter } from 'lucide-react';
+import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { generateSlug } from '@/utils/slugs';
 import { useState, useEffect } from 'react';
 
@@ -384,6 +387,162 @@ const Audit = () => {
                   Are you a security firm that wants to work in the NEAR Ecosystem and be part of this program? 
                   Get in touch with us through our team directory.
                 </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Audit Calculator */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-6 text-foreground">Audit Calculator</h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Estimate timeline and completion date for your security audit
+          </p>
+          
+          <Card className="max-w-4xl mx-auto">
+            <CardContent className="p-8 space-y-8">
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="w-6 h-6 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">Coming Soon & Not Accurate Disclaimer</h3>
+                    <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                      This calculator provides rough estimates only and is currently in development. Actual audit times may vary significantly based on code complexity, dependencies, and other factors.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-3">
+                  <Label htmlFor="lines-of-code" className="text-base font-medium">Lines of Code</Label>
+                  <Input
+                    id="lines-of-code"
+                    type="number"
+                    placeholder="e.g., 1000"
+                    className="text-base"
+                  />
+                </div>
+                
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">Audit Type</Label>
+                  <Select defaultValue="rust-smart-contract">
+                    <SelectTrigger className="text-base">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="rust-smart-contract">Rust Smart Contract on NEAR</SelectItem>
+                      <SelectItem value="chain-signatures">NEAR Chain Signatures</SelectItem>
+                      <SelectItem value="pen-testing">Penetration Testing</SelectItem>
+                      <SelectItem value="other">Other Auditing</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">Start Date</Label>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start text-left font-normal text-base text-muted-foreground"
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    Pick a date
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="border-t pt-6">
+                  <h3 className="text-2xl font-grotesk font-semibold text-foreground mb-6">Estimated Timeline</h3>
+                  
+                  <div className="space-y-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Clock className="w-5 h-5" />
+                          Planning Phase
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span>Initial consultation and scope definition</span>
+                          <Badge variant="outline">3-5 days</Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span>Documentation review and environment setup</span>
+                          <Badge variant="outline">2-3 days</Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <Shield className="w-5 h-5" />
+                          Audit Execution
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span>Initial assessment and code analysis</span>
+                          <Badge variant="secondary" className="font-mono">
+                            Calculate based on inputs
+                          </Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span>Comprehensive security testing</span>
+                          <Badge variant="secondary" className="font-mono">
+                            Calculate based on inputs
+                          </Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span>Vulnerability analysis and documentation</span>
+                          <Badge variant="secondary" className="font-mono">
+                            Calculate based on inputs
+                          </Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span>Final report preparation</span>
+                          <Badge variant="secondary" className="font-mono">
+                            Calculate based on inputs
+                          </Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5" />
+                          Post-Audit Follow-up
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span>Review meeting and findings discussion</span>
+                          <Badge variant="outline">1-2 days</Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span>Remediation verification (if needed)</span>
+                          <Badge variant="outline">Calculate based on findings</Badge>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="bg-primary/5 border-primary/20">
+                      <CardContent className="pt-6">
+                        <div className="flex justify-between items-center mb-4">
+                          <span className="text-lg font-semibold text-foreground">Total Estimated Duration:</span>
+                          <span className="text-2xl font-bold text-primary font-mono">Enter details to calculate</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-muted-foreground">Estimated Completion Date:</span>
+                          <span className="text-primary font-semibold">Set start date to calculate</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
