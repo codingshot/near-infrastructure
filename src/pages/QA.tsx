@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NEARNavbar from "@/components/near/NEARNavbar";
 import NEARFooter from "@/components/near/NEARFooter";
@@ -6,13 +6,35 @@ import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ExternalLink, Github, Twitter } from "lucide-react";
+import { ExternalLink, Github, Twitter, Linkedin } from "lucide-react";
+import { generateSlug } from '@/utils/slugs';
 
 const QA = () => {
   const navigate = useNavigate();
+  const [dillonData, setDillonData] = useState<any>(null);
+  
+  useEffect(() => {
+    const loadTeamData = async () => {
+      try {
+        const response = await fetch('/data/team.json');
+        const data = await response.json();
+        const allMembers = [...data.workingGroup, ...data.infrastructureCommittee];
+        const dillon = allMembers.find((member: any) => member.name.includes('Dillon'));
+        setDillonData(dillon);
+      } catch (error) {
+        console.error('Error loading team data:', error);
+      }
+    };
+    
+    loadTeamData();
+  }, []);
 
   const handleDillionClick = () => {
-    navigate("/team/dillon");
+    if (dillonData) {
+      navigate(`/team/${generateSlug(dillonData.name)}`);
+    } else {
+      navigate("/team/dillon");
+    }
   };
 
   return (
@@ -130,27 +152,44 @@ const QA = () => {
                         onClick={handleDillionClick}
                         className="text-primary hover:underline font-medium"
                       >
-                        Dillion
+                        {dillonData ? dillonData.name : 'Dillon Freeman'}
                       </button>
                     </HoverCardTrigger>
                     <HoverCardContent className="w-80">
                       <div className="flex justify-between space-x-4">
                         <Avatar>
-                          <AvatarImage src="/team/dillion.jpeg" />
-                          <AvatarFallback>DN</AvatarFallback>
+                          <AvatarImage src={dillonData?.image || "/team/dillon.jpeg"} />
+                          <AvatarFallback>DF</AvatarFallback>
                         </Avatar>
                         <div className="space-y-1 flex-1">
-                          <h4 className="text-sm font-semibold">Dillion Naidoo</h4>
+                          <h4 className="text-sm font-semibold">{dillonData?.name || 'Dillon Freeman'}</h4>
                           <p className="text-sm text-muted-foreground">
-                            Infrastructure Committee Lead
+                            {dillonData?.title || 'Partnerships at NEAR Foundation'}
                           </p>
                           <p className="text-xs text-muted-foreground pt-2">
-                            Leading the Infrastructure Committee to support and grow the NEAR ecosystem through strategic initiatives and community programs.
+                            {dillonData?.bio || 'Leading strategic partnerships and ecosystem development initiatives'}
                           </p>
                           <div className="flex items-center space-x-2 pt-2">
-                            <Twitter className="h-4 w-4 text-muted-foreground" />
-                            <Github className="h-4 w-4 text-muted-foreground" />
-                            <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                            {dillonData?.twitter && (
+                              <a
+                                href={dillonData.twitter}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary"
+                              >
+                                <Twitter className="h-4 w-4" />
+                              </a>
+                            )}
+                            {dillonData?.linkedin && (
+                              <a
+                                href={dillonData.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-primary"
+                              >
+                                <Linkedin className="h-4 w-4" />
+                              </a>
+                            )}
                           </div>
                         </div>
                       </div>
