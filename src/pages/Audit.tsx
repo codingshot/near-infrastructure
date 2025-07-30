@@ -27,6 +27,12 @@ const Audit = () => {
   const [auditType, setAuditType] = useState<string>('rust-smart-contract');
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
   const [estimateTitle, setEstimateTitle] = useState<string>('');
+  const [overrides, setOverrides] = useState<{
+    assessment?: number;
+    testing?: number;
+    analysis?: number;
+    report?: number;
+  }>({});
   const [calculatedDays, setCalculatedDays] = useState<any>({
     assessment: 'Calculate based on inputs',
     testing: 'Calculate based on inputs', 
@@ -56,19 +62,31 @@ const Audit = () => {
     const urlAuditType = searchParams.get('type');
     const urlStartDate = searchParams.get('start');
     const urlTitle = searchParams.get('title');
+    const urlAssessment = searchParams.get('assessment');
+    const urlTesting = searchParams.get('testing');
+    const urlAnalysis = searchParams.get('analysis');
+    const urlReport = searchParams.get('report');
     
-    if (urlLinesOfCode || urlAuditType || urlStartDate || urlTitle) {
+    if (urlLinesOfCode || urlAuditType || urlStartDate || urlTitle || urlAssessment || urlTesting || urlAnalysis || urlReport) {
       const lines = urlLinesOfCode ? parseInt(urlLinesOfCode) : 0;
       const type = urlAuditType || 'rust-smart-contract';
       const start = urlStartDate ? new Date(urlStartDate) : undefined;
       const title = urlTitle || '';
       
+      const newOverrides = {
+        assessment: urlAssessment ? parseInt(urlAssessment) : undefined,
+        testing: urlTesting ? parseInt(urlTesting) : undefined,
+        analysis: urlAnalysis ? parseInt(urlAnalysis) : undefined,
+        report: urlReport ? parseInt(urlReport) : undefined,
+      };
+      
       if (lines) setLinesOfCode(lines);
       if (urlAuditType) setAuditType(type);
       if (start && !isNaN(start.getTime())) setStartDate(start);
       if (title) setEstimateTitle(decodeURIComponent(title));
+      setOverrides(newOverrides);
       
-      updateCalculation(lines, type, start);
+      updateCalculation(lines, type, start, newOverrides);
       
       // Scroll to calculator section
       setTimeout(() => {
@@ -77,12 +95,16 @@ const Audit = () => {
     }
   }, [searchParams]);
 
-  const updateUrlParams = (lines: number, type: string, date: Date | undefined, title: string = '') => {
+  const updateUrlParams = (lines: number, type: string, date: Date | undefined, title: string = '', overrideValues: any = {}) => {
     const newParams = new URLSearchParams();
     if (lines > 0) newParams.set('lines', lines.toString());
     if (type) newParams.set('type', type);
     if (date) newParams.set('start', date.toISOString().split('T')[0]);
     if (title.trim()) newParams.set('title', encodeURIComponent(title.trim()));
+    if (overrideValues.assessment) newParams.set('assessment', overrideValues.assessment.toString());
+    if (overrideValues.testing) newParams.set('testing', overrideValues.testing.toString());
+    if (overrideValues.analysis) newParams.set('analysis', overrideValues.analysis.toString());
+    if (overrideValues.report) newParams.set('report', overrideValues.report.toString());
     
     setSearchParams(newParams);
   };
@@ -105,9 +127,9 @@ const Audit = () => {
     });
   };
 
-  const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined) => {
+  const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined, overrideValues: any = overrides) => {
     // Update URL parameters
-    updateUrlParams(linesOfCode, auditType, startDate, estimateTitle);
+    updateUrlParams(linesOfCode, auditType, startDate, estimateTitle, overrideValues);
     
     if (!linesOfCode || linesOfCode <= 0) {
       setCalculatedDays({
@@ -134,33 +156,54 @@ const Audit = () => {
     // More reasonable complexity scaling - less aggressive growth
     const complexityScale = Math.min(1 + (linesOfCode / 20000) * 0.3, 1.8); // Cap at 1.8x for very large codebases
     
-    // More reasonable day calculations
-    const assessmentDays = Math.max(1, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.4)) * complexityScale));
-    const testingDays = Math.max(2, Math.ceil((factor.base * 1.2 + (linesOfCode * factor.complexity * 0.6)) * factor.multiplier));
-    const analysisDays = Math.max(1, Math.ceil((factor.base * 0.7 + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
-    const reportDays = Math.max(1, Math.ceil((factor.base * 0.5 + (linesOfCode * factor.complexity * 0.2)) * 1.0));
+    // Calculate base estimates
+    const baseAssessment = Math.max(1, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.4)) * complexityScale));
+    const baseTesting = Math.max(2, Math.ceil((factor.base * 1.2 + (linesOfCode * factor.complexity * 0.6)) * factor.multiplier));
+    const baseAnalysis = Math.max(1, Math.ceil((factor.base * 0.7 + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
+    const baseReport = Math.max(1, Math.ceil((factor.base * 0.5 + (linesOfCode * factor.complexity * 0.2)) * 1.0));
 
-    // More reasonable planning and review days
-    const planningDays = linesOfCode > 8000 ? 4 : linesOfCode > 3000 ? 3 : 2;
-    const reviewDays = linesOfCode > 15000 ? 2 : 1;
-    const remediationDays = 7; // Default 1 week for revisions
-    const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays + remediationDays;
+    // Apply caps to prevent unrealistic estimates
+    const calculatedAssessment = Math.min(baseAssessment, 10);
+    const calculatedTesting = Math.min(baseTesting, 15);
+    const calculatedAnalysis = Math.min(baseAnalysis, 8);
+    const calculatedReport = Math.min(baseReport, 5);
+    
+    // Use overrides if available, otherwise use calculated values
+    const assessment = overrideValues.assessment || calculatedAssessment;
+    const testing = overrideValues.testing || calculatedTesting;
+    const analysis = overrideValues.analysis || calculatedAnalysis;
+    const report = overrideValues.report || calculatedReport;
+    
+    const remediation = 7; // Fixed 1 week for remediation verification
+    const total = assessment + testing + analysis + report + remediation;
 
     let completion = 'Set start date to calculate';
     if (startDate) {
       const completionDate = new Date(startDate);
-      completionDate.setDate(completionDate.getDate() + totalDays);
+      completionDate.setDate(completionDate.getDate() + total);
       completion = format(completionDate, 'PPP');
     }
 
     setCalculatedDays({
-      assessment: `${assessmentDays} day${assessmentDays !== 1 ? 's' : ''}`,
-      testing: `${testingDays} day${testingDays !== 1 ? 's' : ''}`,
-      analysis: `${analysisDays} day${analysisDays !== 1 ? 's' : ''}`,
-      report: `${reportDays} day${reportDays !== 1 ? 's' : ''}`,
-      total: `${totalDays} days`,
+      assessment: `${assessment} days`,
+      testing: `${testing} days`,
+      analysis: `${analysis} days`,
+      report: `${report} days`,
+      total: `${total} days`,
       completion
     });
+  };
+
+  const editEstimate = (phase: 'assessment' | 'testing' | 'analysis' | 'report', currentValue: string) => {
+    const numericValue = parseInt(currentValue.replace(/\D/g, '')) || 0;
+    const input = prompt(`Enter new estimate for ${phase} (days):`, numericValue.toString());
+    
+    if (input !== null && !isNaN(parseInt(input))) {
+      const newValue = parseInt(input);
+      const newOverrides = { ...overrides, [phase]: newValue };
+      setOverrides(newOverrides);
+      updateCalculation(linesOfCode, auditType, startDate, newOverrides);
+    }
   };
 
   const pastExamples = [
@@ -686,31 +729,71 @@ const Audit = () => {
                           </Button>
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span>Initial assessment and code analysis</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.assessment}
-                          </Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Comprehensive security testing</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.testing}
-                          </Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Vulnerability analysis and documentation</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.analysis}
-                          </Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Final report preparation</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.report}
-                          </Badge>
-                        </div>
+                       <CardContent className="space-y-3">
+                         <div className="flex justify-between items-center group">
+                           <span>Initial assessment and code analysis</span>
+                           <div className="flex items-center gap-2">
+                             <Badge variant="secondary" className="font-mono">
+                               {calculatedDays.assessment}
+                             </Badge>
+                             <Button 
+                               variant="ghost" 
+                               size="sm"
+                               className="opacity-0 group-hover:opacity-100 transition-opacity"
+                               onClick={() => editEstimate('assessment', calculatedDays.assessment)}
+                             >
+                               <Edit className="w-3 h-3" />
+                             </Button>
+                           </div>
+                         </div>
+                         <div className="flex justify-between items-center group">
+                           <span>Comprehensive security testing</span>
+                           <div className="flex items-center gap-2">
+                             <Badge variant="secondary" className="font-mono">
+                               {calculatedDays.testing}
+                             </Badge>
+                             <Button 
+                               variant="ghost" 
+                               size="sm"
+                               className="opacity-0 group-hover:opacity-100 transition-opacity"
+                               onClick={() => editEstimate('testing', calculatedDays.testing)}
+                             >
+                               <Edit className="w-3 h-3" />
+                             </Button>
+                           </div>
+                         </div>
+                         <div className="flex justify-between items-center group">
+                           <span>Vulnerability analysis and documentation</span>
+                           <div className="flex items-center gap-2">
+                             <Badge variant="secondary" className="font-mono">
+                               {calculatedDays.analysis}
+                             </Badge>
+                             <Button 
+                               variant="ghost" 
+                               size="sm"
+                               className="opacity-0 group-hover:opacity-100 transition-opacity"
+                               onClick={() => editEstimate('analysis', calculatedDays.analysis)}
+                             >
+                               <Edit className="w-3 h-3" />
+                             </Button>
+                           </div>
+                         </div>
+                         <div className="flex justify-between items-center group">
+                           <span>Final report preparation</span>
+                           <div className="flex items-center gap-2">
+                             <Badge variant="secondary" className="font-mono">
+                               {calculatedDays.report}
+                             </Badge>
+                             <Button 
+                               variant="ghost" 
+                               size="sm"
+                               className="opacity-0 group-hover:opacity-100 transition-opacity"
+                               onClick={() => editEstimate('report', calculatedDays.report)}
+                             >
+                               <Edit className="w-3 h-3" />
+                             </Button>
+                           </div>
+                         </div>
                       </CardContent>
                     </Card>
                     
