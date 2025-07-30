@@ -635,7 +635,29 @@ const Audit = () => {
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-muted-foreground">Estimated Completion Date:</span>
-                          <span className="text-primary font-semibold">{calculatedDays.completion}</span>
+                          {!startDate ? (
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <button className="text-primary font-semibold hover:underline cursor-pointer">
+                                  {calculatedDays.completion}
+                                </button>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-auto p-0" align="end">
+                                <Calendar
+                                  mode="single"
+                                  selected={startDate}
+                                  onSelect={(date) => {
+                                    setStartDate(date);
+                                    updateCalculation(linesOfCode, auditType, date);
+                                  }}
+                                  initialFocus
+                                  className="p-3 pointer-events-auto"
+                                />
+                              </PopoverContent>
+                            </Popover>
+                          ) : (
+                            <span className="text-primary font-semibold">{calculatedDays.completion}</span>
+                          )}
                         </div>
                       </CardContent>
                     </Card>
