@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock, Edit } from 'lucide-react';
+import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock, Edit, Share2 } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
@@ -17,6 +17,7 @@ import { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { useSearchParams } from 'react-router-dom';
+import { toast } from '@/components/ui/use-toast';
 
 const Audit = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,6 +26,7 @@ const Audit = () => {
   const [linesOfCode, setLinesOfCode] = useState<number>(0);
   const [auditType, setAuditType] = useState<string>('rust-smart-contract');
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  const [estimateTitle, setEstimateTitle] = useState<string>('');
   const [calculatedDays, setCalculatedDays] = useState<any>({
     assessment: 'Calculate based on inputs',
     testing: 'Calculate based on inputs', 
@@ -53,15 +55,18 @@ const Audit = () => {
     const urlLinesOfCode = searchParams.get('lines');
     const urlAuditType = searchParams.get('type');
     const urlStartDate = searchParams.get('start');
+    const urlTitle = searchParams.get('title');
     
-    if (urlLinesOfCode || urlAuditType || urlStartDate) {
+    if (urlLinesOfCode || urlAuditType || urlStartDate || urlTitle) {
       const lines = urlLinesOfCode ? parseInt(urlLinesOfCode) : 0;
       const type = urlAuditType || 'rust-smart-contract';
       const start = urlStartDate ? new Date(urlStartDate) : undefined;
+      const title = urlTitle || '';
       
       if (lines) setLinesOfCode(lines);
       if (urlAuditType) setAuditType(type);
       if (start && !isNaN(start.getTime())) setStartDate(start);
+      if (title) setEstimateTitle(decodeURIComponent(title));
       
       updateCalculation(lines, type, start);
       
@@ -72,18 +77,37 @@ const Audit = () => {
     }
   }, [searchParams]);
 
-  const updateUrlParams = (lines: number, type: string, date: Date | undefined) => {
+  const updateUrlParams = (lines: number, type: string, date: Date | undefined, title: string = '') => {
     const newParams = new URLSearchParams();
     if (lines > 0) newParams.set('lines', lines.toString());
     if (type) newParams.set('type', type);
     if (date) newParams.set('start', date.toISOString().split('T')[0]);
+    if (title.trim()) newParams.set('title', encodeURIComponent(title.trim()));
     
     setSearchParams(newParams);
   };
 
+  const shareEstimate = () => {
+    const currentUrl = new URL(window.location.href);
+    const shareUrl = `${currentUrl.origin}${currentUrl.pathname}?${searchParams.toString()}`;
+    
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      toast({
+        title: "Link copied to clipboard",
+        description: "Share this link to show your audit estimate",
+      });
+    }).catch(() => {
+      toast({
+        title: "Failed to copy link",
+        description: "Please copy the URL manually from your browser",
+        variant: "destructive",
+      });
+    });
+  };
+
   const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined) => {
     // Update URL parameters
-    updateUrlParams(linesOfCode, auditType, startDate);
+    updateUrlParams(linesOfCode, auditType, startDate, estimateTitle);
     
     if (!linesOfCode || linesOfCode <= 0) {
       setCalculatedDays({
@@ -501,6 +525,37 @@ const Audit = () => {
                     <p className="text-sm text-yellow-800 dark:text-yellow-200">
                       This calculator provides rough estimates only and is currently in development. Actual audit times may vary significantly based on code complexity, dependencies, and other factors.
                     </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1 mr-4">
+                    <Label htmlFor="estimate-title" className="text-base font-medium">Estimate Title (Optional)</Label>
+                    <Input
+                      id="estimate-title"
+                      type="text"
+                      value={estimateTitle}
+                      onChange={(e) => {
+                        setEstimateTitle(e.target.value);
+                        updateUrlParams(linesOfCode, auditType, startDate, e.target.value);
+                      }}
+                      placeholder="e.g., DeFi Protocol V2 Audit"
+                      className="text-base mt-2"
+                    />
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <Label className="text-base font-medium mb-2">Share Estimate</Label>
+                    <Button
+                      variant="outline"
+                      onClick={shareEstimate}
+                      className="inline-flex items-center gap-2"
+                      disabled={!linesOfCode || linesOfCode <= 0}
+                    >
+                      <Share2 className="h-4 w-4" />
+                      Copy Link
+                    </Button>
                   </div>
                 </div>
               </div>
