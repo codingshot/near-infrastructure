@@ -9,11 +9,25 @@ import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Calendar } from '@/components/ui/calendar';
 import { generateSlug } from '@/utils/slugs';
 import { useState, useEffect } from 'react';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const Audit = () => {
   const [dillonData, setDillonData] = useState<any>(null);
+  const [linesOfCode, setLinesOfCode] = useState<number>(0);
+  const [auditType, setAuditType] = useState<string>('rust-smart-contract');
+  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  const [calculatedDays, setCalculatedDays] = useState<any>({
+    assessment: 'Calculate based on inputs',
+    testing: 'Calculate based on inputs', 
+    analysis: 'Calculate based on inputs',
+    report: 'Calculate based on inputs',
+    total: 'Enter details to calculate',
+    completion: 'Set start date to calculate'
+  });
   
   useEffect(() => {
     const loadTeamData = async () => {
@@ -30,6 +44,59 @@ const Audit = () => {
     
     loadTeamData();
   }, []);
+
+  const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined) => {
+    if (!linesOfCode || linesOfCode <= 0) {
+      setCalculatedDays({
+        assessment: 'Calculate based on inputs',
+        testing: 'Calculate based on inputs',
+        analysis: 'Calculate based on inputs', 
+        report: 'Calculate based on inputs',
+        total: 'Enter details to calculate',
+        completion: 'Set start date to calculate'
+      });
+      return;
+    }
+
+    // Enhanced calculation factors for better accuracy
+    const baseFactors: { [key: string]: { base: number; complexity: number; multiplier: number } } = {
+      'rust-smart-contract': { base: 4, complexity: 0.012, multiplier: 1.2 },
+      'chain-signatures': { base: 7, complexity: 0.018, multiplier: 1.5 },
+      'pen-testing': { base: 6, complexity: 0.010, multiplier: 1.1 },
+      'other': { base: 5, complexity: 0.015, multiplier: 1.3 }
+    };
+
+    const factor = baseFactors[auditType] || baseFactors['other'];
+
+    // Enhanced calculations with complexity scaling
+    const complexityScale = Math.min(1 + (linesOfCode / 10000) * 0.5, 2.5); // Cap at 2.5x for very large codebases
+    
+    const assessmentDays = Math.max(2, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
+    const testingDays = Math.max(3, Math.ceil((factor.base * 1.5 + (linesOfCode * factor.complexity * 0.5)) * factor.multiplier));
+    const analysisDays = Math.max(2, Math.ceil((factor.base * 0.8 + (linesOfCode * factor.complexity * 0.2)) * complexityScale));
+    const reportDays = Math.max(2, Math.ceil((factor.base * 0.6 + (linesOfCode * factor.complexity * 0.1)) * 1.1));
+
+    // Dynamic planning and review days based on project size
+    const planningDays = linesOfCode > 5000 ? 7 : linesOfCode > 2000 ? 6 : 5;
+    const reviewDays = linesOfCode > 10000 ? 3 : 2;
+    const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays;
+
+    let completion = 'Set start date to calculate';
+    if (startDate) {
+      const completionDate = new Date(startDate);
+      completionDate.setDate(completionDate.getDate() + totalDays);
+      completion = format(completionDate, 'PPP');
+    }
+
+    setCalculatedDays({
+      assessment: `${assessmentDays}`,
+      testing: `${testingDays}`,
+      analysis: `${analysisDays}`,
+      report: `${reportDays}`,
+      total: `${totalDays} days`,
+      completion
+    });
+  };
 
   const pastExamples = [
     'Templar Protocol',
@@ -419,6 +486,12 @@ const Audit = () => {
                   <Input
                     id="lines-of-code"
                     type="number"
+                    value={linesOfCode || ''}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value) || 0;
+                      setLinesOfCode(value);
+                      updateCalculation(value, auditType, startDate);
+                    }}
                     placeholder="e.g., 1000"
                     className="text-base"
                   />
@@ -426,7 +499,13 @@ const Audit = () => {
                 
                 <div className="space-y-3">
                   <Label className="text-base font-medium">Audit Type</Label>
-                  <Select defaultValue="rust-smart-contract">
+                  <Select 
+                    value={auditType} 
+                    onValueChange={(value) => {
+                      setAuditType(value);
+                      updateCalculation(linesOfCode, value, startDate);
+                    }}
+                  >
                     <SelectTrigger className="text-base">
                       <SelectValue />
                     </SelectTrigger>
@@ -441,13 +520,32 @@ const Audit = () => {
                 
                 <div className="space-y-3">
                   <Label className="text-base font-medium">Start Date</Label>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start text-left font-normal text-base text-muted-foreground"
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    Pick a date
-                  </Button>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal text-base",
+                          !startDate && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {startDate ? format(startDate, "PPP") : "Pick a date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={startDate}
+                        onSelect={(date) => {
+                          setStartDate(date);
+                          updateCalculation(linesOfCode, auditType, date);
+                        }}
+                        initialFocus
+                        className="p-3 pointer-events-auto"
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               
@@ -486,25 +584,25 @@ const Audit = () => {
                         <div className="flex justify-between items-center">
                           <span>Initial assessment and code analysis</span>
                           <Badge variant="secondary" className="font-mono">
-                            Calculate based on inputs
+                            {calculatedDays.assessment}
                           </Badge>
                         </div>
                         <div className="flex justify-between items-center">
                           <span>Comprehensive security testing</span>
                           <Badge variant="secondary" className="font-mono">
-                            Calculate based on inputs
+                            {calculatedDays.testing}
                           </Badge>
                         </div>
                         <div className="flex justify-between items-center">
                           <span>Vulnerability analysis and documentation</span>
                           <Badge variant="secondary" className="font-mono">
-                            Calculate based on inputs
+                            {calculatedDays.analysis}
                           </Badge>
                         </div>
                         <div className="flex justify-between items-center">
                           <span>Final report preparation</span>
                           <Badge variant="secondary" className="font-mono">
-                            Calculate based on inputs
+                            {calculatedDays.report}
                           </Badge>
                         </div>
                       </CardContent>
@@ -533,11 +631,11 @@ const Audit = () => {
                       <CardContent className="pt-6">
                         <div className="flex justify-between items-center mb-4">
                           <span className="text-lg font-semibold text-foreground">Total Estimated Duration:</span>
-                          <span className="text-2xl font-bold text-primary font-mono">Enter details to calculate</span>
+                          <span className="text-2xl font-bold text-primary font-mono">{calculatedDays.total}</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-muted-foreground">Estimated Completion Date:</span>
-                          <span className="text-primary font-semibold">Set start date to calculate</span>
+                          <span className="text-primary font-semibold">{calculatedDays.completion}</span>
                         </div>
                       </CardContent>
                     </Card>
