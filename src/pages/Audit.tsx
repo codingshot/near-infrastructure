@@ -733,9 +733,14 @@ const Audit = () => {
                          <div className="flex justify-between items-center group">
                            <span>Initial assessment and code analysis</span>
                            <div className="flex items-center gap-2">
-                             <Badge variant="secondary" className="font-mono">
-                               {calculatedDays.assessment}
-                             </Badge>
+                              <Badge 
+                                variant="secondary" 
+                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                                onClick={() => editEstimate('assessment', calculatedDays.assessment)}
+                                title="Click to edit estimate"
+                              >
+                                {calculatedDays.assessment}
+                              </Badge>
                              <Button 
                                variant="ghost" 
                                size="sm"
@@ -749,9 +754,14 @@ const Audit = () => {
                          <div className="flex justify-between items-center group">
                            <span>Comprehensive security testing</span>
                            <div className="flex items-center gap-2">
-                             <Badge variant="secondary" className="font-mono">
-                               {calculatedDays.testing}
-                             </Badge>
+                              <Badge 
+                                variant="secondary" 
+                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                                onClick={() => editEstimate('testing', calculatedDays.testing)}
+                                title="Click to edit estimate"
+                              >
+                                {calculatedDays.testing}
+                              </Badge>
                              <Button 
                                variant="ghost" 
                                size="sm"
@@ -765,9 +775,14 @@ const Audit = () => {
                          <div className="flex justify-between items-center group">
                            <span>Vulnerability analysis and documentation</span>
                            <div className="flex items-center gap-2">
-                             <Badge variant="secondary" className="font-mono">
-                               {calculatedDays.analysis}
-                             </Badge>
+                              <Badge 
+                                variant="secondary" 
+                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                                onClick={() => editEstimate('analysis', calculatedDays.analysis)}
+                                title="Click to edit estimate"
+                              >
+                                {calculatedDays.analysis}
+                              </Badge>
                              <Button 
                                variant="ghost" 
                                size="sm"
@@ -781,9 +796,14 @@ const Audit = () => {
                          <div className="flex justify-between items-center group">
                            <span>Final report preparation</span>
                            <div className="flex items-center gap-2">
-                             <Badge variant="secondary" className="font-mono">
-                               {calculatedDays.report}
-                             </Badge>
+                              <Badge 
+                                variant="secondary" 
+                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                                onClick={() => editEstimate('report', calculatedDays.report)}
+                                title="Click to edit estimate"
+                              >
+                                {calculatedDays.report}
+                              </Badge>
                              <Button 
                                variant="ghost" 
                                size="sm"
