@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock } from 'lucide-react';
+import { ExternalLink, Shield, Users, CheckCircle, AlertTriangle, Info, Linkedin, Twitter, CalendarIcon, Clock, Edit, Share2 } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
@@ -13,15 +13,29 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar } from '@/components/ui/calendar';
 import { generateSlug } from '@/utils/slugs';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { useSearchParams } from 'react-router-dom';
+import { toast } from '@/components/ui/use-toast';
 
 const Audit = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const calculatorRef = useRef<HTMLDivElement>(null);
   const [dillonData, setDillonData] = useState<any>(null);
   const [linesOfCode, setLinesOfCode] = useState<number>(0);
   const [auditType, setAuditType] = useState<string>('rust-smart-contract');
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
+  const [estimateTitle, setEstimateTitle] = useState<string>('');
+  const [overrides, setOverrides] = useState<{
+    assessment?: number;
+    testing?: number;
+    analysis?: number;
+    report?: number;
+    consultation?: number;
+    documentation?: number;
+  }>({});
+  const [editingPhase, setEditingPhase] = useState<string | null>(null);
   const [calculatedDays, setCalculatedDays] = useState<any>({
     assessment: 'Calculate based on inputs',
     testing: 'Calculate based on inputs', 
@@ -45,9 +59,87 @@ const Audit = () => {
     };
     
     loadTeamData();
-  }, []);
+    
+    // Load URL parameters if present
+    const urlLinesOfCode = searchParams.get('lines');
+    const urlAuditType = searchParams.get('type');
+    const urlStartDate = searchParams.get('start');
+    const urlTitle = searchParams.get('title');
+    const urlAssessment = searchParams.get('assessment');
+    const urlTesting = searchParams.get('testing');
+    const urlAnalysis = searchParams.get('analysis');
+    const urlReport = searchParams.get('report');
+    const urlConsultation = searchParams.get('consultation');
+    const urlDocumentation = searchParams.get('documentation');
+    
+    if (urlLinesOfCode || urlAuditType || urlStartDate || urlTitle || urlAssessment || urlTesting || urlAnalysis || urlReport || urlConsultation || urlDocumentation) {
+      const lines = urlLinesOfCode ? parseInt(urlLinesOfCode) : 0;
+      const type = urlAuditType || 'rust-smart-contract';
+      const start = urlStartDate ? new Date(urlStartDate) : undefined;
+      const title = urlTitle || '';
+      
+      const newOverrides = {
+        assessment: urlAssessment ? parseInt(urlAssessment) : undefined,
+        testing: urlTesting ? parseInt(urlTesting) : undefined,
+        analysis: urlAnalysis ? parseInt(urlAnalysis) : undefined,
+        report: urlReport ? parseInt(urlReport) : undefined,
+        consultation: urlConsultation ? parseInt(urlConsultation) : undefined,
+        documentation: urlDocumentation ? parseInt(urlDocumentation) : undefined,
+      };
+      
+      if (lines) setLinesOfCode(lines);
+      if (urlAuditType) setAuditType(type);
+      if (start && !isNaN(start.getTime())) setStartDate(start);
+      if (title) setEstimateTitle(decodeURIComponent(title));
+      setOverrides(newOverrides);
+      
+      updateCalculation(lines, type, start, newOverrides);
+      
+      // Scroll to calculator section
+      setTimeout(() => {
+        calculatorRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [searchParams]);
 
-  const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined) => {
+  const updateUrlParams = (lines: number, type: string, date: Date | undefined, title: string = '', overrideValues: any = {}) => {
+    const newParams = new URLSearchParams();
+    if (lines > 0) newParams.set('lines', lines.toString());
+    if (type) newParams.set('type', type);
+    if (date) newParams.set('start', date.toISOString().split('T')[0]);
+    if (title.trim()) newParams.set('title', encodeURIComponent(title.trim()));
+    if (overrideValues.assessment) newParams.set('assessment', overrideValues.assessment.toString());
+    if (overrideValues.testing) newParams.set('testing', overrideValues.testing.toString());
+    if (overrideValues.analysis) newParams.set('analysis', overrideValues.analysis.toString());
+    if (overrideValues.report) newParams.set('report', overrideValues.report.toString());
+    if (overrideValues.consultation) newParams.set('consultation', overrideValues.consultation.toString());
+    if (overrideValues.documentation) newParams.set('documentation', overrideValues.documentation.toString());
+    
+    setSearchParams(newParams);
+  };
+
+  const shareEstimate = () => {
+    const currentUrl = new URL(window.location.href);
+    const shareUrl = `${currentUrl.origin}${currentUrl.pathname}?${searchParams.toString()}`;
+    
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      toast({
+        title: "Link copied to clipboard",
+        description: "Share this link to show your audit estimate",
+      });
+    }).catch(() => {
+      toast({
+        title: "Failed to copy link",
+        description: "Please copy the URL manually from your browser",
+        variant: "destructive",
+      });
+    });
+  };
+
+  const updateCalculation = (linesOfCode: number, auditType: string, startDate: Date | undefined, overrideValues: any = overrides) => {
+    // Update URL parameters
+    updateUrlParams(linesOfCode, auditType, startDate, estimateTitle, overrideValues);
+    
     if (!linesOfCode || linesOfCode <= 0) {
       setCalculatedDays({
         assessment: 'Calculate based on inputs',
@@ -73,33 +165,65 @@ const Audit = () => {
     // More reasonable complexity scaling - less aggressive growth
     const complexityScale = Math.min(1 + (linesOfCode / 20000) * 0.3, 1.8); // Cap at 1.8x for very large codebases
     
-    // More reasonable day calculations
-    const assessmentDays = Math.max(1, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.4)) * complexityScale));
-    const testingDays = Math.max(2, Math.ceil((factor.base * 1.2 + (linesOfCode * factor.complexity * 0.6)) * factor.multiplier));
-    const analysisDays = Math.max(1, Math.ceil((factor.base * 0.7 + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
-    const reportDays = Math.max(1, Math.ceil((factor.base * 0.5 + (linesOfCode * factor.complexity * 0.2)) * 1.0));
+    // Calculate base estimates
+    const baseAssessment = Math.max(1, Math.ceil((factor.base + (linesOfCode * factor.complexity * 0.4)) * complexityScale));
+    const baseTesting = Math.max(2, Math.ceil((factor.base * 1.2 + (linesOfCode * factor.complexity * 0.6)) * factor.multiplier));
+    const baseAnalysis = Math.max(1, Math.ceil((factor.base * 0.7 + (linesOfCode * factor.complexity * 0.3)) * complexityScale));
+    const baseReport = Math.max(1, Math.ceil((factor.base * 0.5 + (linesOfCode * factor.complexity * 0.2)) * 1.0));
 
-    // More reasonable planning and review days
-    const planningDays = linesOfCode > 8000 ? 4 : linesOfCode > 3000 ? 3 : 2;
-    const reviewDays = linesOfCode > 15000 ? 2 : 1;
-    const remediationDays = 7; // Default 1 week for revisions
-    const totalDays = planningDays + assessmentDays + testingDays + analysisDays + reportDays + reviewDays + remediationDays;
+    // Apply caps to prevent unrealistic estimates
+    const calculatedAssessment = Math.min(baseAssessment, 10);
+    const calculatedTesting = Math.min(baseTesting, 15);
+    const calculatedAnalysis = Math.min(baseAnalysis, 8);
+    const calculatedReport = Math.min(baseReport, 5);
+    
+    // Use overrides if available, otherwise use calculated values
+    const assessment = overrideValues.assessment || calculatedAssessment;
+    const testing = overrideValues.testing || calculatedTesting;
+    const analysis = overrideValues.analysis || calculatedAnalysis;
+    const report = overrideValues.report || calculatedReport;
+    
+    const remediation = 7; // Fixed 1 week for remediation verification
+    const total = assessment + testing + analysis + report + remediation;
 
     let completion = 'Set start date to calculate';
     if (startDate) {
       const completionDate = new Date(startDate);
-      completionDate.setDate(completionDate.getDate() + totalDays);
+      completionDate.setDate(completionDate.getDate() + total);
       completion = format(completionDate, 'PPP');
     }
 
     setCalculatedDays({
-      assessment: `${assessmentDays}`,
-      testing: `${testingDays}`,
-      analysis: `${analysisDays}`,
-      report: `${reportDays}`,
-      total: `${totalDays} days`,
+      assessment: `${assessment} days`,
+      testing: `${testing} days`,
+      analysis: `${analysis} days`,
+      report: `${report} days`,
+      total: `${total} days`,
       completion
     });
+  };
+
+  const startEditingPhase = (phase: string) => {
+    setEditingPhase(phase);
+  };
+
+  const handlePhaseEdit = (phase: 'assessment' | 'testing' | 'analysis' | 'report' | 'consultation' | 'documentation', value: string) => {
+    const numericValue = parseInt(value) || 0;
+    if (numericValue > 0) {
+      const newOverrides = { ...overrides, [phase]: numericValue };
+      setOverrides(newOverrides);
+      updateCalculation(linesOfCode, auditType, startDate, newOverrides);
+    }
+    setEditingPhase(null);
+  };
+
+  const handlePhaseKeyDown = (e: React.KeyboardEvent, phase: 'assessment' | 'testing' | 'analysis' | 'report' | 'consultation' | 'documentation') => {
+    if (e.key === 'Enter') {
+      const input = e.target as HTMLInputElement;
+      handlePhaseEdit(phase, input.value);
+    } else if (e.key === 'Escape') {
+      setEditingPhase(null);
+    }
   };
 
   const pastExamples = [
@@ -448,7 +572,7 @@ const Audit = () => {
         </div>
 
         {/* Audit Calculator */}
-        <div className="mb-12">
+        <div className="mb-12" ref={calculatorRef}>
           <h2 className="text-3xl font-bold mb-6 text-foreground">Audit Calculator</h2>
           <p className="text-lg text-muted-foreground mb-8">
             Estimate timeline and completion date for your security audit
@@ -464,6 +588,37 @@ const Audit = () => {
                     <p className="text-sm text-yellow-800 dark:text-yellow-200">
                       This calculator provides rough estimates only and is currently in development. Actual audit times may vary significantly based on code complexity, dependencies, and other factors.
                     </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1 mr-4">
+                    <Label htmlFor="estimate-title" className="text-base font-medium">Estimate Title (Optional)</Label>
+                    <Input
+                      id="estimate-title"
+                      type="text"
+                      value={estimateTitle}
+                      onChange={(e) => {
+                        setEstimateTitle(e.target.value);
+                        updateUrlParams(linesOfCode, auditType, startDate, e.target.value);
+                      }}
+                      placeholder="e.g., DeFi Protocol V2 Audit"
+                      className="text-base mt-2"
+                    />
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <Label className="text-base font-medium mb-2">Share Estimate</Label>
+                    <Button
+                      variant="outline"
+                      onClick={shareEstimate}
+                      className="inline-flex items-center gap-2"
+                      disabled={!linesOfCode || linesOfCode <= 0}
+                    >
+                      <Share2 className="h-4 w-4" />
+                      Copy Link
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -494,7 +649,7 @@ const Audit = () => {
                       updateCalculation(linesOfCode, value, startDate);
                     }}
                   >
-                    <SelectTrigger className="text-base">
+                    <SelectTrigger className="text-base" data-testid="audit-type-select">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -549,16 +704,52 @@ const Audit = () => {
                           Planning Phase
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span>Initial consultation and scope definition</span>
-                          <Badge variant="outline">3-5 days</Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Documentation review and environment setup</span>
-                          <Badge variant="outline">2-3 days</Badge>
-                        </div>
-                      </CardContent>
+                       <CardContent className="space-y-3">
+                         <div className="flex justify-between items-center">
+                           <span>Initial consultation and scope definition</span>
+                           {editingPhase === 'consultation' ? (
+                             <Input
+                               type="number"
+                               defaultValue={overrides.consultation || 4}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('consultation', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'consultation')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="outline"
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('consultation')}
+                               title="Click to edit estimate"
+                             >
+                               {overrides.consultation ? `${overrides.consultation} days` : '3-5 days'}
+                             </Badge>
+                           )}
+                         </div>
+                         <div className="flex justify-between items-center">
+                           <span>Documentation review and environment setup</span>
+                           {editingPhase === 'documentation' ? (
+                             <Input
+                               type="number"
+                               defaultValue={overrides.documentation || 3}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('documentation', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'documentation')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="outline"
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('documentation')}
+                               title="Click to edit estimate"
+                             >
+                               {overrides.documentation ? `${overrides.documentation} days` : '2-3 days'}
+                             </Badge>
+                           )}
+                         </div>
+                       </CardContent>
                     </Card>
                     
                     <Card>
@@ -568,31 +759,95 @@ const Audit = () => {
                           Audit Execution
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span>Initial assessment and code analysis</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.assessment}
-                          </Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Comprehensive security testing</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.testing}
-                          </Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Vulnerability analysis and documentation</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.analysis}
-                          </Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Final report preparation</span>
-                          <Badge variant="secondary" className="font-mono">
-                            {calculatedDays.report}
-                          </Badge>
-                        </div>
+                       <CardContent className="space-y-3">
+                         <div className="flex justify-between items-center">
+                           <span>Initial assessment and code analysis</span>
+                           {editingPhase === 'assessment' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.assessment.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('assessment', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'assessment')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('assessment')}
+                               title="Click to edit estimate"
+                             >
+                               {calculatedDays.assessment}
+                             </Badge>
+                           )}
+                         </div>
+                         <div className="flex justify-between items-center">
+                           <span>Comprehensive security testing</span>
+                           {editingPhase === 'testing' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.testing.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('testing', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'testing')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('testing')}
+                               title="Click to edit estimate"
+                             >
+                               {calculatedDays.testing}
+                             </Badge>
+                           )}
+                         </div>
+                         <div className="flex justify-between items-center">
+                           <span>Vulnerability analysis and documentation</span>
+                           {editingPhase === 'analysis' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.analysis.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('analysis', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'analysis')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('analysis')}
+                               title="Click to edit estimate"
+                             >
+                               {calculatedDays.analysis}
+                             </Badge>
+                           )}
+                         </div>
+                         <div className="flex justify-between items-center">
+                           <span>Final report preparation</span>
+                           {editingPhase === 'report' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.report.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('report', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'report')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('report')}
+                               title="Click to edit estimate"
+                             >
+                               {calculatedDays.report}
+                             </Badge>
+                           )}
+                         </div>
                       </CardContent>
                     </Card>
                     
