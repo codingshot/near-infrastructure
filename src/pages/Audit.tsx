@@ -32,6 +32,8 @@ const Audit = () => {
     testing?: number;
     analysis?: number;
     report?: number;
+    consultation?: number;
+    documentation?: number;
   }>({});
   const [editingPhase, setEditingPhase] = useState<string | null>(null);
   const [calculatedDays, setCalculatedDays] = useState<any>({
@@ -67,8 +69,10 @@ const Audit = () => {
     const urlTesting = searchParams.get('testing');
     const urlAnalysis = searchParams.get('analysis');
     const urlReport = searchParams.get('report');
+    const urlConsultation = searchParams.get('consultation');
+    const urlDocumentation = searchParams.get('documentation');
     
-    if (urlLinesOfCode || urlAuditType || urlStartDate || urlTitle || urlAssessment || urlTesting || urlAnalysis || urlReport) {
+    if (urlLinesOfCode || urlAuditType || urlStartDate || urlTitle || urlAssessment || urlTesting || urlAnalysis || urlReport || urlConsultation || urlDocumentation) {
       const lines = urlLinesOfCode ? parseInt(urlLinesOfCode) : 0;
       const type = urlAuditType || 'rust-smart-contract';
       const start = urlStartDate ? new Date(urlStartDate) : undefined;
@@ -79,6 +83,8 @@ const Audit = () => {
         testing: urlTesting ? parseInt(urlTesting) : undefined,
         analysis: urlAnalysis ? parseInt(urlAnalysis) : undefined,
         report: urlReport ? parseInt(urlReport) : undefined,
+        consultation: urlConsultation ? parseInt(urlConsultation) : undefined,
+        documentation: urlDocumentation ? parseInt(urlDocumentation) : undefined,
       };
       
       if (lines) setLinesOfCode(lines);
@@ -106,6 +112,8 @@ const Audit = () => {
     if (overrideValues.testing) newParams.set('testing', overrideValues.testing.toString());
     if (overrideValues.analysis) newParams.set('analysis', overrideValues.analysis.toString());
     if (overrideValues.report) newParams.set('report', overrideValues.report.toString());
+    if (overrideValues.consultation) newParams.set('consultation', overrideValues.consultation.toString());
+    if (overrideValues.documentation) newParams.set('documentation', overrideValues.documentation.toString());
     
     setSearchParams(newParams);
   };
@@ -199,7 +207,7 @@ const Audit = () => {
     setEditingPhase(phase);
   };
 
-  const handlePhaseEdit = (phase: 'assessment' | 'testing' | 'analysis' | 'report', value: string) => {
+  const handlePhaseEdit = (phase: 'assessment' | 'testing' | 'analysis' | 'report' | 'consultation' | 'documentation', value: string) => {
     const numericValue = parseInt(value) || 0;
     if (numericValue > 0) {
       const newOverrides = { ...overrides, [phase]: numericValue };
@@ -209,7 +217,7 @@ const Audit = () => {
     setEditingPhase(null);
   };
 
-  const handlePhaseKeyDown = (e: React.KeyboardEvent, phase: 'assessment' | 'testing' | 'analysis' | 'report') => {
+  const handlePhaseKeyDown = (e: React.KeyboardEvent, phase: 'assessment' | 'testing' | 'analysis' | 'report' | 'consultation' | 'documentation') => {
     if (e.key === 'Enter') {
       const input = e.target as HTMLInputElement;
       handlePhaseEdit(phase, input.value);
@@ -696,16 +704,52 @@ const Audit = () => {
                           Planning Phase
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span>Initial consultation and scope definition</span>
-                          <Badge variant="outline">3-5 days</Badge>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Documentation review and environment setup</span>
-                          <Badge variant="outline">2-3 days</Badge>
-                        </div>
-                      </CardContent>
+                       <CardContent className="space-y-3">
+                         <div className="flex justify-between items-center">
+                           <span>Initial consultation and scope definition</span>
+                           {editingPhase === 'consultation' ? (
+                             <Input
+                               type="number"
+                               defaultValue={overrides.consultation || 4}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('consultation', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'consultation')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="outline"
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('consultation')}
+                               title="Click to edit estimate"
+                             >
+                               {overrides.consultation ? `${overrides.consultation} days` : '3-5 days'}
+                             </Badge>
+                           )}
+                         </div>
+                         <div className="flex justify-between items-center">
+                           <span>Documentation review and environment setup</span>
+                           {editingPhase === 'documentation' ? (
+                             <Input
+                               type="number"
+                               defaultValue={overrides.documentation || 3}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('documentation', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'documentation')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="outline"
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('documentation')}
+                               title="Click to edit estimate"
+                             >
+                               {overrides.documentation ? `${overrides.documentation} days` : '2-3 days'}
+                             </Badge>
+                           )}
+                         </div>
+                       </CardContent>
                     </Card>
                     
                     <Card>
