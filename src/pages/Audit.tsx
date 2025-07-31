@@ -33,6 +33,7 @@ const Audit = () => {
     analysis?: number;
     report?: number;
   }>({});
+  const [editingPhase, setEditingPhase] = useState<string | null>(null);
   const [calculatedDays, setCalculatedDays] = useState<any>({
     assessment: 'Calculate based on inputs',
     testing: 'Calculate based on inputs', 
@@ -194,15 +195,26 @@ const Audit = () => {
     });
   };
 
-  const editEstimate = (phase: 'assessment' | 'testing' | 'analysis' | 'report', currentValue: string) => {
-    const numericValue = parseInt(currentValue.replace(/\D/g, '')) || 0;
-    const input = prompt(`Enter new estimate for ${phase} (days):`, numericValue.toString());
-    
-    if (input !== null && !isNaN(parseInt(input))) {
-      const newValue = parseInt(input);
-      const newOverrides = { ...overrides, [phase]: newValue };
+  const startEditingPhase = (phase: string) => {
+    setEditingPhase(phase);
+  };
+
+  const handlePhaseEdit = (phase: 'assessment' | 'testing' | 'analysis' | 'report', value: string) => {
+    const numericValue = parseInt(value) || 0;
+    if (numericValue > 0) {
+      const newOverrides = { ...overrides, [phase]: numericValue };
       setOverrides(newOverrides);
       updateCalculation(linesOfCode, auditType, startDate, newOverrides);
+    }
+    setEditingPhase(null);
+  };
+
+  const handlePhaseKeyDown = (e: React.KeyboardEvent, phase: 'assessment' | 'testing' | 'analysis' | 'report') => {
+    if (e.key === 'Enter') {
+      const input = e.target as HTMLInputElement;
+      handlePhaseEdit(phase, input.value);
+    } else if (e.key === 'Escape') {
+      setEditingPhase(null);
     }
   };
 
@@ -679,22 +691,9 @@ const Audit = () => {
                   <div className="space-y-6">
                     <Card>
                       <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Clock className="w-5 h-5" />
-                            Planning Phase
-                          </div>
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            onClick={() => {
-                              const element = document.getElementById('lines-of-code');
-                              element?.focus();
-                              element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
+                        <CardTitle className="flex items-center gap-2">
+                          <Clock className="w-5 h-5" />
+                          Planning Phase
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3">
@@ -711,129 +710,108 @@ const Audit = () => {
                     
                     <Card>
                       <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Shield className="w-5 h-5" />
-                            Audit Execution
-                          </div>
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            onClick={() => {
-                              const element = document.querySelector('[data-testid="audit-type-select"]') as HTMLElement;
-                              element?.click();
-                              element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
+                        <CardTitle className="flex items-center gap-2">
+                          <Shield className="w-5 h-5" />
+                          Audit Execution
                         </CardTitle>
                       </CardHeader>
                        <CardContent className="space-y-3">
-                         <div className="flex justify-between items-center group">
+                         <div className="flex justify-between items-center">
                            <span>Initial assessment and code analysis</span>
-                           <div className="flex items-center gap-2">
-                              <Badge 
-                                variant="secondary" 
-                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
-                                onClick={() => editEstimate('assessment', calculatedDays.assessment)}
-                                title="Click to edit estimate"
-                              >
-                                {calculatedDays.assessment}
-                              </Badge>
-                             <Button 
-                               variant="ghost" 
-                               size="sm"
-                               className="opacity-0 group-hover:opacity-100 transition-opacity"
-                               onClick={() => editEstimate('assessment', calculatedDays.assessment)}
+                           {editingPhase === 'assessment' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.assessment.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('assessment', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'assessment')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('assessment')}
+                               title="Click to edit estimate"
                              >
-                               <Edit className="w-3 h-3" />
-                             </Button>
-                           </div>
+                               {calculatedDays.assessment}
+                             </Badge>
+                           )}
                          </div>
-                         <div className="flex justify-between items-center group">
+                         <div className="flex justify-between items-center">
                            <span>Comprehensive security testing</span>
-                           <div className="flex items-center gap-2">
-                              <Badge 
-                                variant="secondary" 
-                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
-                                onClick={() => editEstimate('testing', calculatedDays.testing)}
-                                title="Click to edit estimate"
-                              >
-                                {calculatedDays.testing}
-                              </Badge>
-                             <Button 
-                               variant="ghost" 
-                               size="sm"
-                               className="opacity-0 group-hover:opacity-100 transition-opacity"
-                               onClick={() => editEstimate('testing', calculatedDays.testing)}
+                           {editingPhase === 'testing' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.testing.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('testing', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'testing')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('testing')}
+                               title="Click to edit estimate"
                              >
-                               <Edit className="w-3 h-3" />
-                             </Button>
-                           </div>
+                               {calculatedDays.testing}
+                             </Badge>
+                           )}
                          </div>
-                         <div className="flex justify-between items-center group">
+                         <div className="flex justify-between items-center">
                            <span>Vulnerability analysis and documentation</span>
-                           <div className="flex items-center gap-2">
-                              <Badge 
-                                variant="secondary" 
-                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
-                                onClick={() => editEstimate('analysis', calculatedDays.analysis)}
-                                title="Click to edit estimate"
-                              >
-                                {calculatedDays.analysis}
-                              </Badge>
-                             <Button 
-                               variant="ghost" 
-                               size="sm"
-                               className="opacity-0 group-hover:opacity-100 transition-opacity"
-                               onClick={() => editEstimate('analysis', calculatedDays.analysis)}
+                           {editingPhase === 'analysis' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.analysis.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('analysis', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'analysis')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('analysis')}
+                               title="Click to edit estimate"
                              >
-                               <Edit className="w-3 h-3" />
-                             </Button>
-                           </div>
+                               {calculatedDays.analysis}
+                             </Badge>
+                           )}
                          </div>
-                         <div className="flex justify-between items-center group">
+                         <div className="flex justify-between items-center">
                            <span>Final report preparation</span>
-                           <div className="flex items-center gap-2">
-                              <Badge 
-                                variant="secondary" 
-                                className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
-                                onClick={() => editEstimate('report', calculatedDays.report)}
-                                title="Click to edit estimate"
-                              >
-                                {calculatedDays.report}
-                              </Badge>
-                             <Button 
-                               variant="ghost" 
-                               size="sm"
-                               className="opacity-0 group-hover:opacity-100 transition-opacity"
-                               onClick={() => editEstimate('report', calculatedDays.report)}
+                           {editingPhase === 'report' ? (
+                             <Input
+                               type="number"
+                               defaultValue={parseInt(calculatedDays.report.replace(/\D/g, '')) || 0}
+                               className="w-20 h-8 text-sm"
+                               autoFocus
+                               onBlur={(e) => handlePhaseEdit('report', e.target.value)}
+                               onKeyDown={(e) => handlePhaseKeyDown(e, 'report')}
+                             />
+                           ) : (
+                             <Badge 
+                               variant="secondary" 
+                               className="font-mono cursor-pointer hover:bg-primary/20 transition-colors"
+                               onClick={() => startEditingPhase('report')}
+                               title="Click to edit estimate"
                              >
-                               <Edit className="w-3 h-3" />
-                             </Button>
-                           </div>
+                               {calculatedDays.report}
+                             </Badge>
+                           )}
                          </div>
                       </CardContent>
                     </Card>
                     
                     <Card>
                       <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <CheckCircle className="w-5 h-5" />
-                            Post-Audit Follow-up
-                          </div>
-                          <Button 
-                            variant="ghost" 
-                            size="sm"
-                            onClick={() => {
-                              const element = document.querySelector('.space-y-3:has(> .space-y-3 > Label)') as HTMLElement;
-                              element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
+                        <CardTitle className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5" />
+                          Post-Audit Follow-up
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="space-y-3">
