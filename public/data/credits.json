@@ -3,5 +3,10 @@
     "name": "Lava RPC",
     "description": "Decentralized RPC, offering $200 worth of monthly credits to qualified founders",
     "link": "https://nearn.io/lava-rpc/1/"
+  },
+  {
+    "name": "FastNEAR RPC",
+    "description": "FastNear RPC sponsorship for NEAR builders! There are 3 monthly plans: Dev $69: 10M/month RPC, API and Neardata requests; Pro $199: 36M/month RPC, API and Neardata requests; Business $499: 100M/month RPC, API and Neardata requests. All plans support virtually unlimited requests per second with access to Mainnet/Testnet regular and archival RPC. FastNear RPC is fast, low-latency, geo-spacial load-balanced, professionally managed, with 100% uptime over the past year.",
+    "link": "https://nearn.io/fastnear/1/"
   }
 ]
