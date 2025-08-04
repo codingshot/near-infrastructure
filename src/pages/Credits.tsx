@@ -49,15 +49,15 @@ const Credits = () => {
       
       <main className="pt-20 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header Section */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-grotesk font-bold mb-6">
-              Get <span className="near-infra-highlight">near infra</span> Credits
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Get free infrastructure credits if you are a serious builder. Choose from our partner providers below to accelerate your NEAR development.
-            </p>
-          </div>
+      {/* Header Section */}
+      <div className="hero-text max-w-4xl mx-auto text-center mb-12 md:mb-16">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-grotesk font-semibold text-foreground mb-4 md:mb-6 leading-tight text-center">
+          Get <span className="near-infra-highlight">near infra</span> Credits
+        </h1>
+        <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6 md:mb-8 max-w-3xl leading-relaxed mx-auto text-center">
+          Get free infrastructure credits if you are a serious builder. Choose from our partner providers below to accelerate your NEAR development.
+        </p>
+      </div>
 
           {/* Credits Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
