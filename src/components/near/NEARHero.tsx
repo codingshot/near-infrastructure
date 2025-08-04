@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
 import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen, CreditCard } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
@@ -191,9 +192,12 @@ const NEARHero = () => {
                       <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
                         <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                       </div>
-                       <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
+                       <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
                          {card.title === 'Get near infra Credits' ? (
-                           <>Get <span className="near-infra-highlight">near infra</span> Credits</>
+                           <>
+                             Get <span className="near-infra-highlight">near infra</span> Credits
+                             <Badge variant="secondary" className="text-xs">Soon</Badge>
+                           </>
                          ) : (
                            card.title
                          )}
@@ -244,15 +248,30 @@ const NEARHero = () => {
                                        alt={`${credit.name} logo`}
                                        className="w-6 h-6 sm:w-8 sm:h-8 object-cover rounded-full flex-shrink-0"
                                      />
-                                     <h3 className="font-semibold text-base sm:text-lg">{credit.name}</h3>
+                                     <div className="flex items-center gap-2 flex-wrap">
+                                       <h3 className="font-semibold text-base sm:text-lg">{credit.name}</h3>
+                                       {credit.status === 'soon' && (
+                                         <Badge variant="secondary" className="text-xs">Soon</Badge>
+                                       )}
+                                     </div>
                                    </div>
                                    <p className="text-muted-foreground mb-4 text-sm sm:text-base leading-relaxed">{credit.description}</p>
                                  </div>
                                </div>
-                               <Button asChild className="w-full">
-                                 <a href={credit.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                                   Get Credits <ExternalLink className="w-4 h-4" />
-                                 </a>
+                               <Button 
+                                 asChild={credit.status !== 'soon'} 
+                                 className={`w-full ${credit.status === 'soon' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                 disabled={credit.status === 'soon'}
+                               >
+                                 {credit.status === 'soon' ? (
+                                   <span className="flex items-center justify-center gap-2">
+                                     Coming Soon
+                                   </span>
+                                 ) : (
+                                   <a href={credit.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                                     Get Credits <ExternalLink className="w-4 h-4" />
+                                   </a>
+                                 )}
                                </Button>
                              </Card>
                            ))}
