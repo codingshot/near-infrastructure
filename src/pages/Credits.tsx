@@ -86,7 +86,7 @@ const Credits = () => {
                 <img 
                   src={credit.logo} 
                   alt={`${credit.name} logo`}
-                  className="w-8 h-8 object-contain"
+                  className="w-8 h-8 object-cover rounded-full"
                 />
                 {credit.name}
               </CardTitle>
