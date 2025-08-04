@@ -224,41 +224,48 @@ const NEARHero = () => {
                       <DialogTrigger asChild>
                         {CardComponent}
                       </DialogTrigger>
-                      <DialogContent className="max-w-2xl">
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl font-grotesk font-semibold">
-                            Get <span className="near-infra-highlight">near infra</span> Credits
-                          </DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-4">
-                          <p className="text-muted-foreground">
-                            Get free infrastructure credits if you are a serious builder. Choose from our partner providers:
-                          </p>
-                          {credits.map((credit, idx) => (
-                            <Card key={idx} className="p-4">
-                              <div className="flex items-start justify-between">
-                                <div className="flex-1">
-                                  <h3 className="font-semibold text-lg mb-2">{credit.name}</h3>
-                                  <p className="text-muted-foreground mb-4">{credit.description}</p>
-                                </div>
-                              </div>
-                              <Button asChild className="w-full">
-                                <a href={credit.link} target="_blank" rel="noopener noreferrer">
-                                  Get Credits <ExternalLink className="w-4 h-4 ml-2" />
-                                </a>
-                              </Button>
-                            </Card>
-                          ))}
-                          <div className="mt-6 p-4 bg-muted/50 rounded-lg border">
-                            <p className="text-sm text-muted-foreground">
-                              Are you a NEAR Infra provider and want your clients subsidized, apply for your own credit program{' '}
-                              <a href="https://nearn.io/infra-committee/5/" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:no-underline">
-                                here
-                              </a>
-                            </p>
-                          </div>
-                        </div>
-                      </DialogContent>
+                       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+                         <DialogHeader>
+                           <DialogTitle className="text-xl sm:text-2xl font-grotesk font-semibold">
+                             Get <span className="near-infra-highlight">near infra</span> Credits
+                           </DialogTitle>
+                         </DialogHeader>
+                         <div className="space-y-4">
+                           <p className="text-muted-foreground text-sm sm:text-base">
+                             Get free infrastructure credits if you are a serious builder. Choose from our partner providers:
+                           </p>
+                           {credits.map((credit, idx) => (
+                             <Card key={idx} className="p-3 sm:p-4">
+                               <div className="flex items-start justify-between">
+                                 <div className="flex-1">
+                                   <div className="flex items-center gap-3 mb-2">
+                                     <img 
+                                       src={credit.logo} 
+                                       alt={`${credit.name} logo`}
+                                       className="w-6 h-6 sm:w-8 sm:h-8 object-cover rounded-full flex-shrink-0"
+                                     />
+                                     <h3 className="font-semibold text-base sm:text-lg">{credit.name}</h3>
+                                   </div>
+                                   <p className="text-muted-foreground mb-4 text-sm sm:text-base leading-relaxed">{credit.description}</p>
+                                 </div>
+                               </div>
+                               <Button asChild className="w-full">
+                                 <a href={credit.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                                   Get Credits <ExternalLink className="w-4 h-4" />
+                                 </a>
+                               </Button>
+                             </Card>
+                           ))}
+                           <div className="mt-6 p-3 sm:p-4 bg-muted/50 rounded-lg border">
+                             <p className="text-xs sm:text-sm text-muted-foreground">
+                               Are you a NEAR Infra provider and want your clients subsidized, apply for your own credit program{' '}
+                               <a href="https://nearn.io/infra-committee/5/" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:no-underline">
+                                 here
+                               </a>
+                             </p>
+                           </div>
+                         </div>
+                       </DialogContent>
                     </Dialog>
                   ) : (
                     <div onClick={() => window.open(card.href, '_blank', 'noopener,noreferrer')}>
