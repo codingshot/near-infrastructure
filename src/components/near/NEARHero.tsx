@@ -140,7 +140,7 @@ const NEARHero = () => {
               </div>
               <div className="text-sm sm:text-base md:text-lg text-muted-foreground">Funding Committed</div>
             </div>
-            <div>
+            <div className="cursor-pointer hover:scale-105 transition-transform" onClick={() => window.open('/projects', '_self')}>
               <div className="text-2xl sm:text-3xl md:text-4xl font-grotesk font-semibold mb-2">
                 {showStats ? (
                   <CountUp 
