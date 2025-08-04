@@ -59,38 +59,38 @@ const Credits = () => {
         </p>
       </div>
 
-          {/* Credits Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {credits.map((credit, idx) => (
-              <Card key={idx} className="h-full border-2 hover:border-primary/20 transition-all duration-300 group">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl font-grotesk group-hover:text-primary transition-colors">
-                    {credit.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-col h-full">
-                  <p className="text-muted-foreground mb-6 flex-grow leading-relaxed">
-                    {credit.description}
-                  </p>
-                  <Button 
-                    asChild 
-                    size="lg" 
-                    className="w-full group-hover:bg-primary/90 transition-all duration-300"
-                  >
-                    <a 
-                      href={credit.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      Get Credits
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      {/* Credits Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+        {credits.map((credit, idx) => (
+          <Card key={idx} className="h-full border-2 hover:border-primary/20 transition-all duration-300 group hover:translate-y-[-2px]">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl md:text-2xl font-grotesk font-semibold group-hover:text-primary transition-colors">
+                {credit.name}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col h-full">
+              <p className="text-muted-foreground mb-6 flex-grow leading-relaxed text-sm md:text-base">
+                {credit.description}
+              </p>
+              <Button 
+                asChild 
+                size="lg" 
+                className="w-full group-hover:bg-primary/90 transition-all duration-300"
+              >
+                <a 
+                  href={credit.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2"
+                >
+                  Get Credits
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
           {/* Provider Application Section */}
           <div className="bg-muted/30 rounded-2xl p-8 border-2 border-muted">
