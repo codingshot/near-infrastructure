@@ -85,8 +85,8 @@ const Credits = () => {
                 {credit.name}
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col h-full p-4 pt-0">
-              <p className="text-muted-foreground mb-4 flex-grow leading-relaxed text-sm md:text-base">
+            <CardContent className="flex flex-col h-full p-6 pt-0">
+              <p className="text-muted-foreground mb-6 flex-grow leading-relaxed text-sm md:text-base">
                 {credit.description}
               </p>
               <Button 
