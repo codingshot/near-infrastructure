@@ -10,6 +10,7 @@ interface Credit {
   name: string;
   description: string;
   link: string;
+  logo: string;
 }
 
 const Credits = () => {
@@ -81,7 +82,12 @@ const Credits = () => {
         {credits.map((credit, idx) => (
           <Card key={idx} className="border-2 hover:border-primary/20 transition-all duration-300 group hover:translate-y-[-2px] flex flex-col">
             <CardHeader>
-              <CardTitle className="text-xl md:text-2xl font-grotesk font-semibold group-hover:text-primary transition-colors">
+              <CardTitle className="text-xl md:text-2xl font-grotesk font-semibold group-hover:text-primary transition-colors flex items-center gap-3">
+                <img 
+                  src={credit.logo} 
+                  alt={`${credit.name} logo`}
+                  className="w-8 h-8 object-contain"
+                />
                 {credit.name}
               </CardTitle>
             </CardHeader>
