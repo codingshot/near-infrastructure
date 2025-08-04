@@ -192,11 +192,7 @@ const NEARHero = () => {
                         <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                       </div>
                        <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
-                         {card.title === 'Get near infra Credits' ? (
-                           <>Get <span className="near-infra-highlight">near infra</span> Credits</>
-                         ) : (
-                           card.title
-                         )}
+                         RFPs
                        </CardTitle>
                     </div>
                   </CardHeader>
