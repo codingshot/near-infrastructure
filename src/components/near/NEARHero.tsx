@@ -58,20 +58,12 @@ const NEARHero = () => {
       buttonText: 'Submit Proposal'
     },
     {
-      title: 'RFP',
+      title: 'RFPs',
       href: 'https://nearn.io/infra-committee/',
       external: true,
       icon: Target,
       description: 'Browse open requests for proposals and funding opportunities.',
       buttonText: 'View RFPs'
-    },
-    {
-      title: 'Feedback',
-      href: 'https://nearn.io//listing/near-infrastructure-ecosystem-feedback-page-no-payment/',
-      external: true,
-      icon: MessageSquare,
-      description: 'Share your thoughts on near infrastructure ecosystem needs.',
-      buttonText: 'Give Feedback'
     },
     {
       title: 'Get near infra Credits',
@@ -81,6 +73,14 @@ const NEARHero = () => {
       description: 'Get free infrastructure credits if you are a serious builder',
       buttonText: 'Get Credits',
       showPopup: true
+    },
+    {
+      title: 'Feedback',
+      href: 'https://nearn.io//listing/near-infrastructure-ecosystem-feedback-page-no-payment/',
+      external: true,
+      icon: MessageSquare,
+      description: 'Share your thoughts on near infrastructure ecosystem needs.',
+      buttonText: 'Give Feedback'
     }
   ];
 
@@ -192,7 +192,11 @@ const NEARHero = () => {
                         <IconComponent className="w-6 h-6 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
                       </div>
                        <CardTitle className="text-lg md:text-xl font-grotesk font-semibold text-foreground group-hover:text-primary transition-colors">
-                         RFPs
+                         {card.title === 'Get near infra Credits' ? (
+                           <>Get <span className="near-infra-highlight">near infra</span> Credits</>
+                         ) : (
+                           card.title
+                         )}
                        </CardTitle>
                     </div>
                   </CardHeader>
