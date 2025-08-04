@@ -79,31 +79,35 @@ const Credits = () => {
       {/* Credits Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
         {credits.map((credit, idx) => (
-          <Card key={idx} className="h-full border-2 hover:border-primary/20 transition-all duration-300 group hover:translate-y-[-2px]">
-            <CardHeader className="pb-4">
+          <Card key={idx} className="border-2 hover:border-primary/20 transition-all duration-300 group hover:translate-y-[-2px] flex flex-col">
+            <CardHeader>
               <CardTitle className="text-xl md:text-2xl font-grotesk font-semibold group-hover:text-primary transition-colors">
                 {credit.name}
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col h-full p-6 pt-0">
-              <p className="text-muted-foreground mb-6 flex-grow leading-relaxed text-sm md:text-base">
-                {credit.description}
-              </p>
-              <Button 
-                asChild 
-                size="lg" 
-                className="w-full group-hover:bg-primary/90 transition-all duration-300"
-              >
-                <a 
-                  href={credit.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2"
+            <CardContent className="flex flex-col flex-grow">
+              <div className="flex-grow">
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm md:text-base">
+                  {credit.description}
+                </p>
+              </div>
+              <div className="mt-auto">
+                <Button 
+                  asChild 
+                  size="lg" 
+                  className="w-full group-hover:bg-primary/90 transition-all duration-300"
                 >
-                  Get Credits
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
+                  <a 
+                    href={credit.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2"
+                  >
+                    Get Credits
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))}
