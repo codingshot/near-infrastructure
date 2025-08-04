@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { ExternalLink } from 'lucide-react';
 import NEARNavbar from '@/components/near/NEARNavbar';
 import NEARFooter from '@/components/near/NEARFooter';
@@ -11,6 +12,7 @@ interface Credit {
   description: string;
   link: string;
   logo: string;
+  status?: string;
 }
 
 const Credits = () => {
@@ -88,7 +90,12 @@ const Credits = () => {
                   alt={`${credit.name} logo`}
                   className="w-8 h-8 object-cover rounded-full"
                 />
-                {credit.name}
+                <div className="flex items-center gap-2 flex-wrap">
+                  {credit.name}
+                  {credit.status === 'soon' && (
+                    <Badge variant="secondary" className="text-xs">Soon</Badge>
+                  )}
+                </div>
               </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col flex-grow">
@@ -99,19 +106,26 @@ const Credits = () => {
               </div>
               <div className="mt-auto">
                 <Button 
-                  asChild 
+                  asChild={credit.status !== 'soon'} 
                   size="lg" 
-                  className="w-full group-hover:bg-primary/90 transition-all duration-300"
+                  className={`w-full group-hover:bg-primary/90 transition-all duration-300 ${credit.status === 'soon' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  disabled={credit.status === 'soon'}
                 >
-                  <a 
-                    href={credit.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2"
-                  >
-                    Get Credits
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  {credit.status === 'soon' ? (
+                    <span className="flex items-center justify-center gap-2">
+                      Coming Soon
+                    </span>
+                  ) : (
+                    <a 
+                      href={credit.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2"
+                    >
+                      Get Credits
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
                 </Button>
               </div>
             </CardContent>
