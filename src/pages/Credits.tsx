@@ -92,28 +92,28 @@ const Credits = () => {
         ))}
       </div>
 
-          {/* Provider Application Section */}
-          <div className="bg-muted/30 rounded-2xl p-8 border-2 border-muted">
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-2xl font-grotesk font-semibold mb-4">
-                Are you an Infrastructure Provider?
-              </h2>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Want your clients subsidized? Apply for your own credit program and help support the NEAR ecosystem of builders.
-              </p>
-              <Button asChild size="lg" variant="outline" className="border-2">
-                <a 
-                  href="https://nearn.io/infra-committee/5/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  Apply for Credit Program
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
-            </div>
-          </div>
+      {/* Provider Application Section */}
+      <div className="bg-muted/30 rounded-2xl p-6 border-2 border-muted mt-16">
+        <div className="max-w-3xl">
+          <h2 className="text-2xl font-grotesk font-semibold mb-4">
+            Are you an Infrastructure Provider?
+          </h2>
+          <p className="text-muted-foreground mb-6 leading-relaxed">
+            Want your clients subsidized? Apply for your own credit program and help support the NEAR ecosystem of builders.
+          </p>
+          <Button asChild size="lg" variant="outline" className="border-2">
+            <a 
+              href="https://nearn.io/infra-committee/5/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              Apply for Credit Program
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </Button>
+        </div>
+      </div>
         </div>
       </main>
 
