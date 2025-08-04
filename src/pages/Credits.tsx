@@ -31,18 +31,35 @@ const Credits = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "NEAR Infrastructure Credits",
-    "description": "Get free infrastructure credits for NEAR builders from our partner providers.",
-    "url": "https://nearinfra.com/credits"
+    "name": "Free NEAR Infrastructure Credits",
+    "description": "Get free infrastructure credits for NEAR blockchain development. Access discounted RPC services from Lava RPC and FastNEAR RPC.",
+    "url": "https://nearinfra.com/credits",
+    "provider": {
+      "@type": "Organization", 
+      "name": "NEAR Infrastructure Committee"
+    },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Lava RPC Credits",
+        "description": "Decentralized RPC offering $200 worth of monthly credits to qualified founders"
+      },
+      {
+        "@type": "Offer", 
+        "name": "FastNEAR RPC Credits",
+        "description": "FastNear RPC sponsorship for NEAR builders with multiple monthly plans"
+      }
+    ]
   };
 
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title="NEAR Infrastructure Credits | Free Credits for Builders"
-        description="Get free infrastructure credits if you are a serious NEAR builder. Choose from our partner providers including Lava RPC and FastNEAR RPC."
-        keywords="NEAR credits, infrastructure credits, NEAR builders, RPC credits, blockchain infrastructure"
+        title="Free NEAR Infrastructure Credits | Lava RPC & FastNEAR RPC"
+        description="Get free infrastructure credits for NEAR blockchain development. Access discounted RPC services from Lava RPC ($200/month) and FastNEAR RPC. Apply now for developer credits."
+        keywords="NEAR credits, free RPC credits, NEAR infrastructure, blockchain development, Lava RPC, FastNEAR RPC, NEAR blockchain, developer credits, infrastructure providers"
         canonical="https://nearinfra.com/credits"
+        ogImage="https://nearinfra.com/new-og-image.png"
         structuredData={structuredData}
       />
       <NEARNavbar />
