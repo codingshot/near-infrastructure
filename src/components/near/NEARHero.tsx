@@ -184,6 +184,7 @@ const NEARHero = () => {
           <div className="flex gap-4 md:gap-6 justify-center px-4 sm:px-6 lg:px-8">
             {[...actionCards, ...actionCards].map((card, index) => {
               const IconComponent = card.icon;
+              const uniqueKey = `${index}-${card.title.replace(/\s+/g, '-')}`;
               
               const CardComponent = (
                 <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer group hover:translate-y-[-2px] h-full">
@@ -219,7 +220,7 @@ const NEARHero = () => {
               );
 
               return (
-                <div key={index} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
+                <div key={uniqueKey} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
                   {card.showPopup ? (
                     <Dialog>
                       <DialogTrigger asChild>
