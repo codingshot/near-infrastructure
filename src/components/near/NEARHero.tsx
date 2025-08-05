@@ -35,7 +35,7 @@ const NEARHero = () => {
       dragFree: false,
       containScroll: false,
       breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 1 },
+        '(min-width: 640px)': { slidesToScroll: 1 },
         '(min-width: 1024px)': { slidesToScroll: 1 }
       }
     },
@@ -181,8 +181,8 @@ const NEARHero = () => {
           <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground">Quick Actions</h2>
         </div>
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-4 md:gap-6 px-4 sm:px-6 lg:px-8">
-            {actionCards.map((card, index) => {
+          <div className="flex gap-4 md:gap-6 justify-center px-4 sm:px-6 lg:px-8">
+            {[...actionCards, ...actionCards].map((card, index) => {
               const IconComponent = card.icon;
               
               const CardComponent = (
