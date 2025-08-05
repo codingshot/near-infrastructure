@@ -29,17 +29,17 @@ const NEARHero = () => {
   const [emblaRef] = useEmblaCarousel(
     { 
       loop: true,
-      align: 'start',
+      align: 'center',
       slidesToScroll: 1,
       skipSnaps: false,
       dragFree: false,
-      containScroll: 'trimSnaps',
+      containScroll: false,
       breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1024px)': { slidesToScroll: 3 }
+        '(min-width: 768px)': { slidesToScroll: 1 },
+        '(min-width: 1024px)': { slidesToScroll: 1 }
       }
     },
-    [Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })]
+    [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: false })]
   );
 
   useEffect(() => {
