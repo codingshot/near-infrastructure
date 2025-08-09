@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen, CreditCard } from 'lucide-react';
+import { ArrowRight, ExternalLink, FileText, MessageSquare, Target, Users, BookOpen, CreditCard, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import CountUp from 'react-countup';
@@ -26,21 +26,20 @@ const NEARHero = () => {
     loadCredits();
   }, []);
   
-  const [emblaRef] = useEmblaCarousel(
+  const [emblaRef, emblaApi] = useEmblaCarousel(
     { 
       loop: true,
       align: 'start',
       slidesToScroll: 1,
       skipSnaps: false,
       dragFree: false,
-      containScroll: 'trimSnaps',
-      breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1024px)': { slidesToScroll: 3 }
-      }
-    },
-    [Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })]
+      containScroll: 'trimSnaps'
+    }
   );
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowStats(true), 1000);
@@ -177,12 +176,22 @@ const NEARHero = () => {
 
       {/* Action Cards Carousel - Full Width */}
       <div className="mb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 text-center">
-          <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground">Quick Actions</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl md:text-2xl font-grotesk font-semibold text-foreground">Quick Actions</h2>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={scrollNext}
+              className="ml-4 border-border hover:bg-muted"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4 md:gap-6 px-4 sm:px-6 lg:px-8">
-            {actionCards.map((card, index) => {
+            {[...actionCards, ...actionCards].map((card, index) => {
               const IconComponent = card.icon;
               
               const CardComponent = (
@@ -219,7 +228,7 @@ const NEARHero = () => {
               );
 
               return (
-                <div key={index} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
+                <div key={`${index}-${index >= actionCards.length ? 'duplicate' : 'original'}`} className="flex-none w-[280px] sm:w-[320px] md:w-[350px]">
                   {card.showPopup ? (
                     <Dialog>
                       <DialogTrigger asChild>
