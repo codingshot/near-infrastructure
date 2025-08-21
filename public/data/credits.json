@@ -15,5 +15,18 @@
     "name": "Privy NEAR Accounts",
     "description": "NEAR Infrastructure Committee are allocating credits to support up to 500,000 accounts (across the NEAR Ecosystem w/ cap of 50,000 accounts covered per project) created through the Privy x NEAR integration",
     "link": "https://nearn.io/privy/1/",
-    "logo": "/companies/privy.jpg"  }
+    "logo": "/companies/privy.jpg"
+  },
+  {
+    "name": "Pikespeak API Package",
+    "description": "$99/month value - fully covered. Full access to the Pikespeak API with 50+ NEAR portfolio & explorer endpoints, 5 requests/sec rate limit, and 150,000 requests/month included. Designed for NEAR portfolio tracking, account and contract insights, token/NFT lookups, and explorer-grade data.",
+    "link": "https://nearn.io/pikespeak/1/",
+    "logo": "/companies/pikespeak.jpg"
+  },
+  {
+    "name": "NEARBlocks API",
+    "description": "Three monthly paid plans available: Startup $79 (400,000/month API calls), Standard $299 (3,000,000/month API calls), Professional $899 (9,000,000/month API calls). All plans support commercial use with comprehensive NEAR Protocol blockchain data through REST APIs. Same data source that powers the NearBlocks Block Explorer.",
+    "link": "https://nearn.io/nearblocks/1/",
+    "logo": "/companies/nearblocks.jpg"
+  }
 ]
