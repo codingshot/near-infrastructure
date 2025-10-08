@@ -230,9 +230,11 @@ npm run build
 ## 📞 Support
 
 For questions about the NEAR Infrastructure Committee:
+- **Infra Committee activity**: [NEARN](https://nearn.io/infra-committee/)
 - **Website**: [near.org](https://near.org)
 - **Documentation**: [docs.near.org](https://docs.near.org)
 - **Community**: [Discord](https://discord.gg/near)
+                 [Telegram](@neardev)
 
 ## 📄 License
 
