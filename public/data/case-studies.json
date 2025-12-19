@@ -111,6 +111,16 @@
     "tags": ["Data Lake"]
   },
   {
+    "name": "Allium",
+    "description": "NEAR blockchain data integration with Allium Developer APIs and Datshares",
+    "status": "To be launched",
+    "fundingDate": "2025-Q3",
+    "logo": "/companies/allium.jpg",
+    "productUrl": "https://www.allium.so/product/allium-developer",
+    "proposalUrl": "https://nearn.io/infra-committee/7/40/",
+    "tags": ["Data Lake"]
+  },
+  {
     "name": "HotCraft",
     "description": "Chain abstracted NFT Marketplace",
     "status": "In Development",
