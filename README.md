@@ -7,10 +7,8 @@ A comprehensive website showcasing the NEAR Infrastructure Committee's work, tea
 ### Core Sections
 - **Hero Section** - Main landing with action cards for funding applications, RFPs, and feedback
 - **Focus Areas** - Categorized infrastructure components with examples and resources
-- **Case Studies** - Funded projects with status tracking and company information
 - **Team Section** - Infrastructure Committee and Working Group members with company affiliations
 - **Blog Section** - Latest updates and announcements from the committee
-- **Newsletter** - Email subscription for infrastructure updates
 
 ### Interactive Features
 - **Search & Filter** - Find team members and case studies quickly
@@ -58,19 +56,6 @@ near-infrastructure/
   "url": "https://www.near.org/blog/...",
   "excerpt": "Blog post description",
   "image": "/blog/blog-image.webp"
-}
-```
-
-#### `case-studies.json`
-```json
-{
-  "name": "Project Name",
-  "description": "Project description",
-  "status": "Maintenance|In Development|Completed",
-  "fundingDate": "2024-Q1",
-  "logo": "/companies/company-logo.jpg",
-  "productUrl": "https://project-url.com",
-  "tags": ["Category1", "Category2"]
 }
 ```
 
@@ -233,8 +218,7 @@ For questions about the NEAR Infrastructure Committee:
 - **Infra Committee activity**: [NEARN](https://nearn.io/infra-committee/)
 - **Website**: [near.org](https://near.org)
 - **Documentation**: [docs.near.org](https://docs.near.org)
-- **Community**: [Discord](https://discord.gg/near)
-                 [Telegram](@neardev)
+- **Community**: [Telegram](@neardev)
 
 ## 📄 License
 
