@@ -161,6 +161,16 @@
     "tags": ["RPC"]
   },
   {
+    "name": "Glodsky's indexer",
+    "description": "Realtime indexing and subgraphs service",
+    "status": "Launching in Q1 2026",
+    "fundingDate": "2025-Q4",
+    "logo": "/companies/goldsky.png",
+    "productUrl": "#",
+    "proposalUrl": "https://docs.google.com/document/d/1VUsPN2-WKnAvWfjI_ibnQug9BnKJUv5cXFH_yQ5U1PM/edit?tab=t.0",
+    "tags": ["Indexer"]
+  },
+  {
     "name": "FastNEAR RPC",
     "description": "Optimized RPC services for NEAR blockchain",
     "status": "Maintenance",
